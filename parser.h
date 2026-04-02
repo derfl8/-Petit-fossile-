@@ -1,0 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
+/*   Updated: 2026/04/02 22:48:46 by aldecour         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LEXER_H
+# define LEXER_H
+
+typedef struct s_lexer
+{
+	const char	*line;
+	size_t		i;
+}				t_lexer;
+
+typedef enum e_token
+{
+	T_WORD;			// basically anything else
+	T_PIPE;			// |
+	T_REDIR_IN;		// <
+	T_REDIR_OUT;	// >
+	T_HEREDOC;		// <<
+	T_APPEND;		// >>
+	T_WILDCARD;		// * --MAY NOT BE USED--
+}	t_token;
+
+typedef struct s_parser
+{
+	t_lexer	lexer;
+	t_token	next_token;
+	char	*value;
+}			t_parser;
+
+typedef struct s_tree
+{
+	t_token			token;
+	char			*args;
+	struct s_tree	*left;
+	struct s_tree	*right;
+}					t_command_tree;
+#endif
