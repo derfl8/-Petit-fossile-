@@ -1,28 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abegou <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/24 21:08:48 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/02 22:45:47 by aldecour         ###   ########.fr       */
+/*   Created: 2026/03/26 18:44:09 by aldecour          #+#    #+#             */
+/*   Updated: 2026/03/26 18:44:39 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
-
-int main(void)
-{
-	const char *prompt = "Petit Fossile :";
-	char *res;
-
-	while (1)
-	{
-		res = readline(prompt);
-		if (res)
-			add_history(res);
-		if (res)
-			parser(res);
-	}
-}
+#include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
