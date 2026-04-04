@@ -6,12 +6,15 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/04/02 22:48:46 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/04/04 19:24:07 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#ifndef PARSER_H
+# define PARSER_H
+
+#include <stdbool.h>
+#include <stdlib.h>
 
 typedef struct s_lexer
 {
@@ -21,13 +24,14 @@ typedef struct s_lexer
 
 typedef enum e_token
 {
-	T_WORD;			// basically anything else
-	T_PIPE;			// |
-	T_REDIR_IN;		// <
-	T_REDIR_OUT;	// >
-	T_HEREDOC;		// <<
-	T_APPEND;		// >>
-	T_WILDCARD;		// * --MAY NOT BE USED--
+	T_WORD,			// basically anything else
+	T_PIPE,			// |
+	T_REDIR_IN,		// <
+	T_REDIR_OUT,	// >
+	T_HEREDOC,		// <<
+	T_APPEND,		// >>
+	T_WILDCARD,		// * --MAY NOT BE USED--
+	T_MAX_TOKENS,	// keep as last line
 }	t_token;
 
 typedef struct s_parser
@@ -37,11 +41,12 @@ typedef struct s_parser
 	char	*value;
 }			t_parser;
 
+//placeholder command tree
 typedef struct s_tree
 {
 	t_token			token;
 	char			*args;
 	struct s_tree	*left;
 	struct s_tree	*right;
-}					t_command_tree;
+}					t_tree;
 #endif
