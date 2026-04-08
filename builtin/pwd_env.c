@@ -6,12 +6,14 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/08 15:53:10 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/08 19:25:17 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <complex.h>
 #include <linux/limits.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 int ft_pwd(void)
@@ -24,15 +26,18 @@ int ft_pwd(void)
     return (0);
 }
 
-int ft_cd(void)
+int ft_env(char **envp)
 {
-    char    buffer[PATH_MAX];
-
-    printf("%s\n", );
-    
+    int i = 0;
+    while (envp[i])
+        printf("%s\n", envp[i++]);
+    return (0);
 }
 
-int main(void)
+int main(int ac, char **av, char **envp)
 {
-    ft_pwd();
+    (void)ac;
+    (void)av;
+    ft_env(envp);
+    return (0);
 }
