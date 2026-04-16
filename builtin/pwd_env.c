@@ -6,31 +6,39 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/08 19:25:17 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/16 14:23:53 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <complex.h>
-#include <linux/limits.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "minishell.h"
 
+//// update by cd if PWD unset
 int ft_pwd(void)
 {
     char    buffer[PATH_MAX];
     
     if(getcwd(buffer, PATH_MAX) == NULL)
+    {
+        perror("pwd");
         return(1);
+    }
     printf("%s\n", getcwd(buffer, PATH_MAX));
     return (0);
 }
 
 int ft_env(char **envp)
 {
-    int i = 0;
-    while (envp[i])
+    int     i;
+    t_env   *envinfo;
+       
+    i = 0;
+    envinfo = envp[i++];
+    while (envinfo != NULL)
+    {
+        envinfo = envp[i];
         printf("%s\n", envp[i++]);
+        envinfo = envinfo->next;
+    }
     return (0);
 }
 
