@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 14:22:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/17 18:01:43 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/17 18:45:23 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_env	*ft_new_env(char *envinfo)
 	new_node->next = NULL;
 	return (new_node);
 }
+
 void	ft_free_stack_env(t_env **array)
 {
 	t_env	*tmp;
