@@ -6,13 +6,13 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 14:22:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/16 14:26:00 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/17 18:01:43 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_add_back(t_env **lst, t_env *new)
+void	ft_add_back_env(t_env **lst, t_env *new)
 {
 	t_env	*buffer;
 
@@ -28,7 +28,7 @@ void	ft_add_back(t_env **lst, t_env *new)
 	return ;
 }
 
-t_env	*ft_new(int envinfo)
+t_env	*ft_new_env(char *envinfo)
 {
 	t_env	*new_node;
 
@@ -38,4 +38,16 @@ t_env	*ft_new(int envinfo)
 	new_node->envinfo = envinfo;
 	new_node->next = NULL;
 	return (new_node);
+}
+void	ft_free_stack_env(t_env **array)
+{
+	t_env	*tmp;
+
+	while (*array)
+	{
+		tmp = *array;
+		(*array) = (*array)->next;
+		free(tmp);
+	}
+	return ;
 }
