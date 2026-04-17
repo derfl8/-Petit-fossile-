@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/17 18:02:36 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/17 18:38:39 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,9 @@ int ft_pwd(void)
 
 int ft_env(t_env *envinfo)
 {
-    int     i;
-    t_env   *envinfo;
-       
-    i = 0;
-    envinfo = envp[i++];
     while (envinfo != NULL)
     {
-        envinfo = envp[i];
-        printf("%s\n", envp[i++]);
+        printf("%s\n", envinfo->envinfo);
         envinfo = envinfo->next;
     }
     return (0);
@@ -69,8 +63,7 @@ int main(int ac, char **av, char **envp)
     (void)ac;
     (void)av;
     envinfo = init_env(envp);
-    ft_env();
+    ft_env(envinfo);
     ft_pwd();
-    // ft_env(envp);
     return (0);
 }
