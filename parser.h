@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/04/04 19:51:19 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/04/17 21:16:55 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include "libft/libft.h"
 
 typedef struct s_lexer
 {
@@ -22,30 +23,34 @@ typedef struct s_lexer
 	size_t		i;
 }				t_lexer;
 
-typedef enum e_token
+typedef enum e_type
 {
-	T_WORD,			// basically anything else
 	T_PIPE,			// |
 	T_REDIR_IN,		// <
 	T_REDIR_OUT,	// >
 	T_HEREDOC,		// <<
 	T_APPEND,		// >>
+	T_WORD,			// basically anything else
 	T_WILDCARD,		// * --MAY NOT BE USED--
 	T_MAX_TOKENS,	// keep as last line
+}	t_type;
+
+typedef struct s_token
+{
+	t_type	type;
+	char	*value;
 }	t_token;
 
 typedef struct s_parser
 {
 	t_lexer	lexer;
 	t_token	next_token;
-	char	*value;
 }			t_parser;
 
 //placeholder command tree
 typedef struct s_tree
 {
 	t_token			token;
-	char			*args;
 	struct s_tree	*left;
 	struct s_tree	*right;
 }					t_tree;

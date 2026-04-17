@@ -6,61 +6,72 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/04/04 19:41:09 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/04/17 21:16:56 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	one_char_automaton(t_lexer *lexer, int *token_table, char c)
+bool	ft_isspace(const char c)
 {
-	if (c == '|')
-		token_table[T_PIPE]++;
-	if (c == '<')
-		token_table[T_REDIR_IN]++;
-	if (c == '>')
-		token_table[T_REDIR_OUT]++;
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (true);
+	return (false);
 }
 
-void	two_char_automaton(t_lexer *lexer, int *token_table, char c)
+char	*get_token_value(t_lexer *lexer, t_type token_type)
 {
-	if (c == '<')
-		token_table[T_HEREDOC]++;
-	if (c == '>')
-		token_table[T_APPEND]++;
+	size_t	i;
+	char	*res;
+
+	i = lexer->i;
+	if (token_type <= T_REDIR_OUT)
+	{
+		lexer->i++;
+		return (NULL);
+	}
+	else if (token_type <= T_APPEND)
+	{
+		lexer->i += 2;
+		return (NULL);
+	}
+	if (token_type == T_WORD)
+	{
+		while (!ft_isspace(lexer->line[lexer->i]))
+			lexer->i++;
+		res = ft_strdup(lexer->i - i);
+		return (res);
+	}
 }
 
-void	token_automaton(t_lexer *lexer, int *token_table, int token_size)
+t_type	get_token_type(t_lexer *lexer)
 {
-	char	c;
+	const char	*c;
 
-	c = lexer->line[lexer->i];
-	if (token_size == 0)
-	{
-		one_char_automaton(lexer, token_table, c);
-	}
-	if (token_size < 2)
-	{
-		two_char_automaton(lexer, token_table, c);
-	}
-	token_table[T_WORD]++;
+	c = &lexer->line[lexer->i];
+	if (*c == '|' && *c + 1 != '|')
+		return (T_PIPE);
+	else if (*c == '<' && *c + 1 != '<')
+		return (T_REDIR_IN);
+	else if (*c == '>' && *c + 1 != '>')
+		return (T_REDIR_IN);
+	else if (*c == '<' && *c + 1 == '<')
+		return (T_HEREDOC);
+	else if (*c == '>' && *c + 1 == '>')
+		return (T_APPEND);
+	return (T_WORD);
 }
 
 t_token pf_lexer(t_lexer *lexer)
 {
-	int		i;
-	int		token_size;
-	int		token_table[T_MAX_TOKENS];
 	t_token	res;
 
-	i = 0;
-	memset(token_table, '0', T_MAX_TOKENS);
-	while (lexer->line[lexer->i] && lexer->line[lexer->i] != ' ')
-	{
-		token_automaton(lexer, token_table, token_size);
+	if (!lexer->line)
+		return ((t_token) {0});
+	while (ft_isspace(lexer->line[lexer->i]))
 		lexer->i++;
-		token_size++;
-	}
+	res.type = get_token_type(lexer);
+	res.value = get_token_value(lexer, res.type);
 	return (res);
 }
 
@@ -72,6 +83,8 @@ t_tree	pf_parser(char *line)
 	lexer.line = line;
 	lexer.i = 0;
 	next_token = pf_lexer(&lexer);
+
+	return ((t_tree) {0});		//tmp
 }
 
 int	main(int ac, char **av)
