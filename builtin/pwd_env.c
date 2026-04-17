@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/16 14:23:53 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/17 16:55:37 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int ft_pwd(void)
         perror("pwd");
         return(1);
     }
-    printf("%s\n", getcwd(buffer, PATH_MAX));
+    printf("%s\n", buffer);
     return (0);
 }
 
@@ -46,6 +46,7 @@ int main(int ac, char **av, char **envp)
 {
     (void)ac;
     (void)av;
-    ft_env(envp);
+    ft_pwd();
+    // ft_env(envp);
     return (0);
 }
