@@ -6,12 +6,55 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/18 15:15:18 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/18 17:35:15 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <stddef.h>
+#include <stdlib.h>
+
+size_t	ft_size_cut(char *to_cut)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (to_cut[i])
+	{
+		if (to_cut[i++] == '=')
+		{
+			while (to_cut[i])
+			{
+				i++;
+				j++;	
+			}
+		}
+	}
+	return (j);
+}
+
+char	*ft_cut_env(char *to_cut)
+{
+	char	*cuted;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	cuted = malloc(sizeof(char) * ft_size_cut(to_cut));
+	while (to_cut[i])
+	{
+		if (to_cut[i++] == '=')
+		{
+			while (to_cut[i])
+				cuted[j++] = to_cut[i++];	
+		}
+	}
+	cuted[j] = '\0';
+	return (cuted);
+}
 
 size_t arg_len(char **av)
 {
@@ -26,13 +69,16 @@ size_t arg_len(char **av)
 int	ft_pwd(t_env *envinfo)
 {
 	char	buffer[PATH_MAX];
+	char	*from_struct;
 
 	// update by cd if PWD unset
-	while (ft_strncmp("PWD=", envinfo->envinfo, 4) != 0 || envinfo->next == NULL)
+	while (envinfo != NULL && ft_strncmp("PWD=", envinfo->envinfo, 4) != 0)
 		envinfo = envinfo->next;
-	if (ft_strncmp("PWD=", envinfo->envinfo, 4) == 0)
+	if (envinfo != NULL && ft_strncmp("PWD=", envinfo->envinfo, 4) == 0)
 	{
-		printf("%s\n", envinfo->envinfo);
+		from_struct = ft_cut_env(envinfo->envinfo);
+		printf("%s\n", from_struct);
+		free(from_struct);
 		return (0);
 	}
 	if (getcwd(buffer, PATH_MAX) == NULL)
@@ -89,9 +135,10 @@ int	main(int ac, char **av, char **envp)
 	t_env	*envinfo;
 
 	(void)ac;
+	(void)av;
 	envinfo = init_env(envp);
 	ft_env(envinfo, av);
-	// ft_pwd(envinfo);
-	//free_env();
+	ft_pwd(envinfo);
+	ft_free_stack_env(&envinfo);
 	return (0);
 }
