@@ -6,65 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/18 17:35:15 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/18 18:55:37 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stddef.h>
-#include <stdlib.h>
-
-size_t	ft_size_cut(char *to_cut)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	while (to_cut[i])
-	{
-		if (to_cut[i++] == '=')
-		{
-			while (to_cut[i])
-			{
-				i++;
-				j++;	
-			}
-		}
-	}
-	return (j);
-}
-
-char	*ft_cut_env(char *to_cut)
-{
-	char	*cuted;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	cuted = malloc(sizeof(char) * ft_size_cut(to_cut));
-	while (to_cut[i])
-	{
-		if (to_cut[i++] == '=')
-		{
-			while (to_cut[i])
-				cuted[j++] = to_cut[i++];	
-		}
-	}
-	cuted[j] = '\0';
-	return (cuted);
-}
-
-size_t arg_len(char **av)
-{
-	size_t	i;
-
-	i = 0;
-	while (av[i]) 
-		i++;
-	return (i);
-}
 
 int	ft_pwd(t_env *envinfo)
 {
@@ -93,7 +39,7 @@ int	ft_pwd(t_env *envinfo)
 int	ft_env(t_env *envinfo, char **av)
 {
 	size_t	len;
-	
+
 	len = arg_len(av);
 	if (len > 1)
 	{
@@ -115,7 +61,6 @@ t_env	*init_env(char **envp)
 	int		i;
 
 	envinfo = NULL;
-
 	i = 0;
 	while (envp[i])
 	{
