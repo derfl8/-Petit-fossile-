@@ -6,17 +6,35 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/17 18:43:52 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/18 15:15:18 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stddef.h>
 
-int	ft_pwd(void)
+size_t arg_len(char **av)
+{
+	size_t	i;
+
+	i = 0;
+	while (av[i]) 
+		i++;
+	return (i);
+}
+
+int	ft_pwd(t_env *envinfo)
 {
 	char	buffer[PATH_MAX];
 
 	// update by cd if PWD unset
+	while (ft_strncmp("PWD=", envinfo->envinfo, 4) != 0 || envinfo->next == NULL)
+		envinfo = envinfo->next;
+	if (ft_strncmp("PWD=", envinfo->envinfo, 4) == 0)
+	{
+		printf("%s\n", envinfo->envinfo);
+		return (0);
+	}
 	if (getcwd(buffer, PATH_MAX) == NULL)
 	{
 		perror("pwd");
@@ -26,8 +44,16 @@ int	ft_pwd(void)
 	return (0);
 }
 
-int	ft_env(t_env *envinfo)
+int	ft_env(t_env *envinfo, char **av)
 {
+	size_t	len;
+	
+	len = arg_len(av);
+	if (len > 1)
+	{
+		printf("Too many args for env command\n");
+		return (1);
+	}
 	while (envinfo != NULL)
 	{
 		printf("%s\n", envinfo->envinfo);
@@ -43,6 +69,7 @@ t_env	*init_env(char **envp)
 	int		i;
 
 	envinfo = NULL;
+
 	i = 0;
 	while (envp[i])
 	{
@@ -62,9 +89,9 @@ int	main(int ac, char **av, char **envp)
 	t_env	*envinfo;
 
 	(void)ac;
-	(void)av;
 	envinfo = init_env(envp);
-	ft_env(envinfo);
-	ft_pwd();
+	ft_env(envinfo, av);
+	// ft_pwd(envinfo);
+	//free_env();
 	return (0);
 }
