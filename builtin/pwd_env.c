@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/19 13:35:51 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/19 19:58:03 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_env	*init_env(char **envp)
 		new = ft_new_env(envp[i++]);
 		if (!new)
 		{
-			ft_free_stack_env(&envinfo);
+			ft_free_stack_env(envinfo);
 			return (NULL);
 		}
 		ft_add_back_env(&envinfo, new);
@@ -84,6 +84,6 @@ int	main(int ac, char **av, char **envp)
 	envinfo = init_env(envp);
 	ft_env(envinfo, av);
 	ft_pwd(envinfo);
-	ft_free_stack_env(&envinfo);
+	ft_free_stack_env(envinfo);
 	return (0);
 }
