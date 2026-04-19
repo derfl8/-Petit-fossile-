@@ -6,11 +6,12 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 14:22:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/18 18:55:46 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/19 17:21:49 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdlib.h>
 
 void	ft_add_back_env(t_env **lst, t_env *new)
 {
@@ -35,7 +36,12 @@ t_env	*ft_new_env(char *envinfo)
 	new_node = malloc(sizeof(t_env));
 	if (!new_node)
 		return (NULL);
-	new_node->envinfo = envinfo;
+	new_node->envinfo = ft_strdup(envinfo);
+	if (!new_node->envinfo)
+	{
+		free(new_node);
+		return (NULL);
+	}
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -48,7 +54,9 @@ void	ft_free_stack_env(t_env **array)
 	{
 		tmp = *array;
 		(*array) = (*array)->next;
-		free(tmp);
+		free(tmp->envinfo);
+		// free(array);
 	}
+	free(array);
 	return ;
 }
