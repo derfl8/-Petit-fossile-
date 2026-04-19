@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 14:22:21 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/19 13:22:11 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/19 19:57:45 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ size_t				ft_strlen(const char *s);
 
 // lst_tools.c
 void				ft_add_back_env(t_env **lst, t_env *new);
-void				ft_free_stack_env(t_env **array);
+void				ft_free_stack_env(t_env *array);
 t_env				*ft_new_env(char *envinfo);
 
 //pwd_env.c
