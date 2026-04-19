@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 18:52:50 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/18 18:55:56 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/19 13:22:33 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_cut_env(char *to_cut)
 
 	i = 0;
 	j = 0;
-	cuted = malloc(sizeof(char) * ft_size_cut(to_cut));
+	cuted = malloc((sizeof(char) * ft_size_cut(to_cut)) + 1);
 	while (to_cut[i])
 	{
 		if (to_cut[i++] == '=')
@@ -63,6 +63,16 @@ size_t	arg_len(char **av)
 		i++;
 	return (i);
 }
+//DEFAULT LIBFT
+
+size_t	ft_strlen(const char *s)
+{
+	const char	*tmp = s;
+
+	while (*tmp)
+		tmp++;
+	return (tmp - s);
+}
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -80,4 +90,22 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		i++;
 	}
 	return (s3[i] - s4[i]);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*d;
+	size_t	i;
+
+	i = 0;
+	d = malloc(ft_strlen(s) * sizeof(char) + 1);
+	if (d == NULL)
+		return (NULL);
+	while (s[i])
+	{
+		d[i] = s[i];
+		i++;
+	}
+	d[i] = '\0';
+	return (d);
 }
