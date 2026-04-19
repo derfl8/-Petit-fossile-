@@ -6,18 +6,19 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/19 20:13:11 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/19 20:24:06 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+	// update by cd if PWD unset
 
 int	ft_pwd(t_env *envinfo)
 {
 	char	buffer[PATH_MAX];
 	char	*from_struct;
 
-	// update by cd if PWD unset
 	while (envinfo != NULL && ft_strncmp("PWD=", envinfo->envinfo, 4) != 0)
 		envinfo = envinfo->next;
 	if (envinfo != NULL && ft_strncmp("PWD=", envinfo->envinfo, 4) == 0)
