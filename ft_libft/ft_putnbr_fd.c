@@ -1,45 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/04/22 23:01:26 by aldecour         ###   ########.fr       */
+/*   Created: 2025/10/24 22:03:37 by aldecour          #+#    #+#             */
+/*   Updated: 2025/10/30 22:25:21 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "libft.h"
 
-t_tree	pf_node_new(t_token *token)
+static void	ft_modulo(int n, int fd)
 {
-	t_tree	node;
+	int		i;
+	long	l;
+	char	biffur[12];
 
-	node->token = &token;
-	node->left = NULL;
-	node->right = NULL;
+	i = 10;
+	l = n;
+	biffur[11] = '\0';
+	if (l < 0)
+		l = -l;
+	while (l)
+	{
+		biffur[i] = l % 10 + '0';
+		l /= 10;
+		i--;
+	}
+	if (n < 0)
+		biffur[i--] = '-';
+	ft_putstr_fd(biffur + i + 1, fd);
 }
 
-void	pf_node_add(t_tree *first)
+void	ft_putnbr_fd(int n, int fd)
 {
-	
-}
-
-t_tree	pf_parser(char *line)
-{
-	t_token	next_token;
-	t_lexer	lexer;
-
-	lexer.line = line;
-	lexer.i = 0;
-	next_token = pf_lexer(&lexer);
-	return ((t_tree){0});		//tmp
-}
-
-int	main(int ac, char **av)
-{
-	if (ac < 2)
-		return (1);
-	pf_parser(av[1]);
+	if (n == 0)
+		ft_putstr_fd("0", fd);
+	else
+		ft_modulo(n, fd);
 }
