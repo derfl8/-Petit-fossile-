@@ -5,8 +5,10 @@ HEADER	= header/minishell.h
 SRCS	=					\
 builtin/custom_libft.c		\
 builtin/lst_tools.c			\
-builtin/pwd_env.c			\
 builtin/libft.c				\
+builtin/pwd_env.c			\
+builtin/echo.c				\
+builtin/main.c				\
 
 OBJS    = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 14:22:21 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/19 20:22:24 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/22 23:06:17 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,18 @@ typedef struct s_env
 
 }					t_env;
 
-// lst_tools.c
-void				ft_add_back_env(t_env **lst, t_env *new_node);
-void				ft_free_stack_env(t_env *array);
-t_env				*ft_new_env(char *envinfo);
+// echo.c
+int					ft_echo(char *print);
 
 //pwd_env.c
 int					ft_pwd(t_env *envinfo);
 int					ft_env(t_env *envinfo, char **av);
 t_env				*init_env(char **envp);
+
+// lst_tools.c
+void				ft_add_back_env(t_env **lst, t_env *new_node);
+void				ft_free_stack_env(t_env *array);
+t_env				*ft_new_env(char *envinfo);
 
 // custom_libft.c
 size_t				ft_size_cut(char *to_cut);
