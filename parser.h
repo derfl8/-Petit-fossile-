@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/04/17 21:16:55 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/04/22 23:01:28 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
-#include "libft/libft.h"
+#include <libft.h>
 
 typedef struct s_lexer
 {

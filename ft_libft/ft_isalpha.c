@@ -1,45 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/04/22 23:01:26 by aldecour         ###   ########.fr       */
+/*   Created: 2025/10/13 14:16:18 by aldecour          #+#    #+#             */
+/*   Updated: 2025/10/13 14:38:48 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "parser.h"
-
-t_tree	pf_node_new(t_token *token)
+int	ft_isalpha(int c)
 {
-	t_tree	node;
-
-	node->token = &token;
-	node->left = NULL;
-	node->right = NULL;
-}
-
-void	pf_node_add(t_tree *first)
-{
-	
-}
-
-t_tree	pf_parser(char *line)
-{
-	t_token	next_token;
-	t_lexer	lexer;
-
-	lexer.line = line;
-	lexer.i = 0;
-	next_token = pf_lexer(&lexer);
-	return ((t_tree){0});		//tmp
-}
-
-int	main(int ac, char **av)
-{
-	if (ac < 2)
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
-	pf_parser(av[1]);
+	else
+		return (0);
 }

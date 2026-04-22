@@ -1,45 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/04/22 23:01:26 by aldecour         ###   ########.fr       */
+/*   Created: 2025/10/15 18:16:53 by aldecour          #+#    #+#             */
+/*   Updated: 2025/10/15 18:16:58 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "libft.h"
 
-t_tree	pf_node_new(t_token *token)
+int	ft_isdigit(int c)
 {
-	t_tree	node;
-
-	node->token = &token;
-	node->left = NULL;
-	node->right = NULL;
-}
-
-void	pf_node_add(t_tree *first)
-{
-	
-}
-
-t_tree	pf_parser(char *line)
-{
-	t_token	next_token;
-	t_lexer	lexer;
-
-	lexer.line = line;
-	lexer.i = 0;
-	next_token = pf_lexer(&lexer);
-	return ((t_tree){0});		//tmp
-}
-
-int	main(int ac, char **av)
-{
-	if (ac < 2)
+	if (c >= '0' && c <= '9')
 		return (1);
-	pf_parser(av[1]);
+	else
+		return (0);
 }
