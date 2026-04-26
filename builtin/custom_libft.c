@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 18:52:50 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/19 20:13:19 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/23 20:17:02 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,22 @@ size_t	arg_len(char **av)
 	while (av[i])
 		i++;
 	return (i);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void			*ptr;
+	unsigned char	*str;
+	size_t			i;
+
+	if (size != 0 && nmemb != 0 && (nmemb * size) / size != nmemb)
+		return (NULL);
+	ptr = malloc(nmemb * size);
+	if (!ptr)
+		return (NULL);
+	str = (unsigned char *)ptr;
+	i = 0;
+	while (i < (nmemb * size))
+		str[i++] = '\0';
+	return (ptr);
 }
