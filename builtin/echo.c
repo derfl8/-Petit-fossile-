@@ -6,13 +6,13 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 19:41:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/27 17:00:00 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/27 17:13:22 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-bool	ft_parsecho(char *pars)
+static bool	ft_parsecho(char *pars)
 {
 	int	i;
 
@@ -31,22 +31,32 @@ bool	ft_parsecho(char *pars)
 	return (false);
 }
 
+static void	echo_n(char **av, int i)
+{
+	while (av[i] && ft_parsecho(av[i]) == true)
+		i++;
+	while (av[i])
+	{
+		printf("%s", av[i]);
+		if (av[i + 1])
+			printf(" ");
+		i++;
+	}
+}
+
 int	ft_echo(char **av)
 {
 	int	i;
 
 	i = 1;
+	if (av[i] == NULL)
+	{
+		printf("\n");
+		return (0);
+	}
 	if (ft_parsecho(av[i]) == true)
 	{
-		while (ft_parsecho(av[i]) == true && av[i])
-			i++;
-		while (av[i])
-		{
-			printf("%s", av[i]);
-			if (av[i + 1])
-				printf(" ");
-			i++;
-		}
+		echo_n(av, i);
 	}
 	else
 	{
