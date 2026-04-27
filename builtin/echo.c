@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 19:41:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/27 16:57:16 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/27 17:00:00 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,31 +36,28 @@ int	ft_echo(char **av)
 	int	i;
 
 	i = 1;
-	while (av[i])
+	if (ft_parsecho(av[i]) == true)
 	{
-		if (ft_parsecho(av[i]) == true)
+		while (ft_parsecho(av[i]) == true && av[i])
+			i++;
+		while (av[i])
 		{
-			while (ft_parsecho(av[i]) == true && av[i])
-				i++;
-			while (av[i])
-			{
-				printf("%s", av[i]);
-				if (av[i + 1])
-					printf(" ");
-				i++;
-			}
+			printf("%s", av[i]);
+			if (av[i + 1])
+				printf(" ");
+			i++;
 		}
-		else
+	}
+	else
+	{
+		while (av[i])
 		{
-			while (av[i])
-			{
-				printf("%s", av[i]);
-				if (av[i + 1])
-					printf(" ");
-				i++;
-			}
-			printf("\n");
+			printf("%s", av[i]);
+			if (av[i + 1])
+				printf(" ");
+			i++;
 		}
+		printf("\n");
 	}
 	return (0);
 }
