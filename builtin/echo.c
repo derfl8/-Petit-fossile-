@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 19:41:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/26 21:18:45 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/27 16:57:16 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	ft_parsecho(char *pars)
 	int	i;
 
 	i = 0;
-	if (pars[i] == '-' && pars[i + 1] == 'n')
+	if (pars[i + 1] && pars[i] == '-' && pars[i + 1] == 'n')
 	{
 		i++;
 		while (pars[i])
@@ -40,15 +40,25 @@ int	ft_echo(char **av)
 	{
 		if (ft_parsecho(av[i]) == true)
 		{
-			while (ft_parsecho(av[i]) == true || av[i])
+			while (ft_parsecho(av[i]) == true && av[i])
 				i++;
 			while (av[i])
-				printf("%s", av[i++]);
+			{
+				printf("%s", av[i]);
+				if (av[i + 1])
+					printf(" ");
+				i++;
+			}
 		}
 		else
 		{
 			while (av[i])
-				printf("%s", av[i++]);
+			{
+				printf("%s", av[i]);
+				if (av[i + 1])
+					printf(" ");
+				i++;
+			}
 			printf("\n");
 		}
 	}
