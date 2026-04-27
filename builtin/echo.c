@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 19:41:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/27 17:13:22 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/27 19:57:51 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	echo_n(char **av, int i)
 	{
 		printf("%s", av[i]);
 		if (av[i + 1])
-			printf(" ");
+			write(1, " ", 1);
 		i++;
 	}
 }
@@ -51,7 +51,7 @@ int	ft_echo(char **av)
 	i = 1;
 	if (av[i] == NULL)
 	{
-		printf("\n");
+		write(1, "\n", 1));
 		return (0);
 	}
 	if (ft_parsecho(av[i]) == true)
@@ -64,7 +64,7 @@ int	ft_echo(char **av)
 		{
 			printf("%s", av[i]);
 			if (av[i + 1])
-				printf(" ");
+				write(1, " ", 1);
 			i++;
 		}
 		printf("\n");
