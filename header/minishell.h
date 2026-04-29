@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 14:22:21 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/27 17:13:10 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/29 17:56:40 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ typedef struct s_env
 // echo.c
 int					ft_echo(char **av);
 
-//pwd_env.c
+// pwd_env.c
 int					ft_pwd(t_env *envinfo, char **av);
 int					ft_env(t_env *envinfo, char **av);
 t_env				*init_env(char **envp);
+
+// exit.c
+void				ft_exit(t_env *envinfo, int exit_code);
 
 // lst_tools.c
 void				ft_add_back_env(t_env **lst, t_env *new_node);
