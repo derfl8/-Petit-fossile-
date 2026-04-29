@@ -1,7 +1,7 @@
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror -g
 NAME	= minishell
-HEADER	= header/minishell.h
+HEADER	= header/builtin.h
 SRCS	=					\
 builtin/custom_libft.c		\
 builtin/lst_tools.c			\

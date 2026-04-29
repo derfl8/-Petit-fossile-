@@ -6,11 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 19:41:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/27 21:46:50 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/29 19:23:07 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../header/builtin.h"
 
 static bool	ft_parsecho(char *pars)
 {
@@ -55,9 +55,7 @@ int	ft_echo(char **av)
 		return (0);
 	}
 	if (ft_parsecho(av[i]) == true)
-	{
 		echo_n(av, i);
-	}
 	else
 	{
 		while (av[i])

@@ -6,11 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 18:52:50 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/23 20:17:02 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/29 19:23:11 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../header/builtin.h"
 
 size_t	ft_size_cut(char *to_cut)
 {
