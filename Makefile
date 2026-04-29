@@ -9,6 +9,7 @@ builtin/libft.c				\
 builtin/pwd_env.c			\
 builtin/echo.c				\
 builtin/main.c				\
+builtin/exit.c				\
 
 OBJS    = $(SRCS:.c=.o)
 
