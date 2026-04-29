@@ -6,11 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 14:22:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/19 20:22:37 by abegou           ###   ########.fr       */
+/*   Updated: 2026/04/29 19:23:21 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../header/builtin.h"
 
 void	ft_add_back_env(t_env **lst, t_env *new_node)
 {
