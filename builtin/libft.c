@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 20:11:57 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/29 19:23:15 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/05 16:20:25 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,12 @@ char	*ft_strdup(const char *s)
 	}
 	d[i] = '\0';
 	return (d);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c < '0' || c > '9')
+		return (0);
+	else
+		return (2048);
 }
