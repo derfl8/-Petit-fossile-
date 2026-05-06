@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:13:07 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/05 16:50:25 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/06 14:41:48 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,24 @@
 
 static int	handle_exit(char **exit_code)
 {
-	// if ()
-	// {
-	// 	printf("bash: exit: %s: numeric argument required\n", exit_code[1]);
-	// 	return (2);
-	// }
-	if (exit_code[1])
+	int	option;
+	int	i;
+	
+	i = 0;
+	while (exit_code[i])
 	{
-		printf("bash: exit: too many arguments\n");
+		
+	}
+	if (!ft_isdigit(exit_code[1][0]))
+	{
+		ft_putstr_fd("Petit Fossile: exit: ", 2);
+		ft_putstr_fd(exit_code[1], 2);
+		ft_putendl_fd(": numeric argument required", 2);
+		return (2);
+	}
+	if (exit_code[2])
+	{
+		ft_putendl_fd("Petit Fossile: exit: too many arguments\n", 2);
 		return (1);
 	}
 	return (0);
