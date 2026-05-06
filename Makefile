@@ -1,11 +1,12 @@
-CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -g -lreadline
-NAME	= minishell
-HEADER	= header/builtin.h
-SRCS	=					\
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror -g
+NAME		= minishell
+HEADER		= header/builtin.h
+LIBFT_PATH	= libft/
+LIBFT		= libft/libft.a
+SRCS		=				\
 builtin/custom_libft.c		\
 builtin/lst_tools.c			\
-builtin/libft.c				\
 builtin/pwd_env.c			\
 builtin/echo.c				\
 builtin/main.c				\
@@ -13,19 +14,24 @@ builtin/exit.c				\
 
 OBJS    = $(SRCS:.c=.o)
 
-all: $(NAME)
+all: $(NAME) $(LIBFT)
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME) $(LIBFT) $(PRINTF)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(OBJS) -o $(NAME) $(LIBFT)
 
 %.o : %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(LIBFT) :
+	make -C $(LIBFT_PATH)
+
 clean:
 	rm -f $(OBJS)
+	make -C $(LIBFT_PATH) clean
 
 fclean: clean
 	rm -f $(NAME)
+	make -C $(LIBFT_PATH) fclean
 
 re: fclean all
 

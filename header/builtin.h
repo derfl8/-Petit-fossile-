@@ -20,8 +20,9 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
-# include <readline/history.h>
-# include <readline/readline.h>
+// # include <readline/history.h>
+// # include <readline/readline.h>
+# include "../libft/libft.h"
 
 typedef struct s_env
 {
@@ -50,12 +51,5 @@ t_env				*ft_new_env(char *envinfo);
 size_t				ft_size_cut(char *to_cut);
 char				*ft_cut_env(char *to_cut);
 size_t				arg_len(char **av);
-
-// libft.c
-int					ft_strncmp(const char *s1, const char *s2, size_t n);
-char				*ft_strdup(const char *s);
-size_t				ft_strlen(const char *s);
-void				*ft_calloc(size_t nmemb, size_t size);
-int					ft_isdigit(int c);
 
 #endif

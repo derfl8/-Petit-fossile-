@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.c                                            :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abegou <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/19 20:11:57 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/05 16:20:25 by abegou           ###   ########.fr       */
+/*   Created: 2025/10/15 18:23:13 by abegou            #+#    #+#             */
+/*   Updated: 2025/10/18 15:00:00 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/builtin.h"
-
-size_t	ft_strlen(const char *s)
-{
-	const char	*tmp;
-
-	tmp = s;
-	while (*tmp)
-		tmp++;
-	return (tmp - s);
-}
+#include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -38,30 +28,4 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		i++;
 	}
 	return (s3[i] - s4[i]);
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*d;
-	size_t	i;
-
-	i = 0;
-	d = malloc(ft_strlen(s) * sizeof(char) + 1);
-	if (d == NULL)
-		return (NULL);
-	while (s[i])
-	{
-		d[i] = s[i];
-		i++;
-	}
-	d[i] = '\0';
-	return (d);
-}
-
-int	ft_isdigit(int c)
-{
-	if (c < '0' || c > '9')
-		return (0);
-	else
-		return (2048);
 }
