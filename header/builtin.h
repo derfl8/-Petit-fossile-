@@ -40,7 +40,7 @@ int					ft_env(t_env *envinfo, char **av);
 t_env				*init_env(char **envp);
 
 // exit.c
-void				ft_exit(t_env *envinfo, char **exit_code);
+void				ft_exit(t_env *envinfo, char **exit_code, int nb_arg);
 
 // lst_tools.c
 void				ft_add_back_env(t_env **lst, t_env *new_node);
