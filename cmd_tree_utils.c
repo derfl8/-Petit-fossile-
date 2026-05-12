@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_tree_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:04:44 by aldecour          #+#    #+#             */
-/*   Updated: 2026/05/07 17:05:33 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/05/12 13:24:28 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.c"
+#include "parser.h"
 
 t_tree	*pf_node_new(void)
 {
