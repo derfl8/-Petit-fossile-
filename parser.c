@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/05/12 12:39:03 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/05/12 13:10:11 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	parse_logic(t_tree *cmd_current, t_token *next_token, t_lexer *lexer)
 	else if (next_token->type == T_HEREDOC)
 		parse_heredoc(next_token, cmd_current, lexer);
 	else if (next_token->type == T_PIPE)
-		parse_pipe();
+		parse_pipe(next_token, cmd_current, lexer);
 }
 
 t_tree	**pf_parser(char *line)
