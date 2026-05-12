@@ -6,23 +6,18 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:34:16 by aldecour          #+#    #+#             */
-/*   Updated: 2026/04/22 16:36:32 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/05/09 16:14:45 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include <stdio.h>
 
-bool	ft_isspace(const char c)
-{
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (true);
-	return (false);
-}
-
-char	*get_token_value(t_lexer *lexer, t_type token_type)
+static char	*get_token_value(t_lexer *lexer, t_token_type token_type)
 {
 	size_t	i;
 	char	*res;
+	int		size;
 
 	i = lexer->i;
 	if (token_type <= T_REDIR_OUT)
@@ -37,41 +32,58 @@ char	*get_token_value(t_lexer *lexer, t_type token_type)
 	}
 	if (token_type == T_WORD)
 	{
-		while (!ft_isspace(lexer->line[lexer->i]))
+		while (lexer->line[lexer->i] && !ft_isspace(lexer->line[lexer->i]))
 			lexer->i++;
-		res = ft_strdup(&lexer->line[lexer->i - i]);
+		size = lexer->i - i + 1;
+		res = ft_strndup(&lexer->line[i], size);
 		return (res);
 	}
 	return (NULL);
 }
 
-t_type	get_token_type(t_lexer *lexer)
+static t_token_type	get_token_type(t_lexer *lexer)
 {
 	const char	*c;
 
 	c = &lexer->line[lexer->i];
-	if (*c == '|' && *c + 1 != '|')
+	if (c[0] == '\0')
+		return (T_EOF);
+	else if (c[0] == '|' && c[1] != '|')
 		return (T_PIPE);
-	else if (*c == '<' && *c + 1 != '<')
+	else if (c[0] == '<' && c[1] != '<')
 		return (T_REDIR_IN);
-	else if (*c == '>' && *c + 1 != '>')
-		return (T_REDIR_IN);
-	else if (*c == '<' && *c + 1 == '<')
+	else if (c[0] == '>' && c[1] != '>')
+		return (T_REDIR_OUT);
+	else if (c[0] == '<' && c[1] == '<')
 		return (T_HEREDOC);
-	else if (*c == '>' && *c + 1 == '>')
+	else if (c[0] == '>' && c[1] == '>')
 		return (T_APPEND);
 	return (T_WORD);
 }
 
-t_token	pf_lexer(t_lexer *lexer)
+#include <stdio.h>
+static void	print_token(t_token *token)
 {
-	t_token	res;
+	printf("token type : %d\n", token->type);
+	printf("token value : %s\n", token->value);
+	printf("--------------------\n");
+}
+
+t_token *get_next_token(t_lexer *lexer)
+{
+	t_token		*res;
 
 	if (!lexer->line)
-		return ((t_token){0});
+		return (&(t_token){-1});
 	while (ft_isspace(lexer->line[lexer->i]))
 		lexer->i++;
-	res.type = get_token_type(lexer);
-	res.value = get_token_value(lexer, res.type);
+	if (lexer->line[lexer->i] == '\0')
+		return (&(t_token){.type = T_EOF, .value = NULL});
+	res = malloc(sizeof(t_token));
+	if (!res)
+		return (NULL);
+	res->type = get_token_type(lexer);
+	res->value = get_token_value(lexer, res->type);
+	print_token(res);
 	return (res);
 }

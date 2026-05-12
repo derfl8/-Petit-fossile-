@@ -1,6 +1,6 @@
 NAME = libft.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 SOURCE =	ft_isalpha.c \
 			ft_isdigit.c \
@@ -38,7 +38,9 @@ SOURCE =	ft_isalpha.c \
 			ft_putnbr_fd.c \
 			ft_itohex.c \
 			ft_lltoa.c \
-			ft_ulltohex.c
+			ft_ulltohex.c \
+			ft_strndup.c \
+			ft_isspace.c
 
 OBJECTS = $(SOURCE:.c=.o)
 
