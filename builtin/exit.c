@@ -6,11 +6,13 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:13:07 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/07 18:17:14 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/12 16:58:57 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+
+// int	mod_256();
 
 static bool	wich_case(char *exit_code)
 {
@@ -19,6 +21,8 @@ static bool	wich_case(char *exit_code)
 	i = 0;
 	if (exit_code)
 	{
+		if (exit_code[0] == '-')
+			i++;
 		while (exit_code[i])
 		{
 			if (!ft_isdigit(exit_code[i]))
@@ -41,6 +45,11 @@ void	ft_exit(t_env *envinfo, char **exit_code, int nb_arg)
 	{
 		ft_putendl_fd("Petit Fossile: exit: too many arguments", 2);
 		return ;
+	}
+	else if (nb_arg == 2)
+	{
+		ft_free_stack_env(envinfo);
+		exit(((unsigned char) ft_atol(exit_code[1])));
 	}
 	ft_free_stack_env(envinfo);
 	exit(2);
