@@ -6,12 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:13:07 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/07 16:37:43 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/07 18:17:14 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
-
 
 static bool	wich_case(char *exit_code)
 {
