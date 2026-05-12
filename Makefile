@@ -1,7 +1,6 @@
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g
 NAME		= minishell
-<<<<<<< HEAD
 HEADER		= header/builtin.h
 LIBFT_PATH	= libft/
 LIBFT		= libft/libft.a
@@ -17,17 +16,12 @@ builtin/cd.c				\
 builtin/unset.c				\
 builtin/export.c			\
 builtin/exp_no_arg.c		\
-=======
-HEADER		= header/parser.h
-LIBFT_PATH	= libft/
-LIBFT		= libft/libft.a
-SRCS		=				\
 parser/parser_utils.c		\
 parser/parser.c				\
 parser/cmd_tree_utils.c		\
 parser/lexer.c				\
 header/parser.h				\
->>>>>>> 007b860 (file orga + norm + makefile)
+test_main.c
 
 OBJS    = $(SRCS:.c=.o)
 
