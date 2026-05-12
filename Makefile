@@ -9,7 +9,7 @@ parser/parser_utils.c		\
 parser/parser.c				\
 parser/cmd_tree_utils.c		\
 parser/lexer.c				\
-header/parser.h				\
+test_main.c
 
 OBJS    = $(SRCS:.c=.o)
 

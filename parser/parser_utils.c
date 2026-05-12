@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 12:35:42 by aldecour          #+#    #+#             */
-/*   Updated: 2026/05/12 13:33:02 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/12 17:07:33 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	parse_cmd(t_token *current, t_tree *cmd_node)
 {
-	int	i;
+	int		i;
+	char	*arg;
 
 	i = 0;
-	if (cmd_node->type == -1)
-		cmd_node->type = ASL_CMD;
+	cmd_node->type = ASL_CMD;
 	while (cmd_node->args)
 		i++;
 	cmd_node->args[i] = current->value;
@@ -47,7 +47,7 @@ void	parse_heredoc(t_token *current, t_tree *cmd_node, t_lexer *lexer)
 	cmd_node->args[0] = current->value;
 }
 
-void	parse_pipe(t_token *current, t_tree *cmd_node, t_lexer *lexer)
+void	parse_pipe(t_tree *cmd_node)
 {
 	cmd_node->type = ASL_PIPE;
 	cmd_node->args = NULL;

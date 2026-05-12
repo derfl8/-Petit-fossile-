@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:34:16 by aldecour          #+#    #+#             */
-/*   Updated: 2026/05/12 13:32:59 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/12 16:48:49 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_token	*get_next_token(t_lexer *lexer)
 	t_token	*res;
 
 	if (!lexer->line)
-		return (&(t_token){-1});
+		return (NULL);
 	while (ft_isspace(lexer->line[lexer->i]))
 		lexer->i++;
 	if (lexer->line[lexer->i] == '\0')
