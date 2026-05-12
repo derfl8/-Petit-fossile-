@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/05/12 12:38:33 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/05/12 13:13:39 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct s_tree
 
 // FUNCTIONS
 t_token *get_next_token(t_lexer *lexer);
-
 t_tree	**pf_parser(char *line);
 
 // CMD_TREE_UTILS.C
@@ -75,4 +74,5 @@ void	pf_node_add_back(t_tree **cmd_head, t_tree *new);
 void	parse_cmd(t_token *current, t_tree *cmd_node);
 void	parse_redir(t_token *current, t_tree *cmd_node, t_lexer *lexer);
 void	parse_heredoc(t_token *current, t_tree *cmd_node, t_lexer *lexer);
+void	parse_pipe(t_token *current, t_tree *cmd_node, t_lexer *lexer);
 #endif
