@@ -22,7 +22,7 @@ static char	**ft_count_words(char const *s, char c)
 	count = 0;
 	if (s[0] == '\0')
 	{
-		tab = malloc(sizeof (char *));
+		tab = malloc(sizeof(char *));
 		return (tab);
 	}
 	if (s[0] != c)
@@ -33,7 +33,7 @@ static char	**ft_count_words(char const *s, char c)
 			count++;
 		i++;
 	}
-	tab = malloc((count + 1) * sizeof (char *));
+	tab = malloc((count + 1) * sizeof(char *));
 	return (tab);
 }
 

@@ -24,29 +24,28 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 }
 /*
 static char	mine_buffer[2048] = {0};
-static char real_buffer[2048] = {0};
+static char	real_buffer[2048] = {0};
 
-static int fd = 0;
-# define 	N_TEST	10000000
+static int	fd = 0;
+#define 	N_TEST	10000000
 
-#include <stdio.h>
-#include <fcntl.h>
 #include "bsd/string.h"
-#include <stdlib.h>
 #include <assert.h>
+#include <fcntl.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 char	*ft_random_string(int len)
 {
+	char	*s;
+
 	if (fd == 0)
 		fd = open("/dev/random", O_RDONLY);
-
 	assert(len < 2048);
-	char	*s = malloc(len + 1);
+	s = malloc(len + 1);
 	assert(s);
-
 	read(fd, s, len);
-
 	s[len] = 0;
 	for (int i = 0; i < len; ++i)
 		s[i] = (s[i] % 26) + 'a';
@@ -55,33 +54,30 @@ char	*ft_random_string(int len)
 
 bool	ft_test_strlcat(void)
 {
+	int		n;
+	int		n2;
+	char	*s1;
+	char	*s2;
+		goto end;
+		goto end;
+		goto end;
+		goto end;
+
 	int	mine, real;
-	int	n = rand() % 1024;
-	int	n2 = rand() % 1024;
-
-	char	*s1 = ft_random_string(n);
-	char	*s2 = ft_random_string(n2);
-
-
+	n = rand() % 1024;
+	n2 = rand() % 1024;
+	s1 = ft_random_string(n);
+	s2 = ft_random_string(n2);
 	memset(mine_buffer, 0, sizeof(mine_buffer));
 	memset(real_buffer, 0, sizeof(real_buffer));
-
 	mine = ft_strlcat(mine_buffer, s1, n + 1);
 	real = strlcat(real_buffer, s1, n + 1);
-
 	if (memcmp(mine_buffer, real_buffer, n) != 0)
-		goto end;
 	if (mine != real)
-		goto end;
-
 	mine = ft_strlcat(mine_buffer, s2, n + n2 + 1);
 	real = strlcat(real_buffer, s2, n + n2 + 1);
-
 	if (memcmp(mine_buffer, real_buffer, n + n2) != 0)
-		goto end;
 	if (mine != real)
-		goto end;
-
 	free(s1);
 	free(s2);
 	return (true);

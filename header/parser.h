@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/05/12 13:37:54 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/12 13:41:56 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ typedef struct s_lexer
 
 typedef enum e_token_type
 {
-	T_PIPE,      // |
-	T_REDIR_IN,  // <
-	T_REDIR_OUT, // >
-	T_HEREDOC,   // <<
-	T_APPEND,    // >>
-	T_WORD,      // basically anything else
+	T_PIPE,			// |
+	T_REDIR_IN,		// <
+	T_REDIR_OUT,	// >
+	T_HEREDOC,		// <<
+	T_APPEND,		// >>
+	T_WORD,			// basically anything else
 	T_EOF,
-	T_MAX_TOKENS, // keep as last line
+	T_MAX_TOKENS,	// keep as last line
 }					t_token_type;
 
 typedef struct s_token
