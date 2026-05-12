@@ -6,40 +6,60 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/04/22 23:01:26 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/05/12 12:39:03 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_tree	pf_node_new(t_token *token)
+void	parser_init(t_lexer *lexer, t_token_type *old_type, const char *line)
 {
-	t_tree	node;
-
-	node->token = &token;
-	node->left = NULL;
-	node->right = NULL;
+	lexer->line = line;
+	lexer->i = 0;
+	*old_type = (t_token_type)-1;
 }
 
-void	pf_node_add(t_tree *first)
+void	parse_logic(t_tree *cmd_current, t_token *next_token, t_lexer *lexer)
 {
-	
+	int	err_code;
+	if (next_token->type == T_WORD)
+		parse_cmd(next_token, cmd_current);
+	else if (next_token->type == T_REDIR_IN)
+		parse_redir(next_token, cmd_current, lexer);
+	else if (next_token->type == T_REDIR_OUT)
+		parse_redir(next_token, cmd_current, lexer);
+	else if (next_token->type == T_APPEND)
+		parse_redir(next_token, cmd_current, lexer);
+	else if (next_token->type == T_HEREDOC)
+		parse_heredoc(next_token, cmd_current, lexer);
+	else if (next_token->type == T_PIPE)
+		parse_pipe();
 }
 
-t_tree	pf_parser(char *line)
+t_tree	**pf_parser(char *line)
 {
-	t_token	next_token;
-	t_lexer	lexer;
+	t_tree			**cmd_head;
+	t_tree			*cmd_current;
+	t_token			*next_token;
+	t_token_type	old_type;
+	t_lexer			lexer;
 
-	lexer.line = line;
-	lexer.i = 0;
-	next_token = pf_lexer(&lexer);
-	return ((t_tree){0});		//tmp
-}
-
-int	main(int ac, char **av)
-{
-	if (ac < 2)
-		return (1);
-	pf_parser(av[1]);
+	parser_init(&lexer, &old_type, line);
+	cmd_current = pf_node_new();
+	while (1)	
+	{
+		if (next_token)
+			old_type = next_token->type;
+		next_token = get_next_token(&lexer);
+		if (next_token->type == T_EOF)
+			break ;
+		else if (old_type != -1 && next_token->type != old_type)
+		{
+			pf_node_add_back(cmd_head, cmd_current);
+			cmd_current = pf_node_new();
+		}
+		else
+			parse_logic(cmd_current, next_token, &lexer);
+	}
+	return (cmd_head);
 }
