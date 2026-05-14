@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:13:07 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/12 16:58:57 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/14 21:29:15 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static bool	wich_case(char *exit_code)
 	return (true);
 }
 
-void	ft_exit(t_env *envinfo, char **exit_code, int nb_arg)
+void	ft_exit(t_data *shell, char **exit_code, int nb_arg)
 {
 	if (nb_arg > 1 && wich_case(exit_code[1]) == false)
 	{
@@ -48,9 +48,9 @@ void	ft_exit(t_env *envinfo, char **exit_code, int nb_arg)
 	}
 	else if (nb_arg == 2)
 	{
-		ft_free_stack_env(envinfo);
+		ft_free_stack_env(shell->env);
 		exit(((unsigned char) ft_atol(exit_code[1])));
 	}
-	ft_free_stack_env(envinfo);
-	exit(2);
+	ft_free_stack_env(shell->env);
+	exit(shell->success_or_failed);
 }

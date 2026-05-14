@@ -24,6 +24,9 @@
 // # include <readline/readline.h>
 # include "../libft/libft.h"
 
+typedef struct s_env	t_env;
+typedef struct s_data	t_data;
+
 typedef struct s_env
 {
 	char			*envinfo;
@@ -31,16 +34,22 @@ typedef struct s_env
 
 }					t_env;
 
+typedef struct s_data
+{
+	t_env	*env;
+	int		success_or_failed;
+}			t_data;
+
 // echo.c
-int					ft_echo(char **av);
+int					ft_echo(t_data *shell, char **av);
 
 // pwd_env.c
-int					ft_pwd(t_env *envinfo, char **av);
-int					ft_env(t_env *envinfo, char **av);
+int					ft_pwd(t_data *shell, char **av);
+int					ft_env(t_data *shell, char **av);
 t_env				*init_env(char **envp);
 
 // exit.c
-void				ft_exit(t_env *envinfo, char **exit_code, int nb_arg);
+void				ft_exit(t_data *shell, char **exit_code, int nb_arg);
 
 // lst_tools.c
 void				ft_add_back_env(t_env **lst, t_env *new_node);
