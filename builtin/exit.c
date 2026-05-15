@@ -12,7 +12,7 @@
 
 #include "../header/builtin.h"
 
-// int	mod_256();
+// int	mod_256(void);
 
 static bool	wich_case(char *exit_code)
 {
@@ -49,7 +49,7 @@ void	ft_exit(t_data *shell, char **exit_code, int nb_arg)
 	else if (nb_arg == 2)
 	{
 		ft_free_stack_env(shell->env);
-		exit(((unsigned char) ft_atol(exit_code[1])));
+		exit(((unsigned char)ft_atol(exit_code[1])));
 	}
 	ft_free_stack_env(shell->env);
 	exit(shell->success_or_failed);
