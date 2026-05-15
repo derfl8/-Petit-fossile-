@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/14 21:28:48 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/15 16:22:30 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ int	ft_pwd(t_data *shell, char **av)
 {
 	char	buffer[PATH_MAX];
 	char	*from_struct;
+	t_env	*tmp;
 
 	(void)av;
-	while (shell->env != NULL && ft_strncmp("PWD=",shell->env->envinfo, 4) != 0)
-		shell->env = shell->env->next;
-	if (shell->env != NULL && ft_strncmp("PWD=", shell->env->envinfo, 4) == 0)
+	tmp = shell->env;
+	while (tmp && ft_strncmp("PWD=", tmp->envinfo,4) != 0)
+		tmp = tmp->next;
+	if (shell->env && ft_strncmp("PWD=", shell->env->envinfo, 4) == 0)
 	{
 		from_struct = ft_cut_env(shell->env->envinfo);
 		printf("%s\n", from_struct);
@@ -44,18 +46,20 @@ int	ft_pwd(t_data *shell, char **av)
 int	ft_env(t_data *shell, char **av)
 {
 	size_t	len;
+	t_env	*tmp;
 
 	len = arg_len(av);
+	tmp = shell->env;
 	if (len > 1)
 	{
 		printf("Too many args for env command\n");
 		shell->success_or_failed = 1;
 		return (1);
 	}
-	while (shell->env != NULL)
+	while (tmp)
 	{
-		printf("%s\n", shell->env->envinfo);
-		shell->env = shell->env->next;
+		printf("%s\n", tmp->envinfo);
+		tmp = tmp->next;
 	}
 	shell->success_or_failed = 0;
 	return (0);
