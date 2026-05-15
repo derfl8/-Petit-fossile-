@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/15 16:22:30 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/15 16:25:31 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	ft_pwd(t_data *shell, char **av)
 	tmp = shell->env;
 	while (tmp && ft_strncmp("PWD=", tmp->envinfo,4) != 0)
 		tmp = tmp->next;
-	if (shell->env && ft_strncmp("PWD=", shell->env->envinfo, 4) == 0)
+	if (tmp && ft_strncmp("PWD=", tmp->envinfo, 4) == 0)
 	{
-		from_struct = ft_cut_env(shell->env->envinfo);
+		from_struct = ft_cut_env(tmp->envinfo);
 		printf("%s\n", from_struct);
 		free(from_struct);
 		shell->success_or_failed = 0;
