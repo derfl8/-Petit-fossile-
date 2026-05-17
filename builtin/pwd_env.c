@@ -22,7 +22,7 @@ int	ft_pwd(t_data *shell, char **av)
 
 	(void)av;
 	tmp = shell->env;
-	while (tmp && ft_strncmp("PWD=", tmp->envinfo,4) != 0)
+	while (tmp && ft_strncmp("PWD=", tmp->envinfo, 4) != 0)
 		tmp = tmp->next;
 	if (tmp && ft_strncmp("PWD=", tmp->envinfo, 4) == 0)
 	{
