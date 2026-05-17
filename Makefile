@@ -11,6 +11,7 @@ builtin/pwd_env.c			\
 builtin/echo.c				\
 builtin/main.c				\
 builtin/exit.c				\
+builtin/cd.c				\
 
 OBJS    = $(SRCS:.c=.o)
 

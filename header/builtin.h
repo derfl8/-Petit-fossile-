@@ -20,8 +20,6 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
-// # include <readline/history.h>
-// # include <readline/readline.h>
 # include "../libft/libft.h"
 
 typedef struct s_env	t_env;
@@ -39,6 +37,9 @@ typedef struct s_data
 	t_env	*env;
 	int		success_or_failed;
 }			t_data;
+
+// cd.c
+int					ft_cd(t_data *shell, char **av);
 
 // echo.c
 int					ft_echo(t_data *shell, char **av);
