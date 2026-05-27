@@ -6,11 +6,12 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/15 16:25:31 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/27 21:35:48 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+#include <stdlib.h>
 
 // update by cd if PWD unset
 
@@ -84,4 +85,28 @@ t_env	*init_env(char **envp)
 		ft_add_back_env(&envinfo, new);
 	}
 	return (envinfo);
+}
+
+bool	update_env(t_env *env, char *key, char *value)
+{
+	int		keysize;
+	char	*tmp;
+
+	keysize = ft_strlen(key);
+	while (env && ft_strncmp(key, env->envinfo, keysize) != 0)
+		env = env->next;
+	if (env && ft_strncmp(key, env->envinfo, keysize) == 0)
+	{
+		free(env->envinfo);
+		tmp = ft_strjoin(key, "=");
+		if (!tmp)
+			return (false);
+		env->envinfo = ft_strjoin(tmp, value);
+		if (!env->envinfo)
+			return (false);
+		free(tmp);
+	}
+	else
+		return (false);
+	return (true);
 }

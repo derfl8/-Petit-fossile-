@@ -48,6 +48,7 @@ int					ft_echo(t_data *shell, char **av);
 int					ft_pwd(t_data *shell, char **av);
 int					ft_env(t_data *shell, char **av);
 t_env				*init_env(char **envp);
+bool				update_env(t_env *env, char *key, char *value);
 
 // exit.c
 void				ft_exit(t_data *shell, char **exit_code, int nb_arg);
