@@ -44,8 +44,10 @@ int					ft_cd(t_data *shell, char **av);
 // echo.c
 int					ft_echo(t_data *shell, char **av);
 
-// pwd_env.c
+// pwd.c
 int					ft_pwd(t_data *shell, char **av);
+
+// env.c
 int					ft_env(t_data *shell, char **av);
 t_env				*init_env(char **envp);
 bool				update_env(t_env *env, char *key, char *value);

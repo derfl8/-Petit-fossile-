@@ -1,48 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd_env.c                                          :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/27 21:35:48 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/27 21:51:34 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
-#include <stdlib.h>
-
-// update by cd if PWD unset
-
-int	ft_pwd(t_data *shell, char **av)
-{
-	char	buffer[PATH_MAX];
-	char	*from_struct;
-	t_env	*tmp;
-
-	(void)av;
-	tmp = shell->env;
-	while (tmp && ft_strncmp("PWD=", tmp->envinfo, 4) != 0)
-		tmp = tmp->next;
-	if (tmp && ft_strncmp("PWD=", tmp->envinfo, 4) == 0)
-	{
-		from_struct = ft_cut_env(tmp->envinfo);
-		printf("%s\n", from_struct);
-		free(from_struct);
-		shell->success_or_failed = 0;
-		return (0);
-	}
-	if (getcwd(buffer, PATH_MAX) == NULL)
-	{
-		perror("pwd");
-		shell->success_or_failed = 1;
-		return (1);
-	}
-	printf("%s\n", buffer);
-	shell->success_or_failed = 0;
-	return (0);
-}
 
 int	ft_env(t_data *shell, char **av)
 {

@@ -6,11 +6,12 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:27:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/27 21:18:46 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/27 22:17:39 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+#include <stdlib.h>
 
 static bool	cd_error(t_data *shell, char **av)
 {
@@ -44,26 +45,39 @@ static bool	cd_error(t_data *shell, char **av)
 int	ft_cd(t_data *shell, char **av)
 {
 	char	*pwd;
+	char	*oldpwd;
+	t_env	*new;
 
 	pwd = ft_calloc(PATH_MAX, sizeof(char));
+	oldpwd = ft_calloc(PATH_MAX, sizeof(char));
 	if (!pwd || cd_error(shell, av) == true)
 	{
-		return (1);
 		shell->success_or_failed = 1;
+		return (1);
 	}
 	else
 	{
-		getcwd(pwd, PATH_MAX);
+		getcwd(oldpwd, PATH_MAX);
 		if (chdir(av[1]) == -1)
 		{
 			ft_putstr_fd("Petit Fossile: cd: ", 2);
 			ft_putstr_fd(av[1], 2);
 			ft_putendl_fd(": No such file or directory", 2);
 			shell->success_or_failed = 1;
+			free(pwd);
+			free(oldpwd);
 			return (1);
 		}
+		getcwd(pwd, PATH_MAX);
 		update_env(shell->env, "PWD", pwd);
+		if (update_env(shell->env, "OLDPWD", oldpwd) == false) 
+		{
+			new = ft_new_env(ft_strjoin("OLDPWD=", oldpwd));
+			ft_add_back_env(&shell->env, new);
+		}
 	}
 	shell->success_or_failed = 0;
+	free(pwd);
+	free(oldpwd);
 	return (0);
 }

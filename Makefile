@@ -7,7 +7,8 @@ LIBFT		= libft/libft.a
 SRCS		=				\
 builtin/custom_libft.c		\
 builtin/lst_tools.c			\
-builtin/pwd_env.c			\
+builtin/pwd.c				\
+builtin/env.c				\
 builtin/echo.c				\
 builtin/main.c				\
 builtin/exit.c				\
