@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:27:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/20 17:35:29 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/27 12:20:17 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ int	ft_cd(t_data *shell, char **av)
 {
 	t_env	*tmp;
 	char	*path;
+	char	pwd[PATH_MAX];
 
 	tmp = shell->env;
-	if (av[2][1] == 'a')
+	if (av[2][1] == '1')
 	{
 		ft_putendl_fd("Petit Fossile: cd: too many arguments", 2);
 		shell->success_or_failed = 1;
@@ -37,6 +38,15 @@ int	ft_cd(t_data *shell, char **av)
 		path = ft_cut_env(tmp->envinfo);
 		chdir(path);
 		free(path);
+	}
+	else
+	{
+		getcwd(pwd, PATH_MAX);
+		if ()
+		{
+			
+		}
+		chdir(av[1]);
 	}
 	shell->success_or_failed = 0;
 	return (0);
