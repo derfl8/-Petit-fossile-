@@ -4,6 +4,7 @@ NAME		= minishell
 HEADER		= header/builtin.h
 LIBFT_PATH	= libft/
 LIBFT		= libft/libft.a
+READLINE	= -l readline
 SRCS		=				\
 builtin/custom_libft.c		\
 builtin/lst_tools.c			\
@@ -21,14 +22,14 @@ parser/parser.c				\
 parser/cmd_tree_utils.c		\
 parser/lexer.c				\
 header/parser.h				\
-test_main.c
+parser/dynamic_arg_table.c	\
 
 OBJS    = $(SRCS:.c=.o)
 
 all: $(NAME) $(LIBFT)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(OBJS) -o $(NAME) $(LIBFT)
+	$(CC) $(OBJS) -o $(NAME) $(LIBFT) $(READLINE)
 
 %.o : %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@

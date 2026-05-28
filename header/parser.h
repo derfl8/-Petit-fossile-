@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/05/12 15:36:20 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/05/28 12:12:31 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "../libft/libft.h"
-
-# define LEFT 1
-# define RIGHT 2
 
 typedef struct s_lexer
 {
@@ -33,9 +30,8 @@ typedef enum e_token_type
 	T_REDIR_OUT,	// >
 	T_HEREDOC,		// <<
 	T_APPEND,		// >>
-	T_WORD,			// basically anything else
+	T_WORD,
 	T_EOF,
-	T_MAX_TOKENS,	// keep as last line
 }	t_token_type;
 
 typedef struct s_token
@@ -53,6 +49,13 @@ typedef enum e_asl_type
 	ASL_APPEND,
 	ASL_CMD,
 }	t_asl_type;
+
+typedef enum e_quote_state
+{
+	NO_QUOTE,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE,
+}	t_quote_state;
 
 typedef struct s_tree
 {
@@ -75,4 +78,8 @@ void	parse_cmd(t_token *current, t_tree *cmd_node);
 void	parse_redir(t_token *current, t_tree *cmd_node, t_lexer *lexer);
 void	parse_heredoc(t_token *current, t_tree *cmd_node, t_lexer *lexer);
 void	parse_pipe(t_tree *cmd_node);
+
+// DYNAMIC_ARG_TABLE.C
+void	realloc_args(char ***args, t_token *current);
+void	free_args(char **args, size_t size);
 #endif

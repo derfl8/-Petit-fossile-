@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/05/17 19:06:19 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/05/27 19:51:49 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ void	parser_init(t_lexer *lexer, const char *line)
 {
 	lexer->line = line;
 	lexer->i = 0;
+}
+
+void	free_token(t_token *token)
+{
+	free(token->value);
+	free(token);
 }
 
 void	parse_special(t_tree *cmd_current, t_token *next_token, t_lexer *lexer)
@@ -59,6 +65,7 @@ t_tree	**pf_parser(char *line)
 			parse_special(cmd_current, next_token, &lexer);
 			pf_node_add_back(cmd_head, cmd_current);
 		}
+		free_token(next_token);
 	}
 	return (cmd_head);
 }
