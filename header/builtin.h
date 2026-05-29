@@ -20,6 +20,8 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "../libft/libft.h"
 
 typedef struct s_env	t_env;

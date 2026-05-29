@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:27:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/29 18:46:10 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/29 18:48:48 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static bool	cd_error(t_data *shell, char **av, char *pwd, char *oldpwd)
 	char	*path;
 
 	tmp = shell->env;
-	if (av[2])
+	if (av[2][1] == 'q')
 	{
 		ft_putendl_fd("Petit Fossile: cd: too many arguments", 2);
 		shell->success_or_failed = 1;
