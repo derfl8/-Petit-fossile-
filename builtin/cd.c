@@ -6,14 +6,36 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:27:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/29 14:37:49 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/29 18:46:10 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
-#include <stdbool.h>
 
-static bool	cd_error(t_data *shell, char **av)
+static void	oldpwd_update(t_data *shell, char *oldpwd)
+{
+	t_env	*new;
+
+	if (update_env(shell->env, "OLDPWD", oldpwd) == false)
+	{
+		new = ft_new_env(ft_strjoin("OLDPWD=", oldpwd));
+		ft_add_back_env(&shell->env, new);
+		free(new);
+	}
+	return ;
+}
+
+static void	cd_home(t_data *shell, char *pwd, char *oldpwd, char *path)
+{
+	chdir(path);
+	getcwd(pwd, PATH_MAX);
+	update_env(shell->env, "PWD", pwd);
+	oldpwd_update(shell, oldpwd);
+	free(path);
+	return ;
+}
+
+static bool	cd_error(t_data *shell, char **av, char *pwd, char *oldpwd)
 {
 	t_env	*tmp;
 	char	*path;
@@ -35,9 +57,9 @@ static bool	cd_error(t_data *shell, char **av)
 			shell->success_or_failed = 1;
 			return (true);
 		}
+		getcwd(oldpwd, PATH_MAX);
 		path = ft_cut_env(tmp->envinfo);
-		chdir(path);
-		free(path);
+		cd_home(shell, pwd, oldpwd, path);
 	}
 	return (false);
 }
@@ -57,17 +79,6 @@ static bool	path_check(t_data *shell, char *path, char *pwd, char *oldpwd)
 	return (true);
 }
 
-static void	oldpwd_update(t_data *shell, char *oldpwd)
-{
-	t_env	*new;
-
-	if (update_env(shell->env, "OLDPWD", oldpwd) == false)
-	{
-		new = ft_new_env(ft_strjoin("OLDPWD=", oldpwd));
-		ft_add_back_env(&shell->env, new);
-	}
-}
-
 int	ft_cd(t_data *shell, char **av)
 {
 	char	*pwd;
@@ -75,7 +86,7 @@ int	ft_cd(t_data *shell, char **av)
 
 	pwd = ft_calloc(PATH_MAX, sizeof(char));
 	oldpwd = ft_calloc(PATH_MAX, sizeof(char));
-	if (!pwd || cd_error(shell, av) == true)
+	if (!pwd || cd_error(shell, av, pwd, oldpwd) == true)
 	{
 		shell->success_or_failed = 1;
 		return (1);
