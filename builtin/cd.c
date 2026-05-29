@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:27:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/29 20:42:47 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/29 22:06:11 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,19 @@ static bool	path_check(t_data *shell, char *path, char *pwd, char *oldpwd)
 	return (true);
 }
 
+bool	cd_hyphen(char *hyphen)
+{
+	char	*path;
+
+	getcwd(path, PATH_MAX);
+	if (hyphen[0] == '-' && hyphen[1] == '\0')
+	{
+		printf("%s", path);
+		return (true);
+	}
+	return (false);
+}
+
 int	ft_cd(t_data *shell, char **av)
 {
 	char	*pwd;
@@ -90,10 +103,11 @@ int	ft_cd(t_data *shell, char **av)
 	oldpwd = ft_calloc(PATH_MAX, sizeof(char));
 	if (!pwd || cd_error(shell, av, pwd, oldpwd) == true)
 	{
+		free(oldpwd);
 		shell->success_or_failed = 1;
 		return (1);
 	}
-	else
+	else if (cd_hyphen(av[1]) == false)
 	{
 		getcwd(oldpwd, PATH_MAX);
 		if (path_check(shell, av[1], pwd, oldpwd) == false)
