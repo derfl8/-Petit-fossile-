@@ -6,13 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 21:51:17 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/27 21:51:21 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/27 22:19:53 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
-
-// update by cd if PWD unset
 
 int	ft_pwd(t_data *shell, char **av)
 {
