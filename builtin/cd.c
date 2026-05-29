@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:27:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/29 18:48:48 by abegou           ###   ########.fr       */
+/*   Updated: 2026/05/29 20:42:47 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 static void	oldpwd_update(t_data *shell, char *oldpwd)
 {
 	t_env	*new;
+	char	*tmp;
 
 	if (update_env(shell->env, "OLDPWD", oldpwd) == false)
 	{
-		new = ft_new_env(ft_strjoin("OLDPWD=", oldpwd));
+		tmp = ft_strjoin("OLDPWD=", oldpwd);
+		new = ft_new_env(tmp);
 		ft_add_back_env(&shell->env, new);
-		free(new);
+		free(tmp);
 	}
 	return ;
 }
@@ -41,7 +43,7 @@ static bool	cd_error(t_data *shell, char **av, char *pwd, char *oldpwd)
 	char	*path;
 
 	tmp = shell->env;
-	if (av[2][1] == 'q')
+	if (av[2])
 	{
 		ft_putendl_fd("Petit Fossile: cd: too many arguments", 2);
 		shell->success_or_failed = 1;
