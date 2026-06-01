@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 21:07:59 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/01 23:05:04 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/01 23:09:20 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static void rm_env(t_data *shell, char *key)
 
     s_key = ft_strlen(key);
     cur = shell->env;
-    while (ft_strncmp(key, shell->env->envinfo, s_key) != 0)
+    while (ft_strncmp(key, cur->envinfo, s_key) != 0)
     {
         prev = cur;
-        cur = shell->env->next;
+        cur = cur->next;
     }
-    free(cur);
     free(cur->envinfo);
+    free(cur);
     return ;
 }
 
