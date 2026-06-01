@@ -40,6 +40,9 @@ typedef struct s_data
 	int		success_or_failed;
 }			t_data;
 
+// unset.c
+int					ft_unset(t_data *shell, char **av);
+
 // cd.c
 int					ft_cd(t_data *shell, char **av);
 
@@ -48,6 +51,7 @@ int					ft_echo(t_data *shell, char **av);
 
 // pwd.c
 int					ft_pwd(t_data *shell, char **av);
+void				oldpwd_update(t_data *shell, char *oldpwd);
 
 // env.c
 int					ft_env(t_data *shell, char **av);

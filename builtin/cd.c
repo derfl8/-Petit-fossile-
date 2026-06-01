@@ -6,26 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:27:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/01 20:59:32 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/01 21:03:33 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
-
-static void	oldpwd_update(t_data *shell, char *oldpwd)
-{
-	t_env	*new;
-	char	*tmp;
-
-	if (update_env(shell->env, "OLDPWD", oldpwd) == false)
-	{
-		tmp = ft_strjoin("OLDPWD=", oldpwd);
-		new = ft_new_env(tmp);
-		ft_add_back_env(&shell->env, new);
-		free(tmp);
-	}
-	return ;
-}
 
 static void	cd_home(t_data *shell, char *pwd, char *oldpwd, char *path)
 {
@@ -81,7 +66,7 @@ static bool	path_check(t_data *shell, char *path, char *pwd, char *oldpwd)
 	return (true);
 }
 
-bool	cd_hyphen(t_data *shell, char *hyphen, char *pwd, char *oldpwd)
+static bool	cd_hyphen(t_data *shell, char *hyphen, char *pwd, char *oldpwd)
 {
 	t_env	*tmp;
 	char	*path;
