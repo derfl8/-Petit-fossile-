@@ -6,14 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:27:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/01 20:53:59 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/01 20:59:32 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 static void	oldpwd_update(t_data *shell, char *oldpwd)
 {
@@ -92,10 +89,12 @@ bool	cd_hyphen(t_data *shell, char *hyphen, char *pwd, char *oldpwd)
 	tmp = shell->env;
 	if (hyphen[0] == '-' && hyphen[1] == '\0')
 	{
-		if (search_env(shell->env, "OLDPWD") == true)
+		while (tmp && ft_strncmp("OLDPWD=", tmp->envinfo, 7) != 0)
+			tmp = tmp->next;
+		if (!tmp)
+			ft_putendl_fd("Petit Fossile: cd: OLDPWD not set", 2);
+		else
 		{
-			while (tmp && ft_strncmp("OLDPWD=", tmp->envinfo, 7) != 0)
-				tmp = tmp->next;
 			path = ft_cut_env(tmp->envinfo);
 			printf("%s\n", path);
 			getcwd(oldpwd, PATH_MAX);
@@ -105,8 +104,6 @@ bool	cd_hyphen(t_data *shell, char *hyphen, char *pwd, char *oldpwd)
 			oldpwd_update(shell, oldpwd);
 			free(path);
 		}
-		else 
-			ft_putendl_fd("Petit Fossile: cd: OLDPWD not set", 2);
 		return (true);
 	}
 	return (false);

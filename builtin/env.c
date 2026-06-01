@@ -81,7 +81,7 @@ bool	update_env(t_env *env, char *key, char *value)
 
 bool	search_env(t_env *env, char *key)
 {
-	int		keysize;
+	int	keysize;
 
 	keysize = ft_strlen(key);
 	while (env && ft_strncmp(key, env->envinfo, keysize) != 0)
