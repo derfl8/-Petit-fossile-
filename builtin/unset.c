@@ -6,11 +6,29 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 21:07:59 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/01 22:27:04 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/01 23:05:04 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+
+static void rm_env(t_data *shell, char *key)
+{
+    t_env   *prev;
+    t_env   *cur;
+    int     s_key;
+
+    s_key = ft_strlen(key);
+    cur = shell->env;
+    while (ft_strncmp(key, shell->env->envinfo, s_key) != 0)
+    {
+        prev = cur;
+        cur = shell->env->next;
+    }
+    free(cur);
+    free(cur->envinfo);
+    return ;
+}
 
 int ft_unset(t_data *shell, char **av)
 {
@@ -24,11 +42,7 @@ int ft_unset(t_data *shell, char **av)
     while (i++ != nb_arg)
     {
         if (search_env(shell->env, av[i]) == true)
-        {
-            while (shell->env && ft_strncmp(av[i], shell->env->envinfo, ft_strlen(av[i])) != 0)
-		        shell->env = shell->env->next;
-            free(shell->env->envinfo);
-        }
+            rm_env(shell, av[i]);
     }
     return (0);
 }
