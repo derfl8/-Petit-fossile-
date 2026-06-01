@@ -6,11 +6,13 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:27:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/01 20:44:03 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/01 20:53:59 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 static void	oldpwd_update(t_data *shell, char *oldpwd)
@@ -82,7 +84,7 @@ static bool	path_check(t_data *shell, char *path, char *pwd, char *oldpwd)
 	return (true);
 }
 
-bool	cd_hyphen(t_data *shell, char *hyphen)
+bool	cd_hyphen(t_data *shell, char *hyphen, char *pwd, char *oldpwd)
 {
 	t_env	*tmp;
 	char	*path;
@@ -95,8 +97,16 @@ bool	cd_hyphen(t_data *shell, char *hyphen)
 			while (tmp && ft_strncmp("OLDPWD=", tmp->envinfo, 7) != 0)
 				tmp = tmp->next;
 			path = ft_cut_env(tmp->envinfo);
+			printf("%s\n", path);
+			getcwd(oldpwd, PATH_MAX);
 			chdir(path);
+			getcwd(pwd, PATH_MAX);
+			update_env(shell->env, "PWD", pwd);
+			oldpwd_update(shell, oldpwd);
+			free(path);
 		}
+		else 
+			ft_putendl_fd("Petit Fossile: cd: OLDPWD not set", 2);
 		return (true);
 	}
 	return (false);
@@ -115,7 +125,7 @@ int	ft_cd(t_data *shell, char **av)
 		shell->success_or_failed = 1;
 		return (1);
 	}
-	else if (cd_hyphen(shell, av[1]) == false)
+	else if (cd_hyphen(shell, av[1], pwd, oldpwd) == false)
 	{
 		getcwd(oldpwd, PATH_MAX);
 		if (path_check(shell, av[1], pwd, oldpwd) == false)
