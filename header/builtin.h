@@ -53,6 +53,7 @@ int					ft_pwd(t_data *shell, char **av);
 int					ft_env(t_data *shell, char **av);
 t_env				*init_env(char **envp);
 bool				update_env(t_env *env, char *key, char *value);
+bool				search_env(t_env *env, char *key);
 
 // exit.c
 void				ft_exit(t_data *shell, char **exit_code, int nb_arg);

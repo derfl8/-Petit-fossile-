@@ -6,11 +6,12 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:27:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/29 22:06:11 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/01 20:44:03 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+#include <unistd.h>
 
 static void	oldpwd_update(t_data *shell, char *oldpwd)
 {
@@ -81,14 +82,21 @@ static bool	path_check(t_data *shell, char *path, char *pwd, char *oldpwd)
 	return (true);
 }
 
-bool	cd_hyphen(char *hyphen)
+bool	cd_hyphen(t_data *shell, char *hyphen)
 {
+	t_env	*tmp;
 	char	*path;
 
-	getcwd(path, PATH_MAX);
+	tmp = shell->env;
 	if (hyphen[0] == '-' && hyphen[1] == '\0')
 	{
-		printf("%s", path);
+		if (search_env(shell->env, "OLDPWD") == true)
+		{
+			while (tmp && ft_strncmp("OLDPWD=", tmp->envinfo, 7) != 0)
+				tmp = tmp->next;
+			path = ft_cut_env(tmp->envinfo);
+			chdir(path);
+		}
 		return (true);
 	}
 	return (false);
@@ -107,7 +115,7 @@ int	ft_cd(t_data *shell, char **av)
 		shell->success_or_failed = 1;
 		return (1);
 	}
-	else if (cd_hyphen(av[1]) == false)
+	else if (cd_hyphen(shell, av[1]) == false)
 	{
 		getcwd(oldpwd, PATH_MAX);
 		if (path_check(shell, av[1], pwd, oldpwd) == false)

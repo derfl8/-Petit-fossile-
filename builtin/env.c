@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/27 21:51:34 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/01 14:29:23 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,16 @@ bool	update_env(t_env *env, char *key, char *value)
 	else
 		return (false);
 	return (true);
+}
+
+bool	search_env(t_env *env, char *key)
+{
+	int		keysize;
+
+	keysize = ft_strlen(key);
+	while (env && ft_strncmp(key, env->envinfo, keysize) != 0)
+		env = env->next;
+	if (env && ft_strncmp(key, env->envinfo, keysize) == 0)
+		return (true);
+	return (false);
 }
