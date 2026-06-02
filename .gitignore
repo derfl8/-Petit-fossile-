@@ -1,2 +1,9 @@
-
 compile_commands.json
+*.o
+*.out
+*.a
+\minishell
+main.c
+.cache/
+.vscode/
+
