@@ -6,13 +6,25 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/05/27 19:51:49 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/04 18:37:56 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/parser.h"
 
-void	parser_init(t_lexer *lexer, const char *line)
+void	parse_error(t_parse_error err_type)
+{
+	if (err_type == ERR_QUOTE)
+	{
+		
+	}
+	else if (err_type == ERR_MISSING_CMD)
+	{
+		
+	}
+}
+
+void	lexer_init(t_lexer *lexer, const char *line)
 {
 	lexer->line = line;
 	lexer->i = 0;
@@ -24,11 +36,11 @@ void	free_token(t_token *token)
 	free(token);
 }
 
-void	parse_special(t_tree *cmd_current, t_token *next_token, t_lexer *lexer)
+void	parse_special(t_tree **cmd_head, t_token *next_token, t_lexer *lexer)
 {
-	int	err_code;
+	t_tree	*cmd_current;
 
-	err_code = 0;
+	cmd_current = pf_node_new();
 	if (next_token->type == T_REDIR_IN)
 		parse_redir(next_token, cmd_current, lexer);
 	else if (next_token->type == T_REDIR_OUT)
@@ -39,33 +51,34 @@ void	parse_special(t_tree *cmd_current, t_token *next_token, t_lexer *lexer)
 		parse_heredoc(next_token, cmd_current, lexer);
 	else if (next_token->type == T_PIPE)
 		parse_pipe(cmd_current);
+	pf_node_add_back(cmd_head, cmd_current);
 }
-
+#include <stdio.h>
 t_tree	**pf_parser(char *line)
 {
-	t_tree			**cmd_head;
-	t_tree			*cmd_current;
-	t_tree			*cmd_cmd;
-	t_token			*next_token;
-	t_lexer			lexer;
+	t_tree	**cmd_head;
+	t_tree	*cmd_cmd;
+	t_token	*next_token;
+	t_lexer	lexer = {0};
 
 	cmd_cmd = pf_node_new();
 	cmd_head = &cmd_cmd;
-	parser_init(&lexer, line);
-	while (1)
+	lexer_init(&lexer, line);
+	next_token = get_next_token(&lexer);
+	while (next_token->type != T_EOF)
 	{
-		next_token = get_next_token(&lexer);
-		if (next_token->type == T_EOF)
-			break ;
-		else if (next_token->type == T_WORD)
+		if (!fuck_em_quotes(next_token))
+		{
+			parse_error(ERR_QUOTE);
+			return (NULL);
+		}
+		if (next_token->type == T_WORD)
 			parse_cmd(next_token, cmd_cmd);
 		else
-		{
-			cmd_current = pf_node_new();
-			parse_special(cmd_current, next_token, &lexer);
-			pf_node_add_back(cmd_head, cmd_current);
-		}
+			parse_special(cmd_head, next_token, &lexer);
 		free_token(next_token);
+		next_token = get_next_token(&lexer);
 	}
+	free_token(next_token);
 	return (cmd_head);
 }

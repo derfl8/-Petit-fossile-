@@ -23,6 +23,8 @@ parser/cmd_tree_utils.c		\
 parser/lexer.c				\
 header/parser.h				\
 parser/dynamic_arg_table.c	\
+parser/quote_remover.c		\
+test_main.c
 
 OBJS    = $(SRCS:.c=.o)
 

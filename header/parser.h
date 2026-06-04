@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/05/28 12:12:31 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/04 18:42:28 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_token
 
 typedef enum e_asl_type
 {
+	ASL_NULL,
 	ASL_PIPE,
 	ASL_REDIR_IN,
 	ASL_REDIR_OUT,
@@ -50,19 +51,18 @@ typedef enum e_asl_type
 	ASL_CMD,
 }	t_asl_type;
 
-typedef enum e_quote_state
-{
-	NO_QUOTE,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE,
-}	t_quote_state;
-
 typedef struct s_tree
 {
 	t_asl_type		type;
 	char			**args;
 	struct s_tree	*next;
 }					t_tree;
+
+typedef	enum	e_parse_error
+{
+	ERR_QUOTE,
+	ERR_MISSING_CMD,
+}	t_parse_error;
 
 // FUNCTIONS
 t_token *get_next_token(t_lexer *lexer);
@@ -82,4 +82,7 @@ void	parse_pipe(t_tree *cmd_node);
 // DYNAMIC_ARG_TABLE.C
 void	realloc_args(char ***args, t_token *current);
 void	free_args(char **args, size_t size);
+
+// QUOTE_REMOVER.C
+int		fuck_em_quotes(t_token *token);
 #endif

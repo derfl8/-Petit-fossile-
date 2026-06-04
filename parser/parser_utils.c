@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 12:35:42 by aldecour          #+#    #+#             */
-/*   Updated: 2026/05/27 19:36:05 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/04 18:11:57 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	parse_cmd(t_token *current, t_tree *cmd_node)
 {
 	static size_t	i;
 
+	if (!cmd_node->args)
+		i = 0;
 	cmd_node->type = ASL_CMD;
 	realloc_args(&cmd_node->args, current);
 	cmd_node->args[i] = ft_strdup(current->value);

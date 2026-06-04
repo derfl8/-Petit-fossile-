@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:04:44 by aldecour          #+#    #+#             */
-/*   Updated: 2026/05/12 13:32:53 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/04 16:12:51 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_tree	*pf_node_new(void)
 	t_tree	*node;
 
 	node = malloc(sizeof(t_tree));
-	node->type = -1;
+	node->type = ASL_NULL;
 	node->args = NULL;
 	node->next = NULL;
 	return (node);
