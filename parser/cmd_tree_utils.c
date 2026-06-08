@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 17:04:44 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/04 16:12:51 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/08 20:07:34 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_tree	*pf_node_new(void)
 	return (node);
 }
 
-t_tree	*pf_node_last(t_tree *node)
+t_tree	*get_last_node(t_tree *node)
 {
 	if (!node)
 		return (NULL);
@@ -32,15 +32,15 @@ t_tree	*pf_node_last(t_tree *node)
 	return (node);
 }
 
-void	pf_node_add_back(t_tree **cmd_head, t_tree *new)
+void	pf_node_add_back(t_tree *cmd_head, t_tree *new)
 {
 	t_tree	*last;
 
 	if (!cmd_head || !new)
 		return ;
-	last = pf_node_last(*cmd_head);
-	if (!*cmd_head)
-		*cmd_head = new;
+	last = get_last_node(cmd_head);
+	if (!cmd_head)
+		cmd_head = new;
 	else
 		last->next = new;
 	return ;

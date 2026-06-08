@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:34:16 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/04 16:23:59 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/08 20:15:25 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ t_token	*get_next_token(t_lexer *lexer)
 	{
 		res->type = T_EOF;
 		res->value = NULL;
+		print_token(res);		// DEBUG
 		return (res);
 	}
 	if (!res)

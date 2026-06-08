@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 13:58:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/04 15:28:24 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/08 20:32:18 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	fuck_em_quotes(t_token *token)
 	char	quote;
 	char	*tmp;
 
+	if (!token->value)
+		return (1);
 	i = 0;
 	is_quoted = false;
 	quote = find_em_quotes(*token);

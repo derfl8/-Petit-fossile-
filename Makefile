@@ -1,5 +1,5 @@
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -Werror -gfull #-fsanitize=address,pointer-compare,pointer-subtract,leak,undefined,shift,shift-exponent,shift-base,integer-divide-by-zero,unreachable,vla-bound,null,signed-integer-overflow,bounds,alignment,float-divide-by-zero,float-cast-overflow,nonnull-attribute,returns-nonnull-attribute,bool,enum,pointer-overflow,builtin -fsanitize-address-use-after-scope
 NAME		= minishell
 HEADER		= header/builtin.h
 LIBFT_PATH	= libft/
@@ -31,7 +31,7 @@ OBJS    = $(SRCS:.c=.o)
 all: $(NAME) $(LIBFT)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(OBJS) -o $(NAME) $(LIBFT) $(READLINE)
+	$(CC) $(OBJS) -o $(NAME) $(CFLAGS) $(LIBFT) $(READLINE)
 
 %.o : %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@

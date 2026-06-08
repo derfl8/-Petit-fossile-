@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/04 18:37:56 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/08 20:18:28 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_token(t_token *token)
 	free(token);
 }
 
-void	parse_special(t_tree **cmd_head, t_token *next_token, t_lexer *lexer)
+void	parse_special(t_tree *cmd_head, t_token *next_token, t_lexer *lexer)
 {
 	t_tree	*cmd_current;
 
@@ -54,15 +54,13 @@ void	parse_special(t_tree **cmd_head, t_token *next_token, t_lexer *lexer)
 	pf_node_add_back(cmd_head, cmd_current);
 }
 #include <stdio.h>
-t_tree	**pf_parser(char *line)
+t_tree	*pf_parser(char *line)
 {
-	t_tree	**cmd_head;
-	t_tree	*cmd_cmd;
+	t_tree	*cmd_head;
 	t_token	*next_token;
 	t_lexer	lexer = {0};
 
-	cmd_cmd = pf_node_new();
-	cmd_head = &cmd_cmd;
+	cmd_head = pf_node_new();
 	lexer_init(&lexer, line);
 	next_token = get_next_token(&lexer);
 	while (next_token->type != T_EOF)
@@ -73,7 +71,7 @@ t_tree	**pf_parser(char *line)
 			return (NULL);
 		}
 		if (next_token->type == T_WORD)
-			parse_cmd(next_token, cmd_cmd);
+			parse_cmd(next_token, cmd_head);
 		else
 			parse_special(cmd_head, next_token, &lexer);
 		free_token(next_token);
