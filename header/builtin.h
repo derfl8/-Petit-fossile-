@@ -73,5 +73,6 @@ t_env				*ft_new_env(char *envinfo);
 // custom_libft.c
 char				*ft_cut_env(char *to_cut);
 size_t				arg_len(char **av);
+void				free_tab(char **tab);
 
 #endif

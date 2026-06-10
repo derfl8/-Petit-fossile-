@@ -6,11 +6,25 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 18:52:50 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/10 12:14:58 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/10 18:59:53 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	return ;
+}
 
 static size_t	ft_size_cut(char *to_cut)
 {
