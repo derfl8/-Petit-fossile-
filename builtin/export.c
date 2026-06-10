@@ -26,14 +26,14 @@ static size_t	ft_size_cut(char *to_cut)
 static char	*ft_name_var(char *var)
 {
 	char	*cut;
-    int     i;
+	int		i;
 
-    i = 0;
+	i = 0;
 	cut = malloc((sizeof(char) * ft_size_cut(var)) + 1);
 	while (var[i - 1] != '=')
 	{
 		cut[i] = var[i];
-        i++;
+		i++;
 	}
 	cut[i] = '\0';
 	return (cut);
