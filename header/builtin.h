@@ -40,6 +40,9 @@ typedef struct s_data
 	int		success_or_failed;
 }			t_data;
 
+// export.c
+int					ft_export(t_data *shell, char **av);
+
 // unset.c
 int					ft_unset(t_data *shell, char **av);
 
@@ -68,7 +71,6 @@ void				ft_free_stack_env(t_env *array);
 t_env				*ft_new_env(char *envinfo);
 
 // custom_libft.c
-size_t				ft_size_cut(char *to_cut);
 char				*ft_cut_env(char *to_cut);
 size_t				arg_len(char **av);
 

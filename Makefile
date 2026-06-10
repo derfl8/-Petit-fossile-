@@ -14,6 +14,7 @@ builtin/main.c				\
 builtin/exit.c				\
 builtin/cd.c				\
 builtin/unset.c				\
+builtin/export.c			\
 
 OBJS    = $(SRCS:.c=.o)
 

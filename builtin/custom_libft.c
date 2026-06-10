@@ -6,13 +6,13 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 18:52:50 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/29 19:23:11 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/10 12:14:58 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
 
-size_t	ft_size_cut(char *to_cut)
+static size_t	ft_size_cut(char *to_cut)
 {
 	size_t	i;
 	size_t	j;
