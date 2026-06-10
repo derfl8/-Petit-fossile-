@@ -6,11 +6,12 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:04:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/10 13:33:12 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/10 14:00:35 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+#include <stdlib.h>
 
 static size_t	ft_size_cut(char *to_cut)
 {
@@ -30,7 +31,7 @@ static char	*ft_name_var(char *var)
 
 	i = 0;
 	cut = malloc((sizeof(char) * ft_size_cut(var)) + 1);
-	while (var[i - 1] != '=')
+	while (var[i] != '=')
 	{
 		cut[i] = var[i];
 		i++;
@@ -39,20 +40,29 @@ static char	*ft_name_var(char *var)
 	return (cut);
 }
 
+static void exp_no_arg(t_data *shell)
+{
+    char	*key;
+	char	*value;
+    t_env	*tmp;
+    
+    tmp = shell->env;
+    while (tmp)
+    {
+        key = ft_name_var(tmp->envinfo);
+        value = ft_cut_env(tmp->envinfo);
+        printf("declare -x %s=", key);
+        printf("\"%s\"\n", value);
+        free(key);
+        free(value);
+        tmp = tmp->next;
+    }
+}    
+
 int	ft_export(t_data *shell, char **av)
 {
-	t_env	*tmp;
-
-	tmp = shell->env;
 	if (!av[1])
-	{
-		while (tmp)
-		{
-			printf("declare -x %s", ft_name_var(tmp->envinfo));
-			printf("\"%s\"\n", ft_cut_env(tmp->envinfo));
-			tmp = tmp->next;
-		}
-	}
+        exp_no_arg(shell);
 	shell->success_or_failed = 0;
 	return (0);
 }
