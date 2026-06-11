@@ -9,3 +9,10 @@ main.c
 .vscode/
 test*
 *.supp
+*.a
+*.out
+\minishell
+main.c
+*.swp
+.cache/
+.vscode/
