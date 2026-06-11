@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:04:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/11 17:49:22 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/11 18:38:48 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static bool	is_valid_key(char *keycheck, int limit)
 		return (false);
 	while (*keycheck && limit)
 	{
-		if (ft_isalnum(*keycheck) || *keycheck != '_')
+		if (ft_isalnum(*keycheck) && *keycheck != '_')
 			return (false);
 		keycheck++;
 		limit--;
@@ -75,8 +75,16 @@ static bool	is_valid_key(char *keycheck, int limit)
 
 static void	add_env(t_data *shell, char *var)
 {
+	char	*key;
 	t_env	*new;
 
+	key = ft_name_var(var);
+	if (update_env(shell->env, key, ft_cut_env(var)))
+	{
+		free(key);
+		return ;
+	}
+	free(key);
 	new = ft_new_env(var);
 	if (!new)
 		return ;
@@ -95,18 +103,13 @@ int	ft_export(t_data *shell, char **av)
 	while (av[i])
 	{
 		if (ft_strchr(av[i], '=') != NULL)
-			limit = av[i] - ft_strchr(av[i], '=');
+			limit = ft_strchr(av[i], '=') - av[i];
 		else
-			limit = 0;
-		if (limit > 0)
-		{
-			if (is_valid_key(av[i], limit) == false)
-			{
-				shell->success_or_failed = 1;
-				return (1);
-			}
-		}
-		add_env(shell, av[i]);
+			limit = ft_strlen(av[i]);
+		if (is_valid_key(av[i], limit) == false)
+			shell->success_or_failed = 1;
+		else
+			add_env(shell, av[i]);
 		i++;
 	}
 	shell->success_or_failed = 0;
