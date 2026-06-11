@@ -6,25 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:34:16 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/10 19:16:47 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/11 18:41:35 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/parser.h"
-
-static bool	is_char_in_str(char c, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (true);
-		i++;
-	}
-	return (false);
-}
 
 static void	get_quoted_str(t_lexer *lexer)
 {
@@ -51,9 +37,9 @@ static char	*get_token_value(t_lexer *lexer, t_token_type token_type)
 	{
 		while (lexer->line[lexer->i] && !ft_isspace(lexer->line[lexer->i]))
 		{
-			if (is_char_in_str(lexer->line[lexer->i], "<>|"))
+			if (ft_strchr("<>|", lexer->line[lexer->i]))
 				break ;
-			else if (is_char_in_str(lexer->line[lexer->i], "\"\'"))
+			else if (ft_strchr("\"\'", lexer->line[lexer->i]))
 				get_quoted_str(lexer);
 			else
 				lexer->i++;
@@ -85,9 +71,8 @@ static t_token_type	get_token_type(t_lexer *lexer)
 	return (T_WORD);
 }
 
-#include <stdio.h>
-
-/*static void	print_token(t_token *token)
+/*#include <stdio.h>
+static void	print_token(t_token *token)
 {
 	printf("token type : %d\n", token->type);
 	printf("token value : %s\n", token->value);
@@ -97,7 +82,6 @@ static t_token_type	get_token_type(t_lexer *lexer)
 t_token	*get_next_token(t_lexer *lexer)
 {
 	t_token			*res;
-//	t_quote_state	quote;
 
 	if (!lexer->line)
 		return (NULL);

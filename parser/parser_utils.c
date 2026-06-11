@@ -6,12 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 12:35:42 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/11 13:59:54 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/11 18:39:55 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/parser.h"
-
 
 void	parse_cmd(t_token *current, t_tree *cmd_node)
 {

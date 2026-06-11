@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/11 13:56:32 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/11 18:21:14 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,5 @@ void	realloc_args(char ***args, t_token *current);
 void	free_args(char **args, size_t size);
 
 // QUOTE_REMOVER.C
-int		fuck_em_quotes(t_token *token);
+bool	is_quote_error(t_token *token);
 #endif
