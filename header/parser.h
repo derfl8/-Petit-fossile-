@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/08 20:08:03 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/11 13:56:32 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,18 @@ typedef	enum	e_parse_error
 // FUNCTIONS
 t_token *get_next_token(t_lexer *lexer);
 t_tree	*pf_parser(char *line);
+void	free_token(t_token *token);
 
 // CMD_TREE_UTILS.C
 t_tree	*pf_node_new(void);
 t_tree	*get_last_node(t_tree *node);
 void	pf_node_add_back(t_tree *cmd_head, t_tree *new);
+bool	is_pipe_present(t_tree *cmd_head);
+t_tree	*get_current_cmd_node(t_tree *cmd_head);
 
 // PARSER_UTILS.C
 void	parse_cmd(t_token *current, t_tree *cmd_node);
+void	parse_special(t_tree *cmd_head, t_token *next_token, t_lexer *lexer);
 void	parse_redir(t_token *current, t_tree *cmd_node, t_lexer *lexer);
 void	parse_heredoc(t_token *current, t_tree *cmd_node, t_lexer *lexer);
 void	parse_pipe(t_tree *cmd_node);

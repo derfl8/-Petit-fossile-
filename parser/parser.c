@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/08 20:18:28 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/09 22:43:12 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,23 @@ void	free_token(t_token *token)
 	free(token);
 }
 
-void	parse_special(t_tree *cmd_head, t_token *next_token, t_lexer *lexer)
+int	parser_logic(t_tree *cmd_head, t_token *next_token, t_lexer *lexer)
 {
-	t_tree	*cmd_current;
+	t_tree	*current_cmd;
 
-	cmd_current = pf_node_new();
-	if (next_token->type == T_REDIR_IN)
-		parse_redir(next_token, cmd_current, lexer);
-	else if (next_token->type == T_REDIR_OUT)
-		parse_redir(next_token, cmd_current, lexer);
-	else if (next_token->type == T_APPEND)
-		parse_redir(next_token, cmd_current, lexer);
-	else if (next_token->type == T_HEREDOC)
-		parse_heredoc(next_token, cmd_current, lexer);
-	else if (next_token->type == T_PIPE)
-		parse_pipe(cmd_current);
-	pf_node_add_back(cmd_head, cmd_current);
+	current_cmd = get_current_cmd_node(cmd_head);
+	if (!fuck_em_quotes(next_token))
+	{
+		parse_error(ERR_QUOTE);
+		return (0);
+	}
+	if (next_token->type == T_WORD)
+		parse_cmd(next_token, current_cmd);
+	else
+		parse_special(cmd_head, next_token, lexer);
+	return (1);
 }
+
 #include <stdio.h>
 t_tree	*pf_parser(char *line)
 {
@@ -61,19 +61,12 @@ t_tree	*pf_parser(char *line)
 	t_lexer	lexer = {0};
 
 	cmd_head = pf_node_new();
+	cmd_head->type = ASL_CMD;
 	lexer_init(&lexer, line);
 	next_token = get_next_token(&lexer);
 	while (next_token->type != T_EOF)
 	{
-		if (!fuck_em_quotes(next_token))
-		{
-			parse_error(ERR_QUOTE);
-			return (NULL);
-		}
-		if (next_token->type == T_WORD)
-			parse_cmd(next_token, cmd_head);
-		else
-			parse_special(cmd_head, next_token, &lexer);
+		parser_logic(cmd_head, next_token, &lexer);
 		free_token(next_token);
 		next_token = get_next_token(&lexer);
 	}
