@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 21:07:59 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/03 19:23:17 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/10 20:10:35 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_unset(t_data *shell, char **av)
 	i = 0;
 	while (i < nb_arg)
 	{
-		if (search_env(shell->env, av[i]) == true)
+		if (is_in_env(shell->env, av[i]) == true)
 			rm_env(shell, av[i]);
 		i++;
 	}

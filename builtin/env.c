@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/10 13:11:56 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/10 20:09:36 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ bool	update_env(t_env *env, char *key, char *value)
 	return (true);
 }
 
-bool	search_env(t_env *env, char *key)
+bool	is_in_env(t_env *env, char *key)
 {
 	int	keysize;
 
