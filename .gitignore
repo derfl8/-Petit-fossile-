@@ -1,9 +1,9 @@
 compile_commands.json
 *.o
-*.out
 *.a
+*.out
 \minishell
 main.c
+*.swp
 .cache/
 .vscode/
-
