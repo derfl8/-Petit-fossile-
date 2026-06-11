@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:04:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/11 17:25:42 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/11 17:49:22 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ static void	exp_no_arg(t_data *shell)
 
 static bool	is_valid_key(char *keycheck, int limit)
 {
-	if (ft_isalpha(*keycheck) != 0)
+	if (ft_isalpha(*keycheck) == 0 && *keycheck != '_')
 		return (false);
 	while (*keycheck && limit)
 	{
-		if (ft_isalnum(*keycheck) != 0)
+		if (ft_isalnum(*keycheck) || *keycheck != '_')
 			return (false);
 		keycheck++;
 		limit--;
@@ -94,19 +94,20 @@ int	ft_export(t_data *shell, char **av)
 		exp_no_arg(shell);
 	while (av[i])
 	{
-		limit = av[i] - ft_strchr(av[i], '=');
+		if (ft_strchr(av[i], '=') != NULL)
+			limit = av[i] - ft_strchr(av[i], '=');
+		else
+			limit = 0;
 		if (limit > 0)
 		{
 			if (is_valid_key(av[i], limit) == false)
 			{
-				return (1);
 				shell->success_or_failed = 1;
+				return (1);
 			}
-			else
-				add_env(shell, av[i]);
 		}
-		else
-			add_env(shell, av[i]);
+		add_env(shell, av[i]);
+		i++;
 	}
 	shell->success_or_failed = 0;
 	return (0);
