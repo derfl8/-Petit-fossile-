@@ -1,0 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/01 21:07:59 by abegou            #+#    #+#             */
+/*   Updated: 2026/06/10 20:10:35 by abegou           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../header/builtin.h"
+
+static void	rm_env(t_data *shell, char *key)
+{
+	t_env	*prev;
+	t_env	*cur;
+	int		s_key;
+
+	s_key = ft_strlen(key);
+	prev = NULL;
+	cur = shell->env;
+	while (ft_strncmp(key, cur->envinfo, s_key) != 0)
+	{
+		prev = cur;
+		cur = cur->next;
+	}
+	if (!cur)
+		return ;
+	if (prev == NULL)
+		shell->env = cur->next;
+	else
+		prev->next = cur->next;
+	free(cur->envinfo);
+	free(cur);
+	return ;
+}
+
+int	ft_unset(t_data *shell, char **av)
+{
+	size_t	nb_arg;
+	size_t	i;
+
+	if (!av)
+		return (0);
+	nb_arg = arg_len(av);
+	i = 0;
+	while (i < nb_arg)
+	{
+		if (is_in_env(shell->env, av[i]) == true)
+			rm_env(shell, av[i]);
+		i++;
+	}
+	shell->success_or_failed = 0;
+	return (0);
+}
