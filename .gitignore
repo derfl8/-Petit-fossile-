@@ -7,3 +7,12 @@ main.c
 *.swp
 .cache/
 .vscode/
+test*
+*.supp
+*.a
+*.out
+\minishell
+main.c
+*.swp
+.cache/
+.vscode/
