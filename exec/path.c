@@ -6,11 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 14:52:32 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/12 21:29:13 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/12 21:59:53 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../header/exec.h"
 
 char	**env_to_char(t_data *shell)
 {
@@ -71,4 +71,20 @@ char	*init_path(t_env *tmp, char *cmd)
 		return (path_tmp);
 	}
 	return (NULL);
+}
+
+char	*path_verif(t_env *env, char *cmd)
+{
+	t_env	*tmp;
+	char	*path;
+
+	tmp = env;
+	while (tmp && ft_strncmp("PATH=", tmp->envinfo, 5) != 0)
+		tmp = tmp->next;
+	if (!tmp)
+		return (NULL);
+	path = init_path(tmp, cmd);
+	if (!path)
+		free(path);
+	return (path);
 }
