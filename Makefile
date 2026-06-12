@@ -3,6 +3,7 @@ CFLAGS		= -Wall -Wextra -Werror -g
 NAME		= minishell
 LIBFT_PATH	= libft/
 LIBFT		= libft/libft.a
+OBJPATH		= obj/
 READLINE	= -l readline
 SRCS		=				\
 builtin/custom_libft.c		\
@@ -19,25 +20,28 @@ parser/parser_utils.c		\
 parser/parser.c				\
 parser/cmd_tree_utils.c		\
 parser/lexer.c				\
-header/parser.h				\
 parser/dynamic_arg_table.c	\
 parser/quote_remover.c		\
+main.c
 
-OBJS    = $(SRCS:.c=.o)
+OBJS    = $(SRCS:%.c=$(OBJPATH)%.o)
 
-all: $(NAME) $(LIBFT)
+all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(OBJPATH) $(OBJS) $(LIBFT)
 	$(CC) $(OBJS) -o $(NAME) $(CFLAGS) $(LIBFT) $(READLINE)
 
-%.o : %.c
+$(OBJPATH):
+	mkdir -p $(OBJPATH) $(OBJPATH)/builtin $(OBJPATH)/parser
+
+$(OBJPATH)%.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT) :
 	make -C $(LIBFT_PATH)
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJPATH)
 	make -C $(LIBFT_PATH) clean
 
 fclean: clean

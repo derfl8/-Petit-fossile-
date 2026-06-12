@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:04:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/11 18:38:48 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/11 21:58:26 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static bool	is_valid_key(char *keycheck, int limit)
 		return (false);
 	while (*keycheck && limit)
 	{
-		if (ft_isalnum(*keycheck) && *keycheck != '_')
+		if (ft_isalnum(*keycheck) == 0 && *keycheck != '_')
 			return (false);
 		keycheck++;
 		limit--;
