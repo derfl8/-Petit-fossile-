@@ -6,13 +6,13 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 12:06:04 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/12 21:28:17 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/12 22:00:05 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "../header/exec.h"
 
-static int	builtin(char *is_builtin)
+int	builtin_check(char *is_builtin)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ static int	builtin(char *is_builtin)
 		return (1);
 }
 
-static int	exec_builtin(t_data *shell, char **av)
+int	exec_builtin(t_data *shell, char **av)
 {
 	int	i;
 
@@ -83,23 +83,4 @@ char	**arg_exec(char **av)
 	}
 	arg[i - 1] = NULL;
 	return (arg);
-}
-
-void	ft_exec(t_data *shell, char **av)
-{
-	int		sucess;
-	char	*bin;
-	pid_t	pid;
-
-	(void)sucess;
-	if (builtin(av[0]) == 0)
-		sucess = exec_builtin(shell, av);
-	else
-	{
-		bin = path_verif(shell->env, av[0]);
-		if (bin != NULL)
-			pid = fork();
-			run_child()
-	}
-	return ;
 }
