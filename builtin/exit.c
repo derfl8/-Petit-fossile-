@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:13:07 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/12 13:20:34 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/12 21:37:12 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void	ft_exit(t_data *shell, char **exit_code)
 		exit(((unsigned char)ft_atol(exit_code[1])));
 	}
 	ft_free_stack_env(shell->env);
+	// free_cmd_tree(cmd_tree);
 	exit(shell->success_or_failed);
 }

@@ -25,6 +25,7 @@ parser/quote_remover.c		\
 parser/debug_parser.c		\
 exec/exec_builtin.c			\
 exec/path.c					\
+exec/exec.c					\
 main.c
 
 OBJS    = $(SRCS:%.c=$(OBJPATH)%.o)

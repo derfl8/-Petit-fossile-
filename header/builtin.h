@@ -14,6 +14,7 @@
 # define BUILTIN_H
 
 # include "../libft/libft.h"
+# include "parser.h"
 # include <complex.h>
 # include <limits.h>
 # include <linux/limits.h>
