@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:34:16 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/12 15:22:55 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/12 17:48:59 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*get_token_value(t_lexer *lexer, t_token_type token_type)
 			else
 				lexer->i++;
 		}
-		size = lexer->i - i;
+		size = lexer->i - i + 1;
 		res = ft_strndup(&lexer->line[i], size);
 		return (res);
 	}

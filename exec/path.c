@@ -6,12 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 14:52:32 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/12 16:48:50 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/12 17:17:24 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-#include <stdio.h>
 
 static int	is_bin(char **path)
 {
@@ -32,16 +31,19 @@ static char	*init_path(t_env *tmp, char *cmd)
 	int		i;
 	char	**path;
 	char	*path_tmp;
+    char    *backslash;
 
 	i = 0;
 	path = ft_split(ft_cut_env(tmp->envinfo), ':');
 	while (path[i])
 	{
+        backslash = ft_strjoin("/", cmd);
 		path_tmp = path[i];
-		path[i] = ft_strjoin(path[i], cmd);
+		path[i] = ft_strjoin(path[i], backslash);
 		free(path_tmp);
 		i++;
 	}
+    free(backslash);
 	i = is_bin(path);
 	if (i != -1)
 	{
@@ -65,5 +67,5 @@ char	*path_verif(t_env *env, char *cmd)
 	path = init_path(tmp, cmd);
 	if (!path)
 		free(path);
-	return (NULL);
+	return (path);
 }
