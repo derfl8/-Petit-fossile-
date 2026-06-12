@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 12:06:04 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/12 19:59:04 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/12 21:28:17 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	how_many_arg(char **arg)
 	return (i);
 }
 
-static char	**arg_exec(char **av)
+char	**arg_exec(char **av)
 {
 	char	**arg;
 	int		i;
@@ -89,6 +89,7 @@ void	ft_exec(t_data *shell, char **av)
 {
 	int		sucess;
 	char	*bin;
+	pid_t	pid;
 
 	(void)sucess;
 	if (builtin(av[0]) == 0)
@@ -97,7 +98,8 @@ void	ft_exec(t_data *shell, char **av)
 	{
 		bin = path_verif(shell->env, av[0]);
 		if (bin != NULL)
-			execve(bin, arg_exec(av), env_to_char(shell));
+			pid = fork();
+			run_child()
 	}
 	return ;
 }
