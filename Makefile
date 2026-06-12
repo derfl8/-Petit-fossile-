@@ -22,6 +22,7 @@ parser/cmd_tree_utils.c		\
 parser/lexer.c				\
 parser/dynamic_arg_table.c	\
 parser/quote_remover.c		\
+parser/debug_parser.c		\
 exec/exec_builtin.c			\
 exec/path.c					\
 main.c

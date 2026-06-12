@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/12 13:36:16 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/12 18:15:53 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int ac, char **av, char **envp)
         if (*line)
             add_history(line);
         tree = pf_parser(line);
+		print_tree(tree);
         if (tree)
         {
             // exp_args(&shell, tree);
