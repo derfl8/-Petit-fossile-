@@ -6,12 +6,16 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/12 18:07:42 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/12 18:14:26 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+
+# include "../libft/libft.h"
+# include <stdbool.h>
+# include <stdlib.h>
 
 typedef struct s_lexer
 {
