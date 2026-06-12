@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:34:16 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/11 20:48:33 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/12 15:22:55 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ static void	print_token(t_token *token)
 }*/
 t_token	*get_next_token(t_lexer *lexer)
 {
+	t_token			*res;
+
 	if (!lexer->line)
 		return (NULL);
 	res = malloc(sizeof(t_token));
