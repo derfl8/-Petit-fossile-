@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_strjoin_max(char const *s1, char const *s2 int )
+char	*ft_strjoin_max(char const *s1, char const *s2 int)
 {
 	char	*ret;
 

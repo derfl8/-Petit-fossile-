@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include <complex.h>
+# include <limits.h>
 # include <linux/limits.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -23,7 +24,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <limits.h>
 
 typedef struct s_env	t_env;
 typedef struct s_data	t_data;

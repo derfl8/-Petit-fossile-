@@ -78,7 +78,7 @@ char	**ft_split(char const *s, char c)
 	{
 		while (*s == c)
 			s++;
-		end = sword (s, c);
+		end = sword(s, c);
 		array[i] = ft_substr(s, 0, end);
 		s += end;
 		if (!array[i])

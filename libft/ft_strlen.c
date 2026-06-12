@@ -15,8 +15,9 @@
 
 size_t	ft_strlen(const char *s)
 {
-	const char	*tmp = s;
+	const char	*tmp;
 
+	tmp = s;
 	while (*tmp)
 		tmp++;
 	return (tmp - s);
@@ -24,8 +25,8 @@ size_t	ft_strlen(const char *s)
 
 size_t	ft_strlenin(const char *s)
 {
-	size_t		i;
-	size_t		j;
+	size_t	i;
+	size_t	j;
 
 	j = 0;
 	i = 0;

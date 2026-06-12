@@ -22,6 +22,7 @@ parser/cmd_tree_utils.c		\
 parser/lexer.c				\
 parser/dynamic_arg_table.c	\
 parser/quote_remover.c		\
+exec/exec_builtin.c			\
 main.c
 
 OBJS    = $(SRCS:%.c=$(OBJPATH)%.o)
@@ -32,7 +33,7 @@ $(NAME): $(OBJPATH) $(OBJS) $(LIBFT)
 	$(CC) $(OBJS) -o $(NAME) $(CFLAGS) $(LIBFT) $(READLINE)
 
 $(OBJPATH):
-	mkdir -p $(OBJPATH) $(OBJPATH)/builtin $(OBJPATH)/parser
+	mkdir -p $(OBJPATH) $(OBJPATH)/builtin $(OBJPATH)/parser $(OBJPATH)/exec
 
 $(OBJPATH)%.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@

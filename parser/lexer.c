@@ -74,15 +74,14 @@ static t_token_type	get_token_type(t_lexer *lexer)
 /*#include <stdio.h>
 static void	print_token(t_token *token)
 {
+	t_token	*res;
+
 	printf("token type : %d\n", token->type);
 	printf("token value : %s\n", token->value);
 	printf("--------------------\n");
 }*/
-
 t_token	*get_next_token(t_lexer *lexer)
 {
-	t_token			*res;
-
 	if (!lexer->line)
 		return (NULL);
 	res = malloc(sizeof(t_token));
@@ -92,13 +91,13 @@ t_token	*get_next_token(t_lexer *lexer)
 	{
 		res->type = T_EOF;
 		res->value = NULL;
-//		print_token(res);		// DEBUG
+		//		print_token(res);		// DEBUG
 		return (res);
 	}
 	if (!res)
 		return (NULL);
 	res->type = get_token_type(lexer);
 	res->value = get_token_value(lexer, res->type);
-//	print_token(res);		// DEBUG
+	//	print_token(res);		// DEBUG
 	return (res);
 }
