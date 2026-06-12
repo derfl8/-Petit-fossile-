@@ -3,16 +3,8 @@ compile_commands.json
 *.a
 *.out
 \minishell
-main.c
+minishell
 *.swp
 .cache/
 .vscode/
 test*
-*.supp
-*.a
-*.out
-\minishell
-main.c
-*.swp
-.cache/
-.vscode/

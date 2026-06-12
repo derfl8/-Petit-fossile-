@@ -6,13 +6,13 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:04:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/11 21:58:26 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/12 18:25:11 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
 
-static char	**env_to_char(t_data *shell)
+static char	**env_to_char_sort(t_data *shell)
 {
 	char	**tab;
 	int		i;
@@ -39,7 +39,7 @@ static void	exp_no_arg(t_data *shell)
 	char	**tmp;
 	int		i;
 
-	tmp = env_to_char(shell);
+	tmp = env_to_char_sort(shell);
 	i = 0;
 	while (tmp[i])
 	{

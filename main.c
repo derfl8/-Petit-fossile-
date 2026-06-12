@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/12 18:15:53 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/12 18:42:35 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(int ac, char **av, char **envp)
 {
-    t_data  shell;
-    t_tree  *tree;
-    char    *line;
+	t_data	shell;
+	t_tree	*tree;
+	char	*line;
 
     (void)ac;
     (void)av;

@@ -6,12 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 12:06:04 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/12 16:49:37 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/12 19:04:27 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-#include <stdio.h>
 
 static int	builtin(char *is_builtin)
 {
@@ -60,15 +59,29 @@ static int	exec_builtin(t_data *shell, char **av)
 	return (i);
 }
 
+static char	**arg_exec(char **av)
+{
+	char	**arg;
+	int		i;
+	
+	i = 1;
+	while (av[i])
+	{
+		arg[i - 1] = ft_strdup(av[i]);
+		i++;
+	}
+	arg[i - 1] = NULL;
+	return (arg);
+}
+
 void	ft_exec(t_data *shell, char **av)
 {
-	int	sucess;
-    char    *bin;
+	int		sucess;
 
 	(void)sucess;
 	if (builtin(av[0]) == 0)
 		sucess = exec_builtin(shell, av);
-    bin = path_verif(shell->env, av[0]);
-    printf("%s\n", bin);
+	else if (path_verif(shell->env, av[0]) != NULL);
+		execve(path_verif(shell->env, av[0]), arg_exec(av), env_to_char(shell));
 	return ;
 }
