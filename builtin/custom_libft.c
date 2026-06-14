@@ -6,11 +6,12 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 18:52:50 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/10 19:41:37 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/14 15:33:15 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+#include <stdlib.h>
 
 static size_t	ft_size_cut(char *to_cut)
 {
@@ -64,20 +65,15 @@ size_t	arg_len(char **av)
 	return (i);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	free_tab(char **tab)
 {
-	void			*ptr;
-	unsigned char	*str;
-	size_t			i;
+	int	i;
 
-	if (size != 0 && nmemb != 0 && (nmemb * size) / size != nmemb)
-		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (!ptr)
-		return (NULL);
-	str = (unsigned char *)ptr;
 	i = 0;
-	while (i < (nmemb * size))
-		str[i++] = '\0';
-	return (ptr);
+	if (!tab)
+		return ;
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
+	return ;
 }

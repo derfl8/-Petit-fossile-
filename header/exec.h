@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:07:05 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/12 22:32:09 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/14 18:06:58 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 char        **arg_exec(char **av);
 int         builtin_check(char *is_builtin);
-int         exec_builtin(t_data *shell, char **av);
+int	exec_builtin(t_data *shell, char **av, t_tree *cmd_tree);
 
 // path.c
 
