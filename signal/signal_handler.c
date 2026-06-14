@@ -6,12 +6,17 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 18:50:58 by aldecour          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/06/16 20:39:51 by aldecour         ###   ########.fr       */
+=======
+/*   Updated: 2026/06/14 21:27:43 by aldecour         ###   ########.fr       */
+>>>>>>> e5cb809 (started working on signals, still very simple prototype)
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/signal_handler.h"
 
+<<<<<<< HEAD
 volatile int g_signal_status = 0;
 
 void	signal_handler(int sig)
@@ -24,16 +29,26 @@ void	signal_handler(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+=======
+void	signal_handler(int sig)
+{
+	
+>>>>>>> e5cb809 (started working on signals, still very simple prototype)
 }
 
 void	signal_init(void)
 {
 	struct sigaction sa;
 
+<<<<<<< HEAD
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sa.sa_handler = signal_handler;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
+=======
+	sa.sa_handler = signal_handler;
+	sigemptyset(&sa.sa_mask);
+>>>>>>> e5cb809 (started working on signals, still very simple prototype)
 }
