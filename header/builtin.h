@@ -56,6 +56,9 @@ int						ft_unset(t_data *shell, char **av);
 // cd.c
 int						ft_cd(t_data *shell, char **av);
 
+// cd_norm.c
+void					free_all_pwd(t_data *shell, char *pwd, char *oldpwd, int s_o_f);
+
 // echo.c
 int						ft_echo(t_data *shell, char **av);
 
@@ -70,7 +73,8 @@ bool					update_env(t_env *env, char *key, char *value);
 bool					is_in_env(t_env *env, char *key);
 
 // exit.c
-void					ft_exit(t_data *shell, char **exit_code, t_tree *cmd_tree);
+void					ft_exit(t_data *shell, char **exit_code,
+							t_tree *cmd_tree);
 
 // lst_tools.c
 void					ft_add_back_env(t_env **lst, t_env *new_node);
