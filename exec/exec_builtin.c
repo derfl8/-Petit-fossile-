@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 12:06:04 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/12 22:00:05 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/14 18:05:19 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	builtin_check(char *is_builtin)
 		return (1);
 }
 
-int	exec_builtin(t_data *shell, char **av)
+int	exec_builtin(t_data *shell, char **av, t_tree *cmd_tree)
 {
 	int	i;
 
@@ -49,7 +49,7 @@ int	exec_builtin(t_data *shell, char **av)
 	else if (ft_strncmp(av[0], "env", i) == 0)
 		i = ft_env(shell, av);
 	else if (ft_strncmp(av[0], "exit", i) == 0)
-		ft_exit(shell, av);
+		ft_exit(shell, av, cmd_tree);
 	else if (ft_strncmp(av[0], "export", i) == 0)
 		i = ft_export(shell, av);
 	else if (ft_strncmp(av[0], "pwd", i) == 0)
@@ -59,28 +59,28 @@ int	exec_builtin(t_data *shell, char **av)
 	return (i);
 }
 
-static int	how_many_arg(char **arg)
-{
-	int	i;
+// static int	how_many_arg(char **arg)
+// {
+// 	int	i;
 
-	i = 0;
-	while (arg[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (arg[i])
+// 		i++;
+// 	return (i);
+// }
 
-char	**arg_exec(char **av)
-{
-	char	**arg;
-	int		i;
+// char	**arg_exec(char **av)
+// {
+// 	char	**arg;
+// 	int		i;
 	
-	i = 1;
-	arg = ft_calloc(sizeof(char *), how_many_arg(av));
-	while (av[i])
-	{
-		arg[i - 1] = ft_strdup(av[i]);
-		i++;
-	}
-	arg[i - 1] = NULL;
-	return (arg);
-}
+// 	i = 1;
+// 	arg = ft_calloc(sizeof(char *), how_many_arg(av));
+// 	while (av[i])
+// 	{
+// 		arg[i - 1] = ft_strdup(av[i]);
+// 		i++;
+// 	}
+// 	arg[i - 1] = NULL;
+// 	return (arg);
+// }

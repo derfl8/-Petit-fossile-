@@ -6,16 +6,15 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:27:46 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/12 22:33:27 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/14 18:06:32 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/exec.h"
 
-static void run_child(t_data *shell, t_tree *tree)
+static void run_child(t_data *shell, t_tree *tree, char **env)
 {
 	char	*bin;
-	char	**env;
 	
 	bin = path_verif(shell->env, tree->args[0]);
 	if (bin == NULL)
@@ -25,8 +24,8 @@ static void run_child(t_data *shell, t_tree *tree)
 		ft_putstr_fd(": command not found\n", 2);
 		exit(127);
 	}
-	env = env_to_char(shell);
 	execve(bin, tree->args, env);
+	free(env);
 	perror(tree->args[0]);
 	exit(1);
 }
@@ -36,17 +35,22 @@ void	ft_exec(t_data *shell, t_tree *tree)
 	int		success;
 	pid_t	pid;
 	int		status;
-
+	char	**env;
+	
 	(void)success;
+	status = 0;
 	if (builtin_check(tree->args[0]) == 0)
 	{
-		success = exec_builtin(shell, tree->args);
+		success = exec_builtin(shell, tree->args, tree);
 		return ;
 	}
+	env = env_to_char(shell);
 	pid = fork(); 
 	if (pid == 0)
-		run_child(shell, tree);
+		run_child(shell, tree, env);
 	else if (pid > 0)
 		waitpid(pid, &status, 0);
+	free_tab(env);
+	shell->success_or_failed = WEXITSTATUS(status);
 	return ;
 }
