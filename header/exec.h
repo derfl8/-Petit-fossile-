@@ -18,17 +18,17 @@
 
 // exec_builtin.c
 
-char        **arg_exec(char **av);
-int         builtin_check(char *is_builtin);
-int	exec_builtin(t_data *shell, char **av, t_tree *cmd_tree);
+char	**arg_exec(char **av);
+int		builtin_check(char *is_builtin);
+int		exec_builtin(t_data *shell, char **av, t_tree *cmd_tree);
 
 // path.c
 
-char    	*init_path(t_env *tmp, char *cmd);
-char	    *path_verif(t_env *env, char *cmd);
-char    	**env_to_char(t_data *shell);
+char	*init_path(t_env *tmp, char *cmd);
+char	*path_verif(t_env *env, char *cmd);
+char	**env_to_char(t_data *shell);
 
 // exec.c
-void	    ft_exec(t_data *shell, t_tree *tree);
+void	ft_exec(t_data *shell, t_tree *tree);
 
 #endif

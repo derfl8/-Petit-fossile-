@@ -6,11 +6,12 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 19:41:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/05/14 21:27:48 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/14 20:16:35 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+#include <stdio.h>
 
 static bool	ft_parsecho(char *pars)
 {
@@ -37,7 +38,7 @@ static void	echo_n(char **av, int i)
 		i++;
 	while (av[i])
 	{
-		printf("%s", av[i]);
+		write(1, av[i], ft_strlen(av[i]));
 		if (av[i + 1])
 			write(1, " ", 1);
 		i++;
@@ -61,7 +62,7 @@ int	ft_echo(t_data *shell, char **av)
 	{
 		while (av[i])
 		{
-			printf("%s", av[i]);
+			write(1, av[i], ft_strlen(av[i]));
 			if (av[i + 1])
 				write(1, " ", 1);
 			i++;

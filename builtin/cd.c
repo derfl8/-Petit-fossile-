@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:27:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/01 21:03:33 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/14 23:15:06 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	cd_home(t_data *shell, char *pwd, char *oldpwd, char *path)
 {
+	getcwd(oldpwd, PATH_MAX);
 	chdir(path);
 	getcwd(pwd, PATH_MAX);
 	update_env(shell->env, "PWD", pwd);
@@ -22,7 +23,7 @@ static void	cd_home(t_data *shell, char *pwd, char *oldpwd, char *path)
 	return ;
 }
 
-static bool	cd_error(t_data *shell, char **av, char *pwd, char *oldpwd)
+static int	cd_error(t_data *shell, char **av, char *pwd, char *oldpwd)
 {
 	t_env	*tmp;
 	char	*path;
@@ -32,7 +33,7 @@ static bool	cd_error(t_data *shell, char **av, char *pwd, char *oldpwd)
 	{
 		ft_putendl_fd("Petit Fossile: cd: too many arguments", 2);
 		shell->success_or_failed = 1;
-		return (true);
+		return (1);
 	}
 	else if (!av[1])
 	{
@@ -42,13 +43,13 @@ static bool	cd_error(t_data *shell, char **av, char *pwd, char *oldpwd)
 		{
 			ft_putendl_fd("Petit Fossile: cd: HOME not set", 2);
 			shell->success_or_failed = 1;
-			return (true);
+			return (1);
 		}
-		getcwd(oldpwd, PATH_MAX);
 		path = ft_cut_env(tmp->envinfo);
 		cd_home(shell, pwd, oldpwd, path);
+		return (2);
 	}
-	return (false);
+	return (0);
 }
 
 static bool	path_check(t_data *shell, char *path, char *pwd, char *oldpwd)
@@ -98,14 +99,20 @@ int	ft_cd(t_data *shell, char **av)
 {
 	char	*pwd;
 	char	*oldpwd;
+	int		error;
 
 	pwd = ft_calloc(PATH_MAX, sizeof(char));
 	oldpwd = ft_calloc(PATH_MAX, sizeof(char));
-	if (!pwd || cd_error(shell, av, pwd, oldpwd) == true)
+	error = cd_error(shell, av, pwd, oldpwd);
+	if (!pwd || error == 1)
 	{
-		free(oldpwd);
-		shell->success_or_failed = 1;
+		free_all_pwd(shell, NULL, oldpwd, 1);
 		return (1);
+	}
+	else if (error == 2)
+	{
+		free_all_pwd(shell, pwd, oldpwd, 0);
+		return (0);
 	}
 	else if (cd_hyphen(shell, av[1], pwd, oldpwd) == false)
 	{
@@ -116,8 +123,6 @@ int	ft_cd(t_data *shell, char **av)
 		update_env(shell->env, "PWD", pwd);
 		oldpwd_update(shell, oldpwd);
 	}
-	shell->success_or_failed = 0;
-	free(pwd);
-	free(oldpwd);
+	free_all_pwd(shell, pwd, oldpwd, 0);
 	return (0);
 }

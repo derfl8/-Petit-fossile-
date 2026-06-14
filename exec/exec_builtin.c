@@ -73,7 +73,7 @@ int	exec_builtin(t_data *shell, char **av, t_tree *cmd_tree)
 // {
 // 	char	**arg;
 // 	int		i;
-	
+
 // 	i = 1;
 // 	arg = ft_calloc(sizeof(char *), how_many_arg(av));
 // 	while (av[i])
