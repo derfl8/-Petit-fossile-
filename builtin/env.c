@@ -6,11 +6,12 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:31:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/10 20:09:36 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/14 18:13:51 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+#include <stdlib.h>
 
 int	ft_env(t_data *shell, char **av)
 {

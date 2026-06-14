@@ -6,11 +6,12 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:04:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/12 18:25:11 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/14 18:15:35 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+#include <stdlib.h>
 
 static char	**env_to_char_sort(t_data *shell)
 {
@@ -76,15 +77,19 @@ static bool	is_valid_key(char *keycheck, int limit)
 static void	add_env(t_data *shell, char *var)
 {
 	char	*key;
+	char	*value;
 	t_env	*new;
 
 	key = ft_name_var(var);
-	if (update_env(shell->env, key, ft_cut_env(var)))
+	value = ft_cut_env(var);
+	if (update_env(shell->env, key, value))
 	{
+		free(value);
 		free(key);
 		return ;
 	}
 	free(key);
+	free(value);
 	new = ft_new_env(var);
 	if (!new)
 		return ;
