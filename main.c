@@ -6,15 +6,14 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/17 18:35:37 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/17 18:35:53 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/minishell.h"
 
-volatile sig_atomic g_signal_status = 0;
 
-int	main(int ac, char **av, char **envp)
+int	main_process(t_data *shell)
 {
 	t_tree	*tree;
 	char	*line;
