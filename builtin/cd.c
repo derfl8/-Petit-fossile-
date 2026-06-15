@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:27:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/14 23:15:06 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/14 23:59:14 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,17 @@ static bool	cd_hyphen(t_data *shell, char *hyphen, char *pwd, char *oldpwd)
 	return (false);
 }
 
+int	pre_cd(t_data *shell, char *pwd, char *oldpwd, char *av)
+{
+	getcwd(oldpwd, PATH_MAX);
+	if (path_check(shell, av, pwd, oldpwd) == false)
+		return (1);
+	getcwd(pwd, PATH_MAX);
+	update_env(shell->env, "PWD", pwd);
+	oldpwd_update(shell, oldpwd);
+	return (0);
+}
+
 int	ft_cd(t_data *shell, char **av)
 {
 	char	*pwd;
@@ -116,12 +127,8 @@ int	ft_cd(t_data *shell, char **av)
 	}
 	else if (cd_hyphen(shell, av[1], pwd, oldpwd) == false)
 	{
-		getcwd(oldpwd, PATH_MAX);
-		if (path_check(shell, av[1], pwd, oldpwd) == false)
+		if (pre_cd(shell, pwd, oldpwd, av[1]) == 1)
 			return (1);
-		getcwd(pwd, PATH_MAX);
-		update_env(shell->env, "PWD", pwd);
-		oldpwd_update(shell, oldpwd);
 	}
 	free_all_pwd(shell, pwd, oldpwd, 0);
 	return (0);
