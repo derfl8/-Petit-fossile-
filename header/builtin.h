@@ -57,7 +57,7 @@ int						ft_unset(t_data *shell, char **av);
 int						ft_cd(t_data *shell, char **av);
 
 // cd_norm.c
-void					free_all_pwd(t_data *shell, char *pwd, char *oldpwd, int s_o_f);
+int						free_all_pwd(t_data *shell, char *pwd, char *oldpwd, int s_o_f);
 
 // echo.c
 int						ft_echo(t_data *shell, char **av);
