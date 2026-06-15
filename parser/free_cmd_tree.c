@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:00:47 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/12 18:01:17 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/15 18:05:48 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	free_cmd_tree(t_tree *cmd_tree)
 	while (cmd_tree)
 	{
 		i = 0;
-		if (cmd_tree->type != ASL_PIPE)
+		if (cmd_tree->args)
 		{
 			while (cmd_tree->args[i])
 			{
