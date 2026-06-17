@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   signal_handler.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/11 20:58:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/15 18:01:04 by aldecour         ###   ########.fr       */
+/*   Created: 2026/06/14 18:22:55 by aldecour          #+#    #+#             */
+/*   Updated: 2026/06/15 17:52:08 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef SIGNAL_HANDLER_H
+# define SIGNAL_HANDLER_H
 
-# include "../libft/libft.h"
-# include "builtin.h"
-# include "parser.h"
-# include "exec.h"
-# include "signal_handler.h"
+#include "minishell.h"
+#include <signal.h>
 
-extern volatile int g_signal_status;
-
+void	signal_handler(int sig);
+void	signal_init(void);
 #endif

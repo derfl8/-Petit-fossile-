@@ -28,6 +28,7 @@ parser/free_cmd_tree.c		\
 exec/exec_builtin.c			\
 exec/path.c					\
 exec/exec.c					\
+signal/signal_handler.c		\
 main.c
 
 OBJS    = $(SRCS:%.c=$(OBJPATH)%.o)
@@ -38,7 +39,7 @@ $(NAME): $(OBJPATH) $(OBJS) $(LIBFT)
 	$(CC) $(OBJS) -o $(NAME) $(CFLAGS) $(LIBFT) $(READLINE)
 
 $(OBJPATH):
-	mkdir -p $(OBJPATH) $(OBJPATH)/builtin $(OBJPATH)/parser $(OBJPATH)/exec
+	mkdir -p $(OBJPATH) $(OBJPATH)/builtin $(OBJPATH)/parser $(OBJPATH)/exec $(OBJPATH)/signal
 
 $(OBJPATH)%.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
