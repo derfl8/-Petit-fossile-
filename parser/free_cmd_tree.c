@@ -6,15 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:00:47 by aldecour          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2026/06/15 17:57:22 by abegou           ###   ########.fr       */
-=======
-/*   Updated: 2026/06/15 18:05:48 by aldecour         ###   ########.fr       */
->>>>>>> b4f0690 (implemented signal SIGINT with expected behavior)
-=======
-/*   Updated: 2026/06/15 18:05:48 by aldecour         ###   ########.fr       */
->>>>>>> 95781fc (implemented signal SIGINT with expected behavior)
+/*   Updated: 2026/06/17 19:37:47 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

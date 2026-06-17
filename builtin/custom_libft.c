@@ -6,12 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 18:52:50 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/17 19:46:01 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/16 14:48:07 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
-#include <stdlib.h>
 
 static size_t	ft_size_cut(char *to_cut)
 {
