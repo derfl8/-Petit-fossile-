@@ -22,8 +22,8 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		return ;
 	}
 	buffer = *lst;
-	while (buffer -> next != NULL)
-		buffer = buffer -> next;
-	buffer -> next = new;
+	while (buffer->next != NULL)
+		buffer = buffer->next;
+	buffer->next = new;
 	return ;
 }

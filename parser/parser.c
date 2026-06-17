@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/11 18:41:54 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/12 19:25:36 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,12 @@ t_tree	*pf_parser(char *line)
 	next_token = get_next_token(&lexer);
 	while (next_token->type != T_EOF)
 	{
-		parser_logic(cmd_head, next_token, &lexer);
+		if (parser_logic(cmd_head, next_token, &lexer) == 0)
+		{
+			free_token(next_token);
+			free_cmd_tree(cmd_head);
+			return (NULL);
+		}
 		free_token(next_token);
 		next_token = get_next_token(&lexer);
 	}

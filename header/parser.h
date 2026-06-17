@@ -3,36 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/11 18:21:14 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/12 18:14:26 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-#include <stdbool.h>
-#include <stdlib.h>
-#include "../libft/libft.h"
+# include "../libft/libft.h"
+# include <stdbool.h>
+# include <stdlib.h>
 
 typedef struct s_lexer
 {
-	const char	*line;
-	size_t		i;
-}				t_lexer;
+	const char		*line;
+	size_t			i;
+}					t_lexer;
 
 typedef enum e_token_type
 {
-	T_PIPE,			// |
-	T_REDIR_IN,		// <
-	T_REDIR_OUT,	// >
-	T_HEREDOC,		// <<
-	T_APPEND,		// >>
+	T_PIPE,      // |
+	T_REDIR_IN,  // <
+	T_REDIR_OUT, // >
+	T_HEREDOC,   // <<
+	T_APPEND,    // >>
 	T_WORD,
 	T_EOF,
-}	t_token_type;
+}					t_token_type;
 
 typedef struct s_token
 {
@@ -49,7 +49,7 @@ typedef enum e_asl_type
 	ASL_HEREDOC,
 	ASL_APPEND,
 	ASL_CMD,
-}	t_asl_type;
+}					t_asl_type;
 
 typedef struct s_tree
 {
@@ -58,14 +58,14 @@ typedef struct s_tree
 	struct s_tree	*next;
 }					t_tree;
 
-typedef	enum	e_parse_error
+typedef enum e_parse_error
 {
 	ERR_QUOTE,
 	ERR_MISSING_CMD,
-}	t_parse_error;
+}					t_parse_error;
 
 // FUNCTIONS
-t_token *get_next_token(t_lexer *lexer);
+t_token	*get_next_token(t_lexer *lexer);
 t_tree	*pf_parser(char *line);
 void	free_token(t_token *token);
 
@@ -89,4 +89,10 @@ void	free_args(char **args, size_t size);
 
 // QUOTE_REMOVER.C
 bool	is_quote_error(t_token *token);
+
+// FREE_CMD_TREE.C
+void	free_cmd_tree(t_tree *cmd_tree);
+
+// DEBUG.C TODO : REMOVE THAT SHIT BEFORE PUSH
+void	print_tree(t_tree *cmd_tree);
 #endif

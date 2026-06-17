@@ -6,13 +6,13 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:04:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/11 18:38:48 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/15 23:20:02 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
 
-static char	**env_to_char(t_data *shell)
+static char	**env_to_char_sort(t_data *shell)
 {
 	char	**tab;
 	int		i;
@@ -39,7 +39,7 @@ static void	exp_no_arg(t_data *shell)
 	char	**tmp;
 	int		i;
 
-	tmp = env_to_char(shell);
+	tmp = env_to_char_sort(shell);
 	i = 0;
 	while (tmp[i])
 	{
@@ -65,7 +65,7 @@ static bool	is_valid_key(char *keycheck, int limit)
 		return (false);
 	while (*keycheck && limit)
 	{
-		if (ft_isalnum(*keycheck) && *keycheck != '_')
+		if (ft_isalnum(*keycheck) == 0 && *keycheck != '_')
 			return (false);
 		keycheck++;
 		limit--;
@@ -76,19 +76,28 @@ static bool	is_valid_key(char *keycheck, int limit)
 static void	add_env(t_data *shell, char *var)
 {
 	char	*key;
+	char	*value;
 	t_env	*new;
 
 	key = ft_name_var(var);
-	if (update_env(shell->env, key, ft_cut_env(var)))
+	value = ft_cut_env(var);
+	if (ft_strchr(var, '='))
 	{
-		free(key);
-		return ;
+		if (!update_env(shell->env, key, value))
+		{
+			new = ft_new_env(var);
+			if (new)
+				ft_add_back_env(&shell->env, new);
+		}
+	}
+	else if (!is_in_env(shell->env, key))
+	{
+		new = ft_new_env(var);
+		if (new)
+			ft_add_back_env(&shell->env, new);
 	}
 	free(key);
-	new = ft_new_env(var);
-	if (!new)
-		return ;
-	ft_add_back_env(&shell->env, new);
+	free(value);
 	return ;
 }
 

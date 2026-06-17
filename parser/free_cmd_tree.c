@@ -1,40 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   free_cmd_tree.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/09 19:29:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/11 20:57:17 by abegou           ###   ########.fr       */
+/*   Created: 2026/06/12 18:00:47 by aldecour          #+#    #+#             */
+/*   Updated: 2026/06/15 17:57:22 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../header/parser.h"
 
-long long	ft_atol(const char *nptr)
+void	free_cmd_tree(t_tree *cmd_tree)
 {
-	int			i;
-	long long	sign;
-	long long	ret;
+	size_t	i;
+	t_tree	*old;
 
-	i = 0;
-	sign = 1;
-	ret = 0;
-	while (ft_isspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-')
+	while (cmd_tree)
 	{
-		sign *= -1;
-		i++;
+		i = 0;
+		if (cmd_tree->args)
+		{
+			while (cmd_tree->args[i])
+			{
+				free(cmd_tree->args[i]);
+				i++;
+			}
+			free(cmd_tree->args);
+		}
+		old = cmd_tree;
+		cmd_tree = cmd_tree->next;
+		free(old);
 	}
-	else if (nptr[i] == '+')
-		i++;
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		ret = ret * 10 + nptr[i] - 48;
-		i++;
-	}
-	ret *= sign;
-	return (ret);
 }

@@ -14,7 +14,9 @@
 # define BUILTIN_H
 
 # include "../libft/libft.h"
+# include "parser.h"
 # include <complex.h>
+# include <limits.h>
 # include <linux/limits.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -53,6 +55,14 @@ int						ft_unset(t_data *shell, char **av);
 
 // cd.c
 int						ft_cd(t_data *shell, char **av);
+bool					path_check(t_data *shell, char *path, char *pwd,
+							char *oldpwd);
+
+// cd_norm.c
+int						free_all_pwd(t_data *shell, char *pwd, char *oldpwd,
+							int s_o_f);
+int						pre_cd(t_data *shell, char *pwd, char *oldpwd,
+							char *av);
 
 // echo.c
 int						ft_echo(t_data *shell, char **av);
@@ -68,7 +78,8 @@ bool					update_env(t_env *env, char *key, char *value);
 bool					is_in_env(t_env *env, char *key);
 
 // exit.c
-void					ft_exit(t_data *shell, char **exit_code, int nb_arg);
+void					ft_exit(t_data *shell, char **exit_code,
+							t_tree *cmd_tree);
 
 // lst_tools.c
 void					ft_add_back_env(t_env **lst, t_env *new_node);
