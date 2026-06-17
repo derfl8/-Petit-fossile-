@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 12:06:04 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/14 18:05:19 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/17 22:53:12 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,29 +58,3 @@ int	exec_builtin(t_data *shell, char **av, t_tree *cmd_tree)
 		i = ft_unset(shell, av);
 	return (i);
 }
-
-// static int	how_many_arg(char **arg)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (arg[i])
-// 		i++;
-// 	return (i);
-// }
-
-// char	**arg_exec(char **av)
-// {
-// 	char	**arg;
-// 	int		i;
-
-// 	i = 1;
-// 	arg = ft_calloc(sizeof(char *), how_many_arg(av));
-// 	while (av[i])
-// 	{
-// 		arg[i - 1] = ft_strdup(av[i]);
-// 		i++;
-// 	}
-// 	arg[i - 1] = NULL;
-// 	return (arg);
-// }

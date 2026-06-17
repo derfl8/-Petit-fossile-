@@ -12,7 +12,7 @@
 
 #include "../header/exec.h"
 
-static void    run_child(t_data *shell, t_tree *tree, char **env)
+static void	run_child(t_data *shell, t_tree *tree, char **env)
 {
 	char	*bin;
 
@@ -36,29 +36,29 @@ static void    run_child(t_data *shell, t_tree *tree, char **env)
 	exit(1);
 }
 
-void    ft_exec(t_data *shell, t_tree *tree)
+void	ft_exec(t_data *shell, t_tree *tree)
 {
-    int        success;
-    pid_t    pid;
-    int        status;
-    char    **env;
+	int		success;
+	pid_t	pid;
+	int		status;
+	char	**env;
 
-    (void)success;
-    status = 0;
-    if (!tree->args)
-        return ;
-    if (builtin_check(tree->args[0]) == 0)
-    {
-        success = exec_builtin(shell, tree->args, tree);
-        return ;
-    }
-    env = env_to_char(shell);
-    pid = fork();
-    if (pid == 0)
-        run_child(shell, tree, env);
-    else if (pid > 0)
-        waitpid(pid, &status, 0);
-    free_tab(env);
-    shell->success_or_failed = WEXITSTATUS(status);
-    return ;
+	(void)success;
+	status = 0;
+	if (!tree->args)
+		return ;
+	if (builtin_check(tree->args[0]) == 0)
+	{
+		success = exec_builtin(shell, tree->args, tree);
+		return ;
+	}
+	env = env_to_char(shell);
+	pid = fork();
+	if (pid == 0)
+		run_child(shell, tree, env);
+	else if (pid > 0)
+		waitpid(pid, &status, 0);
+	free_tab(env);
+	shell->success_or_failed = WEXITSTATUS(status);
+	return ;
 }
