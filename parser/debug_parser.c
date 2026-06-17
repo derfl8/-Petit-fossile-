@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   debug_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:03:20 by aldecour          #+#    #+#             */
 /*   Updated: 2026/06/16 20:57:05 by aldecour         ###   ########.fr       */
