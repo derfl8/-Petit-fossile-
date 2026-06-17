@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 14:52:32 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/12 21:59:53 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/17 21:46:04 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,29 @@ char	*init_path(t_env *tmp, char *cmd)
 	char	**path;
 	char	*path_tmp;
 	char	*backslash;
+	char	*cut_env;
 
 	i = 0;
-	path = ft_split(ft_cut_env(tmp->envinfo), ':');
+	cut_env = ft_cut_env(tmp->envinfo);
+	path = ft_split(cut_env, ':');
+	free(cut_env);
 	while (path[i])
 	{
 		backslash = ft_strjoin("/", cmd);
 		path_tmp = path[i];
 		path[i] = ft_strjoin(path[i], backslash);
+		free(backslash);
 		free(path_tmp);
 		i++;
 	}
-	free(backslash);
 	i = is_bin(path);
 	if (i != -1)
 	{
-		path_tmp = path[i];
-		free(path);
+		path_tmp = ft_strdup(path[i]);
+		free_tab(path);
 		return (path_tmp);
 	}
+	free_tab(path);
 	return (NULL);
 }
 
