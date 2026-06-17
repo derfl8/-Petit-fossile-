@@ -13,6 +13,7 @@ builtin/env.c				\
 builtin/echo.c				\
 builtin/exit.c				\
 builtin/cd.c				\
+builtin/cd_norm.c			\
 builtin/unset.c				\
 builtin/export.c			\
 builtin/exp_no_arg.c		\

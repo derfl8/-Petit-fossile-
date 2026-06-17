@@ -6,16 +6,16 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:27:46 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/14 18:06:32 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/17 18:24:12 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/exec.h"
 
-static void run_child(t_data *shell, t_tree *tree, char **env)
+static void	run_child(t_data *shell, t_tree *tree, char **env)
 {
 	char	*bin;
-	
+
 	bin = path_verif(shell->env, tree->args[0]);
 	if (bin == NULL)
 	{
@@ -36,9 +36,11 @@ void	ft_exec(t_data *shell, t_tree *tree)
 	pid_t	pid;
 	int		status;
 	char	**env;
-	
+
 	(void)success;
 	status = 0;
+	if (!tree->args)
+		return ;
 	if (builtin_check(tree->args[0]) == 0)
 	{
 		success = exec_builtin(shell, tree->args, tree);

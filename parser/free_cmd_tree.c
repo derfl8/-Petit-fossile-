@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   free_cmd_tree.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:00:47 by aldecour          #+#    #+#             */
 /*   Updated: 2026/06/15 18:05:48 by aldecour         ###   ########.fr       */
