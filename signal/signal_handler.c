@@ -8,6 +8,7 @@
 /*   Created: 2026/06/14 18:50:58 by aldecour          #+#    #+#             */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2026/06/16 20:39:51 by aldecour         ###   ########.fr       */
 =======
 /*   Updated: 2026/06/14 21:27:43 by aldecour         ###   ########.fr       */
@@ -15,6 +16,9 @@
 =======
 /*   Updated: 2026/06/15 21:40:10 by aldecour         ###   ########.fr       */
 >>>>>>> 95781fc (implemented signal SIGINT with expected behavior)
+=======
+/*   Updated: 2026/06/16 20:39:51 by aldecour         ###   ########.fr       */
+>>>>>>> 089d5ab (finished ctrl + c)
 /*                                                                            */
 /* ************************************************************************** */
 
