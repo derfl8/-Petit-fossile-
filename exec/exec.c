@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:27:46 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/15 17:53:00 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/17 17:42:43 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_exec(t_data *shell, t_tree *tree)
 		success = exec_builtin(shell, tree->args, tree);
 		return ;
 	}
-	env = env_to_char(shell);
+		env = env_to_char(shell);
 	pid = fork();
 	if (pid == 0)
 		run_child(shell, tree, env);
