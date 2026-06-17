@@ -6,11 +6,16 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:04:01 by abegou            #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2026/06/14 18:15:35 by abegou           ###   ########.fr       */
+=======
 /*   Updated: 2026/06/15 23:20:02 by abegou           ###   ########.fr       */
+>>>>>>> a58458a30f9dc347fa89d6d1ee6dc07e78da311d
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+#include <stdlib.h>
 
 static char	**env_to_char_sort(t_data *shell)
 {
@@ -81,6 +86,20 @@ static void	add_env(t_data *shell, char *var)
 
 	key = ft_name_var(var);
 	value = ft_cut_env(var);
+<<<<<<< HEAD
+	if (update_env(shell->env, key, value))
+	{
+		free(value);
+		free(key);
+		return ;
+	}
+	free(key);
+	free(value);
+	new = ft_new_env(var);
+	if (!new)
+		return ;
+	ft_add_back_env(&shell->env, new);
+=======
 	if (ft_strchr(var, '='))
 	{
 		if (!update_env(shell->env, key, value))
@@ -98,6 +117,7 @@ static void	add_env(t_data *shell, char *var)
 	}
 	free(key);
 	free(value);
+>>>>>>> a58458a30f9dc347fa89d6d1ee6dc07e78da311d
 	return ;
 }
 
