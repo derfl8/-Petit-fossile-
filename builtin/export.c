@@ -6,7 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:04:01 by abegou            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/06/14 18:15:35 by abegou           ###   ########.fr       */
+=======
+/*   Updated: 2026/06/15 23:20:02 by abegou           ###   ########.fr       */
+>>>>>>> fa4b34946185badc73f1011a4198c81de158e48c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +86,7 @@ static void	add_env(t_data *shell, char *var)
 
 	key = ft_name_var(var);
 	value = ft_cut_env(var);
+<<<<<<< HEAD
 	if (update_env(shell->env, key, value))
 	{
 		free(value);
@@ -94,6 +99,25 @@ static void	add_env(t_data *shell, char *var)
 	if (!new)
 		return ;
 	ft_add_back_env(&shell->env, new);
+=======
+	if (ft_strchr(var, '='))
+	{
+		if (!update_env(shell->env, key, value))
+		{
+			new = ft_new_env(var);
+			if (new)
+				ft_add_back_env(&shell->env, new);
+		}
+	}
+	else if (!is_in_env(shell->env, key))
+	{
+		new = ft_new_env(var);
+		if (new)
+			ft_add_back_env(&shell->env, new);
+	}
+	free(key);
+	free(value);
+>>>>>>> fa4b34946185badc73f1011a4198c81de158e48c
 	return ;
 }
 

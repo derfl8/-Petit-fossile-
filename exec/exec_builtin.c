@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 12:06:04 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/14 18:05:19 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/17 19:47:35 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	exec_builtin(t_data *shell, char **av, t_tree *cmd_tree)
 // {
 // 	char	**arg;
 // 	int		i;
-	
+
 // 	i = 1;
 // 	arg = ft_calloc(sizeof(char *), how_many_arg(av));
 // 	while (av[i])

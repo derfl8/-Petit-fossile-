@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                        :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 14:22:21 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/29 17:56:40 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/17 19:48:03 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,14 @@ int						ft_unset(t_data *shell, char **av);
 
 // cd.c
 int						ft_cd(t_data *shell, char **av);
+bool					path_check(t_data *shell, char *path, char *pwd,
+							char *oldpwd);
+
+// cd_norm.c
+int						free_all_pwd(t_data *shell, char *pwd, char *oldpwd,
+							int s_o_f);
+int						pre_cd(t_data *shell, char *pwd, char *oldpwd,
+							char *av);
 
 // echo.c
 int						ft_echo(t_data *shell, char **av);
