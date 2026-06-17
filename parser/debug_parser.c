@@ -6,20 +6,13 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:03:20 by aldecour          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2026/06/16 14:48:36 by abegou           ###   ########.fr       */
-=======
-/*   Updated: 2026/06/16 20:57:05 by aldecour         ###   ########.fr       */
->>>>>>> 59e93bd (finished ctrl + c)
-=======
-/*   Updated: 2026/06/16 20:57:05 by aldecour         ###   ########.fr       */
->>>>>>> 089d5ab (finished ctrl + c)
+/*   Updated: 2026/06/17 19:37:21 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/parser.h"
 #include <stdio.h>
+
 void	print_tree(t_tree *cmd_tree)
 {
 	while (cmd_tree)
