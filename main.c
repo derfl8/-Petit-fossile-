@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/15 21:44:21 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/06/16 20:46:31 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int	main_process(t_data *shell)
             ft_putstr_fd("exit\n", 1);
             return (1);
         }
-        if (*line)
-            add_history(line);
+		add_history(line);
         tree = pf_parser(line);
         if (tree)
         {
