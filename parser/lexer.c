@@ -61,6 +61,8 @@ static t_token_type	get_token_type(t_lexer *lexer)
 		return (T_EOF);
 	else if (c[0] == '|' && c[1] != '|')
 		return (T_PIPE);
+	else if (c[0] == '|' && c[1] == '|')
+		return (T_INVALID);
 	else if (c[0] == '<' && c[1] != '<')
 		return (T_REDIR_IN);
 	else if (c[0] == '>' && c[1] != '>')

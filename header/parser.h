@@ -31,6 +31,7 @@ typedef enum e_token_type
 	T_HEREDOC,   // <<
 	T_APPEND,    // >>
 	T_WORD,
+	T_INVALID,
 	T_EOF,
 }					t_token_type;
 
@@ -62,6 +63,7 @@ typedef enum e_parse_error
 {
 	ERR_QUOTE,
 	ERR_MISSING_CMD,
+	ERR_INVALID_TOKEN,
 }					t_parse_error;
 
 // FUNCTIONS
