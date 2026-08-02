@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/17 19:37:12 by abegou           ###   ########.fr       */
+/*   Updated: 2026/07/08 15:40:38 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ void	parse_pipe(t_tree *cmd_node);
 void	realloc_args(char ***args, t_token *current);
 void	free_args(char **args, size_t size);
 
-// QUOTE_REMOVER.C
+// QUOTE_HANDLER.C
 bool	is_quote_error(t_token *token);
+void	quote_remover(char *str);
+void	tree_quote_remover(t_tree *tree);
 
 // FREE_CMD_TREE.C
 void	free_cmd_tree(t_tree *cmd_tree);

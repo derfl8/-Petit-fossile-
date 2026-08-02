@@ -1,33 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_remover.c                                    :+:      :+:    :+:   */
+/*   quote_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 13:58:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/11 18:21:23 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/07/08 15:55:37 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/parser.h"
 
-static char	find_em_quotes(t_token token)
+void	tree_quote_remover(t_tree *tree)
+{
+	size_t	i;
+
+	while (tree)
+	{
+		i = 0;
+		while (tree->args && tree->args[i])
+		{
+			quote_remover(tree->args[i]);
+			i++;
+		}
+		tree = tree->next;
+	}
+}
+
+// the quoted str needs to be valid before calling quote_remover
+// else the last quote will disappear but all info will be lost about
+// and unclosed quote
+void	quote_remover(char *str)
 {
 	size_t	i;
 	char	quote;
+	bool	is_quoted;
 
 	i = 0;
-	quote = '\0';
-	while (token.value[i] && !quote)
+	is_quoted = false;
+	if (!str)
+		return ;
+	while (str[i])
 	{
-		if (token.value[i] == '\'')
-			quote = '\'';
-		else if (token.value[i] == '\"')
-			quote = '\"';
-		i++;
+		if (!is_quoted && ft_strchr("\'\"", str[i]))
+			quote = str[i];
+		if (str[i] == quote)
+		{
+			is_quoted = !is_quoted;
+			ft_memmove(str + i, str + i + 1, ft_strlen(str + i));
+		}
+		else
+			i++;
 	}
-	return (quote);
 }
 
 bool	is_quote_error(t_token *token)
@@ -40,9 +65,10 @@ bool	is_quote_error(t_token *token)
 	i = 0;
 	if (!token || !token->value)
 		return (is_quoted);
-	quote_type = find_em_quotes(*token);
 	while (token->value[i])
 	{
+		if (!is_quoted && ft_strchr("\'\"", token->value[i]))
+			quote_type = token->value[i];
 		if (token->value[i] == quote_type)
 			is_quoted = !is_quoted;
 		i++;
