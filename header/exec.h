@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:07:05 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/14 18:06:58 by abegou           ###   ########.fr       */
+/*   Updated: 2026/08/20 19:45:19 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ char	*path_verif(t_env *env, char *cmd);
 char	**env_to_char(t_data *shell);
 
 // exec.c
+void	ft_exec_family(t_data *shell, t_tree *tree, int nb_cmd);
 void	ft_exec(t_data *shell, t_tree *tree);
+int    	cmd_count(t_tree *tree);
+void	run_child(t_data *shell, t_tree *tree, char **env);
+int	    **pipes_gen(int nb_cmd);
 
 #endif

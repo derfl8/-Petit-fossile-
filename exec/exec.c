@@ -6,13 +6,13 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:27:46 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/17 22:48:53 by abegou           ###   ########.fr       */
+/*   Updated: 2026/08/20 19:44:20 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/exec.h"
 
-static void	run_child(t_data *shell, t_tree *tree, char **env)
+void	run_child(t_data *shell, t_tree *tree, char **env)
 {
 	char	*bin;
 
@@ -36,7 +36,40 @@ static void	run_child(t_data *shell, t_tree *tree, char **env)
 	exit(1);
 }
 
-void	ft_exec(t_data *shell, t_tree *tree)
+int	cmd_count(t_tree *tree)
+{
+	int	cmd;
+
+	cmd = 0;
+	while (tree)
+	{
+		if (tree->type == ASL_CMD)
+			cmd ++;
+		tree = tree->next;
+	}
+	return (cmd);
+}
+
+int	**pipes_gen(int nb_cmd)
+{
+	int	**pipe_table;
+	int	i;
+
+	pipe_table = ft_calloc(sizeof(int *), nb_cmd - 1);
+	i = 0;
+	if (!pipe_table)
+		return (NULL);
+	while (i < nb_cmd - 1)
+	{
+		pipe_table[i] = ft_calloc(sizeof(int), 2);
+		if (!pipe_table[i] || pipe(pipe_table[i]) == -1)
+			return (NULL);
+		i++;
+	}
+	return (pipe_table);
+}
+
+static void	ft_exec_alone(t_data *shell, t_tree *tree)
 {
 	int		success;
 	pid_t	pid;
@@ -60,5 +93,18 @@ void	ft_exec(t_data *shell, t_tree *tree)
 		waitpid(pid, &status, 0);
 	free_tab(env);
 	shell->success_or_failed = WEXITSTATUS(status);
+	return ;
+}
+
+
+void	ft_exec(t_data *shell, t_tree *tree)
+{
+	int nb_cmd;
+
+	nb_cmd = cmd_count(tree);
+	if(nb_cmd > 1)
+		ft_exec_family(shell, tree, nb_cmd);
+	else
+		ft_exec_alone(shell, tree);
 	return ;
 }
