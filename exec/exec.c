@@ -96,7 +96,6 @@ static void	ft_exec_alone(t_data *shell, t_tree *tree)
 	return ;
 }
 
-
 void	ft_exec(t_data *shell, t_tree *tree)
 {
 	int nb_cmd;

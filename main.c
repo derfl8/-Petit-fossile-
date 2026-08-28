@@ -29,7 +29,7 @@ int	main_process(t_data *shell)
 		tree = pf_parser(line);
 		if (tree)
 		{
-			// print_tree(tree); //DEBUG LINE
+			//print_tree(tree); //DEBUG LINE
 			// exp_args(&shell, tree);
 			ft_exec(shell, tree);
 			free_cmd_tree(tree);
