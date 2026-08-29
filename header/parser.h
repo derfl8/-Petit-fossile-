@@ -97,4 +97,7 @@ void	free_cmd_tree(t_tree *cmd_tree);
 
 // DEBUG.C TODO : REMOVE THAT SHIT BEFORE PUSH
 void	print_tree(t_tree *cmd_tree);
+
+// HEREDOC.C
+void	heredoc_handler(t_tree *tree);
 #endif

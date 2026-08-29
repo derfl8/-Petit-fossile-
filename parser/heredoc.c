@@ -25,33 +25,67 @@ bool	is_delim_valid(char *delim)
 			is_quoted = !is_quoted;
 		i++;
 	}
-	return (is_quoted);
+	return (!is_quoted);
 }
 
+char	get_delim_quote_type(char *delim);
+{
+	int	i;
+
+	i = 0;
+	while(delim[i])
+	{
+		if (ft_strchr("\'\"", delim[i]))
+			return(delim[i]);
+		i++;
+	}
+	return ('\0');
+}
+
+//TODO : make it so that it finds EVERY delim for all the heredocs
 char	*find_delimiter(t_tree *tree)
 {
 	while (tree && tree->type != ASL_HEREDOC)
 		tree = tree->next;
-	if (tree->type != ASL_HEREDOC)
+	if (!tree || tree->type != ASL_HEREDOC)
 		return (NULL);
 	return (tree->args[0]);
 }
 
-void	heredoc_handler(t_tree *tree)
+void	single_heredoc_loop(char *delim)
 {
 	char	*line;
-	char	*delim;
+
+	while (1)
+	{
+		line = readline("> ");
+		if (!line)
+		{
+			//print readline err
+			free(line);
+			break;
+		}
+		if (ft_strncmp(line, delim, ft_strlen(line)) == 0)
+			break ;
+		//var expander
+		//store_current_line();
+		free(line);
+	}
+}
+
+void	heredoc_handler(t_tree *tree)
+{
+	char	**delim;
+	int	i;
 
 	line = NULL;
 	delim = find_delimiter(tree);
 	if (!delim || !is_delim_valid(delim))
 		return ;			//TODO : handle errors (print err message before returning)
 	quote_remover(delim);
-	while (1)
+	while (delim[i])
 	{
-		line = readline("> ");
-		if (ft_strncmp(line, delim, ft_strlen(delim)) == 0)
-			break ;		
-		//put the line in trhe dstata
+		single_heredoc_loop(delim[i]);
+		i++;
 	}
 }

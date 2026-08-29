@@ -30,7 +30,7 @@ int	main_process(t_data *shell)
 		if (tree)
 		{
 			//exp_args(&shell, tree);
-			//heredoc_handler(tree);
+			heredoc_handler(tree);
 			tree_quote_remover(tree);
 			print_tree(tree); //DEBUG LINE
 			ft_exec(shell, tree);
