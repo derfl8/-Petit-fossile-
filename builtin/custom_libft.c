@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 18:52:50 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/16 14:48:07 by abegou           ###   ########.fr       */
+/*   Updated: 2026/08/31 23:08:48 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ char	*ft_cut_env(char *to_cut)
 		if (to_cut[i++] == '=')
 		{
 			while (to_cut[i])
+			{
 				cuted[j++] = to_cut[i++];
+			}
 		}
 	}
 	cuted[j] = '\0';
