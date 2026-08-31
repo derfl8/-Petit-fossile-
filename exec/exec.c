@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:27:46 by abegou            #+#    #+#             */
-/*   Updated: 2026/08/20 19:44:20 by abegou           ###   ########.fr       */
+/*   Updated: 2026/08/31 21:50:19 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	ft_exec(t_data *shell, t_tree *tree)
 
 	nb_cmd = cmd_count(tree);
 	if (nb_cmd > 1)
-		ft_exec_family(shell, tree, nb_cmd);
+		ft_exec_pipe(shell, tree, nb_cmd);
 	else
 		ft_exec_alone(shell, tree);
 	return ;

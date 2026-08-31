@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:07:05 by abegou            #+#    #+#             */
-/*   Updated: 2026/08/31 18:04:32 by abegou           ###   ########.fr       */
+/*   Updated: 2026/08/31 21:50:30 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_pipe_ctx
 	char	**env;
 	int		nb_cmd;
 	int		i;
-    int     j;
+	int		j;
 }			t_pipe_ctx;
 
 // exec_builtin.c
@@ -45,7 +45,7 @@ void		run_child(t_data *shell, t_tree *tree, char **env);
 int			**pipes_gen(int nb_cmd);
 
 // exec_family.c
-void		ft_exec_family(t_data *shell, t_tree *tree, int nb_cmd);
+void		ft_exec_pipe(t_data *shell, t_tree *tree, int nb_cmd);
 void		free_int_tab(int **int_tab, int how_many);
 
 #endif

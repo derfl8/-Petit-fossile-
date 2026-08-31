@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 19:42:54 by abegou            #+#    #+#             */
-/*   Updated: 2026/08/31 18:48:25 by abegou           ###   ########.fr       */
+/*   Updated: 2026/08/31 22:05:42 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	free_int_tab(int **int_tab, int how_many)
 	return ;
 }
 
-static void	fork_land(t_data *shell, t_tree *current, t_pipe_ctx *ctx)
+static void	exec_cmd_fork(t_data *shell, t_tree *tree, t_tree *current,
+		t_pipe_ctx *ctx)
 {
 	int	exit_code;
 
@@ -48,7 +49,7 @@ static void	fork_land(t_data *shell, t_tree *current, t_pipe_ctx *ctx)
 		exit_code = exec_builtin(shell, current->args, current);
 		ft_free_stack_env(shell->env);
 		free_tab(ctx->env);
-		free_cmd_tree(current);
+		free_cmd_tree(tree);
 		exit(exit_code);
 	}
 	else
@@ -57,7 +58,7 @@ static void	fork_land(t_data *shell, t_tree *current, t_pipe_ctx *ctx)
 
 static void	close_wait(t_data *shell, t_pipe_ctx *ctx)
 {
-	int status;
+	int	status;
 
 	ctx->j = 0;
 	while (ctx->j < ctx->nb_cmd - 1)
@@ -78,7 +79,7 @@ static void	close_wait(t_data *shell, t_pipe_ctx *ctx)
 	shell->success_or_failed = WEXITSTATUS(status);
 }
 
-void	ft_exec_family(t_data *shell, t_tree *tree, int nb_cmd)
+void	ft_exec_pipe(t_data *shell, t_tree *tree, int nb_cmd)
 {
 	t_pipe_ctx	ctx;
 	t_tree		*current;
@@ -97,7 +98,7 @@ void	ft_exec_family(t_data *shell, t_tree *tree, int nb_cmd)
 		{
 			pid = fork();
 			if (pid == 0)
-				fork_land(shell, current, &ctx);
+				exec_cmd_fork(shell, tree, current, &ctx);
 			ctx.pids[ctx.i] = pid;
 			ctx.i++;
 		}
