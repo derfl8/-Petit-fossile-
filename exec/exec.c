@@ -44,7 +44,7 @@ int	cmd_count(t_tree *tree)
 	while (tree)
 	{
 		if (tree->type == ASL_CMD)
-			cmd ++;
+			cmd++;
 		tree = tree->next;
 	}
 	return (cmd);
@@ -98,10 +98,10 @@ static void	ft_exec_alone(t_data *shell, t_tree *tree)
 
 void	ft_exec(t_data *shell, t_tree *tree)
 {
-	int nb_cmd;
+	int	nb_cmd;
 
 	nb_cmd = cmd_count(tree);
-	if(nb_cmd > 1)
+	if (nb_cmd > 1)
 		ft_exec_family(shell, tree, nb_cmd);
 	else
 		ft_exec_alone(shell, tree);
