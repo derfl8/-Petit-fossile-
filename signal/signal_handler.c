@@ -12,7 +12,7 @@
 
 #include "../header/signal_handler.h"
 
-volatile int	g_signal_status = 0;
+volatile int g_signal_status = 0;
 
 void	signal_handler(int sig)
 {
@@ -28,7 +28,7 @@ void	signal_handler(int sig)
 
 void	signal_init(void)
 {
-	struct sigaction	sa;
+	struct sigaction sa;
 
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;

@@ -82,6 +82,7 @@ static void	add_env(t_data *shell, char *var)
 	key = ft_name_var(var);
 	value = ft_cut_env(var);
 	if (ft_strchr(var, '='))
+	if (update_env(shell->env, key, value))
 	{
 		if (!update_env(shell->env, key, value))
 		{
