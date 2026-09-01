@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 19:42:54 by abegou            #+#    #+#             */
-/*   Updated: 2026/08/31 22:05:42 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/01 16:50:07 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_int_tab(int **int_tab, int how_many)
 	return ;
 }
 
-static void	exec_cmd_fork(t_data *shell, t_tree *tree, t_tree *current,
+static void	exec_cmd_fork(t_data *shell, t_tree *tree, t_tree *curr,
 		t_pipe_ctx *ctx)
 {
 	int	exit_code;
@@ -44,16 +44,16 @@ static void	exec_cmd_fork(t_data *shell, t_tree *tree, t_tree *current,
 	}
 	free_int_tab(ctx->pipe_table, ctx->nb_cmd);
 	free(ctx->pids);
-	if (builtin_check(current->args[0]) == 0)
+	if (builtin_check(curr->args[0]) == 0)
 	{
-		exit_code = exec_builtin(shell, current->args, current);
+		exit_code = exec_builtin(shell, curr->args, curr);
 		ft_free_stack_env(shell->env);
 		free_tab(ctx->env);
 		free_cmd_tree(tree);
 		exit(exit_code);
 	}
 	else
-		run_child(shell, current, ctx->env);
+		run_child(shell, curr, ctx->env);
 }
 
 static void	close_wait(t_data *shell, t_pipe_ctx *ctx)
@@ -82,27 +82,27 @@ static void	close_wait(t_data *shell, t_pipe_ctx *ctx)
 void	ft_exec_pipe(t_data *shell, t_tree *tree, int nb_cmd)
 {
 	t_pipe_ctx	ctx;
-	t_tree		*current;
+	t_tree		*curr;
 	pid_t		pid;
 
 	ctx.pipe_table = pipes_gen(nb_cmd);
 	ctx.pids = ft_calloc(sizeof(pid_t), nb_cmd);
 	ctx.env = env_to_char(shell);
 	ctx.nb_cmd = nb_cmd;
-	current = tree;
+	curr = tree;
 	ctx.i = 0;
 	ctx.j = 0;
-	while (current)
+	while (curr)
 	{
-		if (current->type == ASL_CMD)
+		if (curr->type == ASL_CMD)
 		{
 			pid = fork();
 			if (pid == 0)
-				exec_cmd_fork(shell, tree, current, &ctx);
+				exec_cmd_fork(shell, tree, curr, &ctx);
 			ctx.pids[ctx.i] = pid;
 			ctx.i++;
 		}
-		current = current->next;
+		curr = curr->next;
 	}
 	close_wait(shell, &ctx);
 }
