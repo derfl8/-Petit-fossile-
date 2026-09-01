@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/12 18:14:26 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/17 19:37:12 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef enum e_token_type
 	T_HEREDOC,   // <<
 	T_APPEND,    // >>
 	T_WORD,
+	T_INVALID,
 	T_EOF,
 }					t_token_type;
 
@@ -62,6 +63,7 @@ typedef enum e_parse_error
 {
 	ERR_QUOTE,
 	ERR_MISSING_CMD,
+	ERR_INVALID_TOKEN,
 }					t_parse_error;
 
 // FUNCTIONS

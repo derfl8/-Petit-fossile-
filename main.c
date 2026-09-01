@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/16 20:46:31 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/08/11 18:47:53 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int	main(int ac, char **av, char **envp)
 {
 	t_data	shell;
 
-    (void)ac;
-    (void)av;
-    shell.env = init_env(envp);
-    shell.success_or_failed = 0;
+	(void)ac;
+	(void)av;
+	shell.env = init_env(envp);
+	shell.success_or_failed = 0;
 	signal_init();
 	main_process(&shell);
-    ft_free_stack_env(shell.env);
-    return (shell.success_or_failed);
+	ft_free_stack_env(shell.env);
+	return (shell.success_or_failed);
 }

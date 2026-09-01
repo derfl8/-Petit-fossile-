@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/22 15:06:57 by abegou            #+#    #+#             */
-/*   Updated: 2026/08/11 18:09:28 by abegou           ###   ########.fr       */
+/*   Created: 2026/09/01 22:04:49 by abegou            #+#    #+#             */
+/*   Updated: 2026/09/01 23:09:29 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../header/exec.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void	exit_bin(t_data *shell, t_tree *tree, char **env)
 {
-	size_t		i;
-	const char	*t;
+	ft_putstr_fd("Petit Fossile: ", 2);
+	ft_putstr_fd(tree->args[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
+	ft_free_stack_env(shell->env);
+	free_tab(env);
+	free_cmd_tree(tree);
+	exit(127);
+}
+
+void	free_int_tab(int **int_tab, int how_many)
+{
+	int	i;
 
 	i = 0;
-	t = (const char *)s;
-	while (i < n)
+	while (i < how_many - 1)
 	{
-		if (t[i] == (char)c)
-			return ((void *)((unsigned char *)s + i));
+		free(int_tab[i]);
 		i++;
 	}
-	return (NULL);
+	free(int_tab);
+	return ;
 }

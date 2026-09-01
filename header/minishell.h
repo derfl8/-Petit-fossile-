@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 20:58:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/15 18:01:04 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/08/31 22:13:35 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 # include "../libft/libft.h"
 # include "builtin.h"
-# include "parser.h"
 # include "exec.h"
+# include "parser.h"
 # include "signal_handler.h"
 
-extern volatile int g_signal_status;
+extern volatile int	g_signal_status;
 
 #endif

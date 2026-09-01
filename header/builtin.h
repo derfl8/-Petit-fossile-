@@ -78,7 +78,8 @@ bool					update_env(t_env *env, char *key, char *value);
 bool					is_in_env(t_env *env, char *key);
 
 // exit.c
-void					ft_exit(t_data *shell, char **exit_code, t_tree *cmd_tree);
+void					ft_exit(t_data *shell, char **exit_code,
+							t_tree *cmd_tree);
 
 // lst_tools.c
 void					ft_add_back_env(t_env **lst, t_env *new_node);

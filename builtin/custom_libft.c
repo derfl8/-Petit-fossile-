@@ -6,16 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 18:52:50 by abegou            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/06/14 15:33:15 by abegou           ###   ########.fr       */
-=======
 /*   Updated: 2026/06/16 14:48:07 by abegou           ###   ########.fr       */
->>>>>>> a58458a30f9dc347fa89d6d1ee6dc07e78da311d
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
-#include <stdlib.h>
 
 static size_t	ft_size_cut(char *to_cut)
 {
@@ -52,7 +47,9 @@ char	*ft_cut_env(char *to_cut)
 		if (to_cut[i++] == '=')
 		{
 			while (to_cut[i])
+			{
 				cuted[j++] = to_cut[i++];
+			}
 		}
 	}
 	cuted[j] = '\0';
