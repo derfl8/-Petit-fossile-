@@ -6,11 +6,12 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:27:46 by abegou            #+#    #+#             */
-/*   Updated: 2026/08/31 21:50:19 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/01 19:24:42 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/exec.h"
+#include <unistd.h>
 
 void	run_child(t_data *shell, t_tree *tree, char **env)
 {
@@ -75,6 +76,8 @@ static void	ft_exec_alone(t_data *shell, t_tree *tree)
 	pid_t	pid;
 	int		status;
 	char	**env;
+	int		dup_stdin;
+	int		dup_stdout;
 
 	(void)success;
 	status = 0;
@@ -82,7 +85,14 @@ static void	ft_exec_alone(t_data *shell, t_tree *tree)
 		return ;
 	if (builtin_check(tree->args[0]) == 0)
 	{
+		dup_stdin = dup(STDIN_FILENO);
+		dup_stdout = dup(STDOUT_FILENO);
+		redirections(tree);
 		success = exec_builtin(shell, tree->args, tree);
+		dup2(dup_stdin, STDIN_FILENO);
+		dup2(dup_stdout, STDOUT_FILENO);
+		close(dup_stdin);
+		close(dup_stdout);
 		return ;
 	}
 	env = env_to_char(shell);

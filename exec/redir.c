@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 16:06:52 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/01 18:35:29 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/01 18:40:15 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void    redirections(t_tree *curr)
     t_tree  *next_cmd;
 	int	    fd;
 
+    fd = -1;
     next_cmd = curr->next;
     while (next_cmd && (next_cmd->type == ASL_REDIR_IN || next_cmd->type == ASL_REDIR_OUT || next_cmd->type == ASL_APPEND))
     {
