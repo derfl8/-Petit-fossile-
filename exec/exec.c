@@ -6,12 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:27:46 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/01 19:24:42 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/01 22:27:28 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/exec.h"
-#include <unistd.h>
 
 void	run_child(t_data *shell, t_tree *tree, char **env)
 {
@@ -19,14 +18,14 @@ void	run_child(t_data *shell, t_tree *tree, char **env)
 
 	bin = path_verif(shell->env, tree->args[0]);
 	if (bin == NULL)
+		exit_bin(shell, tree, env);
+	if (redirections(tree) == -1)
 	{
-		ft_putstr_fd("Petit Fossile: ", 2);
-		ft_putstr_fd(tree->args[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
+		free(bin);
 		ft_free_stack_env(shell->env);
 		free_tab(env);
 		free_cmd_tree(tree);
-		exit(127);
+		exit(1);
 	}
 	execve(bin, tree->args, env);
 	free(bin);
@@ -72,27 +71,16 @@ int	**pipes_gen(int nb_cmd)
 
 static void	ft_exec_alone(t_data *shell, t_tree *tree)
 {
-	int		success;
 	pid_t	pid;
 	int		status;
 	char	**env;
-	int		dup_stdin;
-	int		dup_stdout;
 
-	(void)success;
 	status = 0;
 	if (!tree->args)
 		return ;
 	if (builtin_check(tree->args[0]) == 0)
 	{
-		dup_stdin = dup(STDIN_FILENO);
-		dup_stdout = dup(STDOUT_FILENO);
-		redirections(tree);
-		success = exec_builtin(shell, tree->args, tree);
-		dup2(dup_stdin, STDIN_FILENO);
-		dup2(dup_stdout, STDOUT_FILENO);
-		close(dup_stdin);
-		close(dup_stdout);
+		redir_builtin(shell, tree);
 		return ;
 	}
 	env = env_to_char(shell);

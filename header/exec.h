@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:07:05 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/01 18:33:25 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/01 22:28:06 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ void		ft_exec_pipe(t_data *shell, t_tree *tree, int nb_cmd);
 void		free_int_tab(int **int_tab, int how_many);
 
 // redir.c
-void		redirections(t_tree *curr);
+int			redirections(t_tree *curr);
+void		redir_builtin(t_data *shell, t_tree *tree);
+
+// exec_utils.c
+void		exit_bin(t_data *shell, t_tree *tree, char **env);
 
 #endif

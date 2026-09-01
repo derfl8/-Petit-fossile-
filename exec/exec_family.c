@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 19:42:54 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/01 18:41:39 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/01 22:26:12 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,13 @@ static void	exec_cmd_fork(t_data *shell, t_tree *tree, t_tree *curr,
 	}
 	free_int_tab(ctx->pipe_table, ctx->nb_cmd);
 	free(ctx->pids);
-	redirections(curr);
+	if (redirections(curr) == -1)
+	{
+		ft_free_stack_env(shell->env);
+		free_tab(ctx->env);
+		free_cmd_tree(tree);
+		exit(1);
+	}
 	if (builtin_check(curr->args[0]) == 0)
 	{
 		exit_code = exec_builtin(shell, curr->args, curr);

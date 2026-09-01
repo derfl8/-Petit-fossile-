@@ -30,6 +30,7 @@ exec/path.c					\
 exec/exec.c					\
 exec/exec_family.c			\
 exec/redir.c				\
+exec/exec_utils.c			\
 signal/signal_handler.c		\
 main.c
 
