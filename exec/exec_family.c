@@ -6,31 +6,27 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 19:42:54 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/01 22:26:12 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/01 23:12:33 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/exec.h"
 
-void	free_int_tab(int **int_tab, int how_many)
+static void	builtin_fork(t_data *shell, t_tree *tree, t_tree *curr,
+		t_pipe_ctx *ctx)
 {
-	int	i;
+	int	exit_code;
 
-	i = 0;
-	while (i < how_many - 1)
-	{
-		free(int_tab[i]);
-		i++;
-	}
-	free(int_tab);
-	return ;
+	exit_code = exec_builtin(shell, curr->args, curr);
+	ft_free_stack_env(shell->env);
+	free_tab(ctx->env);
+	free_cmd_tree(tree);
+	exit(exit_code);
 }
 
 static void	exec_cmd_fork(t_data *shell, t_tree *tree, t_tree *curr,
 		t_pipe_ctx *ctx)
 {
-	int	exit_code;
-
 	ctx->j = 0;
 	if (ctx->i > 0)
 		dup2(ctx->pipe_table[ctx->i - 1][0], STDIN_FILENO);
@@ -52,13 +48,7 @@ static void	exec_cmd_fork(t_data *shell, t_tree *tree, t_tree *curr,
 		exit(1);
 	}
 	if (builtin_check(curr->args[0]) == 0)
-	{
-		exit_code = exec_builtin(shell, curr->args, curr);
-		ft_free_stack_env(shell->env);
-		free_tab(ctx->env);
-		free_cmd_tree(tree);
-		exit(exit_code);
-	}
+		builtin_fork(shell, tree, curr, ctx);
 	else
 		run_child(shell, curr, ctx->env);
 }

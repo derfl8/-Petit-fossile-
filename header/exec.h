@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:07:05 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/01 22:28:06 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/01 23:09:46 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define EXEC_H
 
 # include "minishell.h"
+# include <fcntl.h>
 # include <sys/wait.h>
- #include <fcntl.h>
 
 typedef struct s_pipe_ctx
 {
@@ -47,13 +47,13 @@ int			**pipes_gen(int nb_cmd);
 
 // exec_family.c
 void		ft_exec_pipe(t_data *shell, t_tree *tree, int nb_cmd);
-void		free_int_tab(int **int_tab, int how_many);
 
 // redir.c
 int			redirections(t_tree *curr);
 void		redir_builtin(t_data *shell, t_tree *tree);
 
 // exec_utils.c
+void		free_int_tab(int **int_tab, int how_many);
 void		exit_bin(t_data *shell, t_tree *tree, char **env);
 
 #endif

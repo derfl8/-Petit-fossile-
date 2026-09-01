@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 16:06:52 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/01 22:32:30 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/01 23:22:30 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	redir_builtin(t_data *shell, t_tree *tree)
 {
 	int	dup_stdin;
 	int	dup_stdout;
-	
+
 	dup_stdin = dup(STDIN_FILENO);
 	dup_stdout = dup(STDOUT_FILENO);
 	redirections(tree);
