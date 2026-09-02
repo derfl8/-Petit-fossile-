@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 18:22:55 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/15 17:52:08 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/02 21:56:53 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 #include <signal.h>
 
 void	signal_handler(int sig);
-void	signal_init(void);
+void	heredoc_signal_handler(int sig);
+void	signal_init(bool is_heredoc);
 #endif

@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 18:50:58 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/17 19:39:27 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/02 21:56:16 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,21 @@ void	signal_handler(int sig)
 	}
 }
 
-void	signal_init(void)
+void	heredoc_signal_handler(int sig)
+{
+	g_signal_status = sig;
+}
+
+void	signal_init(bool is_heredoc)
 {
 	struct sigaction sa;
 
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
-	sa.sa_handler = signal_handler;
+	if (is_heredoc == false)
+		sa.sa_handler = signal_handler;
+	else
+		sa.sa_handler = heredoc_signal_handler;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
