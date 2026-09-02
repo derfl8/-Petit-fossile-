@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/02 18:28:58 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/02 21:25:53 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int	main_process(t_data *shell)
 		tree = pf_parser(line);
 		if (tree)
 		{
-			//print_tree(tree);		//DEBUG LINE
-			// exp_args(&shell, tree);
+			//exp_args(&shell, tree);
+			heredoc_handler(tree);
+			tree_quote_remover(tree);
+			print_tree(tree); //DEBUG LINE
 			ft_exec(shell, tree);
 			free_cmd_tree(tree);
 		}

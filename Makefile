@@ -1,4 +1,4 @@
-CC			= cc
+CC			= clang
 CFLAGS		= -Wall -Wextra -Werror -g
 NAME		= minishell
 LIBFT_PATH	= libft/
@@ -22,9 +22,12 @@ parser/parser.c				\
 parser/cmd_tree_utils.c		\
 parser/lexer.c				\
 parser/dynamic_arg_table.c	\
-parser/quote_remover.c		\
+parser/quote_handling.c		\
 parser/debug_parser.c		\
 parser/free_cmd_tree.c		\
+parser/heredoc.c			\
+parser/heredoc_delim_utils.c\
+parser/rsg_tmp_name.c		\
 exec/exec_builtin.c			\
 exec/path.c					\
 exec/exec.c					\

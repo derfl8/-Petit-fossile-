@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/17 19:37:12 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/01 23:11:58 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,26 @@ void	parse_pipe(t_tree *cmd_node);
 void	realloc_args(char ***args, t_token *current);
 void	free_args(char **args, size_t size);
 
-// QUOTE_REMOVER.C
+// QUOTE_HANDLER.C
 bool	is_quote_error(t_token *token);
+void	quote_remover(char *str);
+void	tree_quote_remover(t_tree *tree);
 
 // FREE_CMD_TREE.C
 void	free_cmd_tree(t_tree *cmd_tree);
 
 // DEBUG.C TODO : REMOVE THAT SHIT BEFORE PUSH
 void	print_tree(t_tree *cmd_tree);
+
+// HEREDOC.C
+void	heredoc_handler(t_tree *tree);
+
+//HEREDOC_DELIM_UTILS.C
+bool	is_delim_valid(char *delim);
+char	get_delim_quote_type(char *delim);
+int		find_delim_nbr(t_tree *tree);
+char	**find_delimiters(t_tree *tree);
+
+//RSG_TMP_NAME.C
+char	*get_random_filename(size_t random_size);
 #endif
