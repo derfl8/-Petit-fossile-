@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 16:06:52 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/02 18:13:56 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/02 19:12:37 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ void	redir_builtin(t_data *shell, t_tree *tree)
 
 	dup_stdin = dup(STDIN_FILENO);
 	dup_stdout = dup(STDOUT_FILENO);
-	redirections(tree);
-	shell->success_or_failed = exec_builtin(shell, tree->args, tree);
+	if (redirections(tree) == -1)
+		shell->success_or_failed = 1;
+	else
+		shell->success_or_failed = exec_builtin(shell, tree->args, tree);
 	dup2(dup_stdin, STDIN_FILENO);
 	dup2(dup_stdout, STDOUT_FILENO);
 	close(dup_stdin);
@@ -30,7 +32,7 @@ void	redir_builtin(t_data *shell, t_tree *tree)
 static int	redir_in(t_tree *curr)
 {
 	int	fd;
-	
+
 	fd = open(curr->args[0], O_RDONLY);
 	if (fd == -1)
 	{
@@ -81,7 +83,8 @@ int	redirections(t_tree *curr)
 	fd = -1;
 	next_cmd = curr->next;
 	while (next_cmd && (next_cmd->type == ASL_REDIR_IN
-			|| next_cmd->type == ASL_REDIR_OUT || next_cmd->type == ASL_APPEND) && next_cmd->args)
+			|| next_cmd->type == ASL_REDIR_OUT || next_cmd->type == ASL_APPEND)
+		&& next_cmd->args)
 	{
 		if (next_cmd->type == ASL_REDIR_IN)
 			fd = redir_in(next_cmd);

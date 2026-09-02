@@ -6,37 +6,36 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/08/11 18:47:53 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/02 18:28:58 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/minishell.h"
-
 
 int	main_process(t_data *shell)
 {
 	t_tree	*tree;
 	char	*line;
 
-    while (1)
-    {
-        line = readline("Petit Fossile> ");
-        if (!line)
-        {
-            ft_putstr_fd("exit\n", 1);
-            return (1);
-        }
+	while (1)
+	{
+		line = readline("Petit Fossile> ");
+		if (!line)
+		{
+			ft_putstr_fd("exit\n", 1);
+			return (1);
+		}
 		add_history(line);
-        tree = pf_parser(line);
-        if (tree)
-        {
-			print_tree(tree);		//DEBUG LINE
-            // exp_args(&shell, tree);
-            ft_exec(shell, tree);
-            free_cmd_tree(tree);
-        }
-        free(line);
-    }
+		tree = pf_parser(line);
+		if (tree)
+		{
+			//print_tree(tree);		//DEBUG LINE
+			// exp_args(&shell, tree);
+			ft_exec(shell, tree);
+			free_cmd_tree(tree);
+		}
+		free(line);
+	}
 }
 
 int	main(int ac, char **av, char **envp)
