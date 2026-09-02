@@ -6,11 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 13:58:26 by aldecour          #+#    #+#             */
-<<<<<<< HEAD:parser/quote_handling.c
-/*   Updated: 2026/09/01 23:58:01 by aldecour         ###   ########.fr       */
-=======
-/*   Updated: 2026/09/01 17:12:31 by abegou           ###   ########.fr       */
->>>>>>> dev:parser/quote_remover.c
+/*   Updated: 2026/09/02 21:30:22 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
