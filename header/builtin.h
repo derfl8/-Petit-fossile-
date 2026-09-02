@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                        :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 14:22:21 by abegou            #+#    #+#             */
-/*   Updated: 2026/04/29 17:56:40 by abegou           ###   ########.fr       */
+/*   Updated: 2026/06/17 18:25:02 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int						free_all_pwd(t_data *shell, char *pwd, char *oldpwd,
 							int s_o_f);
 int						pre_cd(t_data *shell, char *pwd, char *oldpwd,
 							char *av);
+void					cd_pwd_err(t_data *shell);
 
 // echo.c
 int						ft_echo(t_data *shell, char **av);

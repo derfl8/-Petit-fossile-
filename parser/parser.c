@@ -22,6 +22,10 @@ void	parse_error(t_parse_error err_type)
 	{
 		ft_putstr_fd("command error : missing command\n", 2);
 	}
+	else if (err_type == ERR_INVALID_TOKEN)
+	{
+		ft_putstr_fd("synthax error : unexpected token\n", 2);
+	}
 }
 
 void	lexer_init(t_lexer *lexer, const char *line)
@@ -41,6 +45,11 @@ int	parser_logic(t_tree *cmd_head, t_token *next_token, t_lexer *lexer)
 	t_tree	*current_cmd;
 
 	current_cmd = get_current_cmd_node(cmd_head);
+	if (next_token->type == T_INVALID)
+	{
+		parse_error(ERR_INVALID_TOKEN);
+		return (0);
+	}
 	if (is_quote_error(next_token))
 	{
 		parse_error(ERR_QUOTE);

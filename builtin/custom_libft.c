@@ -47,7 +47,9 @@ char	*ft_cut_env(char *to_cut)
 		if (to_cut[i++] == '=')
 		{
 			while (to_cut[i])
+			{
 				cuted[j++] = to_cut[i++];
+			}
 		}
 	}
 	cuted[j] = '\0';

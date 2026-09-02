@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 14:52:32 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/17 21:46:04 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/02 19:32:11 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,13 @@ static int	is_bin(char **path)
 	return (-1);
 }
 
-char	*init_path(t_env *tmp, char *cmd)
+static char	**sub_init_path(char *cmd, char **path)
 {
-	int		i;
-	char	**path;
-	char	*path_tmp;
 	char	*backslash;
-	char	*cut_env;
+	int		i;
+	char	*path_tmp;
 
 	i = 0;
-	cut_env = ft_cut_env(tmp->envinfo);
-	path = ft_split(cut_env, ':');
-	free(cut_env);
 	while (path[i])
 	{
 		backslash = ft_strjoin("/", cmd);
@@ -66,12 +61,26 @@ char	*init_path(t_env *tmp, char *cmd)
 		free(path_tmp);
 		i++;
 	}
+	return (path);
+}
+
+char	*init_path(t_env *tmp, char *cmd)
+{
+	int		i;
+	char	**path;
+	char	*cut_env;
+
+	i = 0;
+	cut_env = ft_cut_env(tmp->envinfo);
+	path = ft_split(cut_env, ':');
+	free(cut_env);
+	path = sub_init_path(cmd, path);
 	i = is_bin(path);
 	if (i != -1)
 	{
-		path_tmp = ft_strdup(path[i]);
+		cut_env = ft_strdup(path[i]);
 		free_tab(path);
-		return (path_tmp);
+		return (cut_env);
 	}
 	free_tab(path);
 	return (NULL);
@@ -82,6 +91,12 @@ char	*path_verif(t_env *env, char *cmd)
 	t_env	*tmp;
 	char	*path;
 
+	if (ft_strchr(cmd, '/'))
+	{
+		if (access(cmd, X_OK | F_OK) == 0)
+			return (ft_strdup(cmd));
+		return (NULL);
+	}
 	tmp = env;
 	while (tmp && ft_strncmp("PATH=", tmp->envinfo, 5) != 0)
 		tmp = tmp->next;
