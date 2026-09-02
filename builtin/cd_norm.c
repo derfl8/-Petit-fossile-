@@ -6,11 +6,17 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 23:05:56 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/15 15:59:55 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/02 17:45:51 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+
+void	cd_pwd_err(t_data *shell)
+{
+	ft_putendl_fd("Petit Fossile: cd: OLDPWD not set", 2);
+	shell->success_or_failed = 1;
+}
 
 int	free_all_pwd(t_data *shell, char *pwd, char *oldpwd, int s_o_f)
 {

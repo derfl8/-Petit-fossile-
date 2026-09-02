@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:04:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/15 23:20:02 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/02 18:28:06 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ static void	add_env(t_data *shell, char *var)
 	key = ft_name_var(var);
 	value = ft_cut_env(var);
 	if (ft_strchr(var, '='))
-	if (update_env(shell->env, key, value))
 	{
 		if (!update_env(shell->env, key, value))
 		{

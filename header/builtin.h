@@ -63,6 +63,7 @@ int						free_all_pwd(t_data *shell, char *pwd, char *oldpwd,
 							int s_o_f);
 int						pre_cd(t_data *shell, char *pwd, char *oldpwd,
 							char *av);
+void					cd_pwd_err(t_data *shell);
 
 // echo.c
 int						ft_echo(t_data *shell, char **av);

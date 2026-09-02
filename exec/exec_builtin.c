@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 12:06:04 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/17 22:53:12 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/02 17:26:28 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ int	exec_builtin(t_data *shell, char **av, t_tree *cmd_tree)
 	else if (ft_strncmp(av[0], "env", i) == 0)
 		i = ft_env(shell, av);
 	else if (ft_strncmp(av[0], "exit", i) == 0)
+	{
 		ft_exit(shell, av, cmd_tree);
+		i = shell->success_or_failed;
+	}
 	else if (ft_strncmp(av[0], "export", i) == 0)
 		i = ft_export(shell, av);
 	else if (ft_strncmp(av[0], "pwd", i) == 0)
