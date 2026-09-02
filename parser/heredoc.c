@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 22:44:33 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/02 00:18:21 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/02 21:39:05 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	single_heredoc_loop(char *delim, char quote_type, char *file_name)
 	int		fd;
 
 	(void) quote_type; //ONLY WHILE ITS NEEDED
-	fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC);
+	fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	while (1)
 	{
 		line = readline("> ");
