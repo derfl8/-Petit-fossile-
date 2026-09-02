@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:13:07 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/14 18:04:09 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/02 17:22:46 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ static bool	wich_case(char *exit_code)
 	return (true);
 }
 
+static void	print_error_arg(char *exit_code)
+{
+	ft_putstr_fd("Petit Fossile: exit: ", 2);
+	ft_putstr_fd(exit_code, 2);
+	ft_putendl_fd(": numeric argument required", 2);
+}
+
 void	ft_exit(t_data *shell, char **exit_code, t_tree *cmd_tree)
 {
 	int	how_many;
@@ -38,13 +45,15 @@ void	ft_exit(t_data *shell, char **exit_code, t_tree *cmd_tree)
 	how_many = arg_len(exit_code);
 	if (how_many > 1 && wich_case(exit_code[1]) == false)
 	{
-		ft_putstr_fd("Petit Fossile: exit: ", 2);
-		ft_putstr_fd(exit_code[1], 2);
-		ft_putendl_fd(": numeric argument required", 2);
+		print_error_arg(exit_code[1]);
+		ft_free_stack_env(shell->env);
+		free_cmd_tree(cmd_tree);
+		exit(2);
 	}
 	else if (how_many > 2)
 	{
 		ft_putendl_fd("Petit Fossile: exit: too many arguments", 2);
+		shell->success_or_failed = 1;
 		return ;
 	}
 	else if (how_many == 2)

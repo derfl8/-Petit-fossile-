@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:27:14 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/15 16:00:49 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/02 17:46:21 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static bool	cd_hyphen(t_data *shell, char *hyphen, char *pwd, char *oldpwd)
 		while (tmp && ft_strncmp("OLDPWD=", tmp->envinfo, 7) != 0)
 			tmp = tmp->next;
 		if (!tmp)
-			ft_putendl_fd("Petit Fossile: cd: OLDPWD not set", 2);
+			cd_pwd_err(shell);
 		else
 		{
 			path = ft_cut_env(tmp->envinfo);
