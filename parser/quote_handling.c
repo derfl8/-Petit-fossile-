@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 13:58:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/07/08 15:55:37 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/01 23:58:01 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	tree_quote_remover(t_tree *tree)
 
 // the quoted str needs to be valid before calling quote_remover
 // else the last quote will disappear but all info will be lost about
-// and unclosed quote
+// any unclosed quote
 void	quote_remover(char *str)
 {
 	size_t	i;
@@ -39,13 +39,14 @@ void	quote_remover(char *str)
 
 	i = 0;
 	is_quoted = false;
+	quote = '\0';
 	if (!str)
 		return ;
 	while (str[i])
 	{
 		if (!is_quoted && ft_strchr("\'\"", str[i]))
 			quote = str[i];
-		if (str[i] == quote)
+		if (quote != '\0' && str[i] == quote)
 		{
 			is_quoted = !is_quoted;
 			ft_memmove(str + i, str + i + 1, ft_strlen(str + i));
@@ -63,13 +64,14 @@ bool	is_quote_error(t_token *token)
 
 	is_quoted = false;
 	i = 0;
+	quote_type = '\0';
 	if (!token || !token->value)
 		return (is_quoted);
 	while (token->value[i])
 	{
 		if (!is_quoted && ft_strchr("\'\"", token->value[i]))
 			quote_type = token->value[i];
-		if (token->value[i] == quote_type)
+		if (quote_type != '\0' && token->value[i] == quote_type)
 			is_quoted = !is_quoted;
 		i++;
 	}

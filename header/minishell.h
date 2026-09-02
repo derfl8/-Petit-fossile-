@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 20:58:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/15 18:01:04 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/08/30 23:24:47 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include "parser.h"
 # include "exec.h"
 # include "signal_handler.h"
+
+# include <sys/stat.h>
+# include <fcntl.h>
 
 extern volatile int g_signal_status;
 

@@ -6,56 +6,33 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 22:44:33 by aldecour          #+#    #+#             */
-/*   Updated: 2026/07/14 15:12:57 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/02 00:18:21 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-bool	is_delim_valid(char *delim)
-{
-	bool	is_quoted;
-	int		i;
-
-	i = 0;
-	is_quoted = false;
-	while (delim[i])
-	{
-		if (ft_strchr("\'\"", delim[i]))
-			is_quoted = !is_quoted;
-		i++;
-	}
-	return (!is_quoted);
-}
-
-char	get_delim_quote_type(char *delim);
+static void	free_delimiters(char **delim)
 {
 	int	i;
 
 	i = 0;
-	while(delim[i])
+	while (delim[i])
 	{
-		if (ft_strchr("\'\"", delim[i]))
-			return(delim[i]);
+		free(delim[i]);
 		i++;
 	}
-	return ('\0');
+	free(delim);
 }
 
-//TODO : make it so that it finds EVERY delim for all the heredocs
-char	*find_delimiter(t_tree *tree)
-{
-	while (tree && tree->type != ASL_HEREDOC)
-		tree = tree->next;
-	if (!tree || tree->type != ASL_HEREDOC)
-		return (NULL);
-	return (tree->args[0]);
-}
-
-void	single_heredoc_loop(char *delim)
+//TODO HANDLE VAR EXPANSIONS
+static void	single_heredoc_loop(char *delim, char quote_type, char *file_name)
 {
 	char	*line;
+	int		fd;
 
+	(void) quote_type; //ONLY WHILE ITS NEEDED
+	fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC);
 	while (1)
 	{
 		line = readline("> ");
@@ -63,29 +40,57 @@ void	single_heredoc_loop(char *delim)
 		{
 			//print readline err
 			free(line);
-			break;
+			break ;
 		}
 		if (ft_strncmp(line, delim, ft_strlen(line)) == 0)
 			break ;
-		//var expander
-		//store_current_line();
+		//if (quote_type == quote a expand lol mdr)
+		//	var expander
+		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
 		free(line);
+	}
+	close(fd);
+}
+
+void	store_filename(t_tree *tree, char *file_name)
+{
+	while (tree)
+	{
+		if (tree->type == ASL_HEREDOC)
+		{
+			free(tree->args[0]);
+			tree->args[0] = ft_strdup(file_name);
+		}
+		tree = tree->next;
 	}
 }
 
 void	heredoc_handler(t_tree *tree)
 {
 	char	**delim;
-	int	i;
+	int		i;
+	char	quote_type;
+	char	*file_name;
 
-	line = NULL;
-	delim = find_delimiter(tree);
-	if (!delim || !is_delim_valid(delim))
-		return ;			//TODO : handle errors (print err message before returning)
-	quote_remover(delim);
+	i = 0;
+	delim = find_delimiters(tree);
+	file_name = get_random_filename(20);
+	if (!delim || !*delim || !file_name)
+		return ;
+	store_filename(tree, file_name);
 	while (delim[i])
 	{
-		single_heredoc_loop(delim[i]);
+		if (!is_delim_valid(delim[i]))
+		{
+			ft_putstr_fd("Petit Fossile : error : Invalid delimiter\n", 2);
+			break ;
+		}
+		quote_type = get_delim_quote_type(delim[i]);
+		quote_remover(delim[i]);
+		single_heredoc_loop(delim[i], quote_type, file_name);
 		i++;
 	}
+	free_delimiters(delim);
+	free(file_name);
 }

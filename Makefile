@@ -26,6 +26,8 @@ parser/quote_handling.c		\
 parser/debug_parser.c		\
 parser/free_cmd_tree.c		\
 parser/heredoc.c			\
+parser/heredoc_delim_utils.c\
+parser/rsg_tmp_name.c		\
 exec/exec_builtin.c			\
 exec/path.c					\
 exec/exec.c					\
