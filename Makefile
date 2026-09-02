@@ -25,14 +25,14 @@ parser/dynamic_arg_table.c	\
 parser/quote_handling.c		\
 parser/debug_parser.c		\
 parser/free_cmd_tree.c		\
-parser/heredoc.c			\
-parser/heredoc_delim_utils.c\
 parser/rsg_tmp_name.c		\
 exec/exec_builtin.c			\
 exec/path.c					\
 exec/exec.c					\
 exec/exec_family.c			\
 exec/redir.c				\
+exec/heredoc.c				\
+exec/heredoc_delim_utils.c	\
 exec/exec_utils.c			\
 signal/signal_handler.c		\
 main.c
