@@ -6,11 +6,26 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 22:04:49 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/03 16:07:35 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/03 18:49:51 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/exec.h"
+
+void	close_pipe(int **pipe_table, int i)
+{
+	int	j;
+
+	j = 0;
+	while (j < i)
+	{
+		close(pipe_table[j][0]);
+		close(pipe_table[j][1]);
+		free(pipe_table[j]);
+		j++;
+	}
+	free(pipe_table);
+}
 
 bool	is_it_redir(t_tree *tree)
 {
