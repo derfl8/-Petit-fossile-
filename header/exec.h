@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:07:05 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/03 15:39:47 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/03 18:50:22 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ char	**find_delimiters(t_tree *tree);
 void		free_int_tab(int **int_tab, int how_many);
 void		exit_bin(t_data *shell, t_tree *tree, char **env);
 bool		is_it_redir(t_tree *tree);
+void		close_pipe(int **pipe_table, int i);
 
 #endif

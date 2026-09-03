@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:27:46 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/01 22:27:28 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/03 19:05:18 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,17 @@ int	**pipes_gen(int nb_cmd)
 	while (i < nb_cmd - 1)
 	{
 		pipe_table[i] = ft_calloc(sizeof(int), 2);
-		if (!pipe_table[i] || pipe(pipe_table[i]) == -1)
+		if (!pipe_table[i])
+		{
+			close_pipe(pipe_table, i);
 			return (NULL);
+		}
+		if (pipe(pipe_table[i]) == -1)
+		{
+			free(pipe_table[i]);
+			close_pipe(pipe_table, i);
+			return (NULL);
+		}
 		i++;
 	}
 	return (pipe_table);

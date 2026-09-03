@@ -42,7 +42,7 @@ static void	heredoc_loop(char *delim, char quote_type, char *file_name)
 	int		fd;
 	int		line_nb;
 
-	(void) quote_type; //ONLY WHILE ITS NEEDED
+	(void)quote_type; //ONLY WHILE ITS NEEDED
 	line_nb = 1;
 	fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	while (1)
