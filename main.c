@@ -48,7 +48,7 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	shell.env = init_env(envp);
 	shell.success_or_failed = 0;
-	signal_init();
+	signal_init(false);
 	main_process(&shell);
 	ft_free_stack_env(shell.env);
 	return (shell.success_or_failed);

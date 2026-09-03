@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 22:44:33 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/02 21:39:05 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/02 23:09:37 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,32 @@ static void	free_delimiters(char **delim)
 	free(delim);
 }
 
+static void	print_readline_error(int line_nb, char *delim)
+{
+	ft_putstr_fd("Petit Fossile: warning: ", 2);
+	ft_putstr_fd("here-document at line ", 2);
+	ft_putstr_fd(ft_itoa(line_nb), 2);
+	ft_putstr_fd(" of here-document delimited by end-of-file (wanted '", 2);
+	ft_putstr_fd(delim, 2);
+	ft_putstr_fd("')\n", 2);
+}
+
 //TODO HANDLE VAR EXPANSIONS
-static void	single_heredoc_loop(char *delim, char quote_type, char *file_name)
+static void	heredoc_loop(char *delim, char quote_type, char *file_name)
 {
 	char	*line;
 	int		fd;
+	int		line_nb;
 
 	(void) quote_type; //ONLY WHILE ITS NEEDED
+	line_nb = 1;
 	fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	while (1)
 	{
 		line = readline("> ");
 		if (!line)
 		{
-			//print readline err
+			print_readline_error(line_nb, delim);
 			free(line);
 			break ;
 		}
@@ -49,6 +61,7 @@ static void	single_heredoc_loop(char *delim, char quote_type, char *file_name)
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
+		line_nb++;
 	}
 	close(fd);
 }
@@ -75,8 +88,10 @@ void	heredoc_handler(t_tree *tree)
 
 	i = 0;
 	delim = find_delimiters(tree);
+	if (!delim || !*delim)
+		return ;
 	file_name = get_random_filename(20);
-	if (!delim || !*delim || !file_name)
+	if (!file_name)
 		return ;
 	store_filename(tree, file_name);
 	while (delim[i])
@@ -88,7 +103,7 @@ void	heredoc_handler(t_tree *tree)
 		}
 		quote_type = get_delim_quote_type(delim[i]);
 		quote_remover(delim[i]);
-		single_heredoc_loop(delim[i], quote_type, file_name);
+		heredoc_loop(delim[i], quote_type, file_name);
 		i++;
 	}
 	free_delimiters(delim);

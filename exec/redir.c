@@ -91,10 +91,11 @@ int	redirections(t_tree *curr)
 	fd = -1;
 	next_cmd = curr->next;
 	while (next_cmd && (next_cmd->type == ASL_REDIR_IN
-			|| next_cmd->type == ASL_REDIR_OUT || next_cmd->type == ASL_APPEND)
+			|| next_cmd->type == ASL_REDIR_OUT || next_cmd->type == ASL_APPEND
+			|| next_cmd->type == ASL_HEREDOC)
 		&& next_cmd->args)
 	{
-		if (next_cmd->type == ASL_REDIR_IN)
+		if (next_cmd->type == ASL_REDIR_IN || next_cmd->type == ASL_HEREDOC)
 			fd = redir_in(next_cmd);
 		else if (next_cmd->type == ASL_REDIR_OUT)
 			fd = redir_out(next_cmd);
