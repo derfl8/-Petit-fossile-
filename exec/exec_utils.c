@@ -6,11 +6,23 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 22:04:49 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/01 23:09:29 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/03 16:07:35 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/exec.h"
+
+bool	is_it_redir(t_tree *tree)
+{
+	if (tree->next)
+	{
+		if (tree->next->type == ASL_REDIR_IN
+			|| tree->next->type == ASL_REDIR_OUT
+			|| tree->next->type == ASL_APPEND)
+			return (true);
+	}
+	return (false);
+}
 
 void	exit_bin(t_data *shell, t_tree *tree, char **env)
 {

@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 16:06:52 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/02 19:12:37 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/03 16:07:25 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,27 @@
 
 void	redir_builtin(t_data *shell, t_tree *tree)
 {
-	int	dup_stdin;
-	int	dup_stdout;
+	int		dup_stdin;
+	int		dup_stdout;
+	bool	redir;
 
-	dup_stdin = dup(STDIN_FILENO);
-	dup_stdout = dup(STDOUT_FILENO);
+	redir = is_it_redir(tree);
+	if (redir == true)
+	{
+		dup_stdin = dup(STDIN_FILENO);
+		dup_stdout = dup(STDOUT_FILENO);
+	}
 	if (redirections(tree) == -1)
 		shell->success_or_failed = 1;
 	else
 		shell->success_or_failed = exec_builtin(shell, tree->args, tree);
-	dup2(dup_stdin, STDIN_FILENO);
-	dup2(dup_stdout, STDOUT_FILENO);
-	close(dup_stdin);
-	close(dup_stdout);
+	if (redir == true)
+	{
+		dup2(dup_stdin, STDIN_FILENO);
+		dup2(dup_stdout, STDOUT_FILENO);
+		close(dup_stdin);
+		close(dup_stdout);
+	}
 }
 
 static int	redir_in(t_tree *curr)
