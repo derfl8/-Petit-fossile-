@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 19:42:54 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/03 19:32:27 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/06 17:18:42 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,15 @@ static void	close_wait(t_data *shell, t_pipe_ctx *ctx)
 	shell->success_or_failed = WEXITSTATUS(status);
 }
 
-static void	cmd_fork(t_data *shell, t_tree *tree, t_pipe_ctx ctx, t_tree *curr)
+static void	cmd_fork(t_data *shell, t_tree *tree, t_pipe_ctx *ctx, t_tree *curr)
 {
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == 0)
-		exec_cmd_fork(shell, tree, curr, &ctx);
-	ctx.pids[ctx.i] = pid;
-	ctx.i++;
+		exec_cmd_fork(shell, tree, curr, ctx);
+	ctx->pids[ctx->i] = pid;
+	ctx->i++;
 }
 
 void	ft_exec_pipe(t_data *shell, t_tree *tree, int nb_cmd)
@@ -108,7 +108,7 @@ void	ft_exec_pipe(t_data *shell, t_tree *tree, int nb_cmd)
 	while (curr)
 	{
 		if (curr->type == ASL_CMD)
-			cmd_fork(shell, tree, ctx, curr);
+			cmd_fork(shell, tree, &ctx, curr);
 		curr = curr->next;
 	}
 	close_wait(shell, &ctx);

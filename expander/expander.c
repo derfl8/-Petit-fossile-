@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/11 20:58:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/02 21:24:55 by aldecour         ###   ########.fr       */
+/*   Created: 2026/09/04 16:09:15 by abegou            #+#    #+#             */
+/*   Updated: 2026/09/04 17:15:31 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../header/expander.h"
 
-# include "../libft/libft.h"
-# include "builtin.h"
-# include "exec.h"
-# include "parser.h"
-# include "signal_handler.h"
-# include <fcntl.h>
-# include <sys/stat.h>
-
-extern volatile int	g_signal_status;
-
-#endif
+char	**expand(t_data *shell, t_tree *tree)
+{
+	if tkt
+		clope
+}

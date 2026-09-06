@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/11 20:58:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/02 21:24:55 by aldecour         ###   ########.fr       */
+/*   Created: 2026/09/04 16:09:55 by abegou            #+#    #+#             */
+/*   Updated: 2026/09/04 16:17:10 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef EXPANDER_H
+# define EXPANDER_H
 
-# include "../libft/libft.h"
-# include "builtin.h"
-# include "exec.h"
-# include "parser.h"
-# include "signal_handler.h"
-# include <fcntl.h>
-# include <sys/stat.h>
+# include "minishell.h"
 
-extern volatile int	g_signal_status;
+// expanderx.c
 
 #endif
