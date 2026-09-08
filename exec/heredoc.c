@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 22:44:33 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/08 02:08:23 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/08 21:49:01 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	child_heredoc(char **delim, char *file_name, t_tree *tree, t_data *shell)
 	{
 		if (!is_delim_valid(delim[i]))
 		{
-			ft_putstr_fd("Petit Fossile : error : Invalid delimiter\n", 2);
+			ft_putstr_fd("Petit Fossile : error: Invalid delimiter\n", 2);
 			break ;
 		}
 		quote_type = get_delim_quote_type(delim[i]);

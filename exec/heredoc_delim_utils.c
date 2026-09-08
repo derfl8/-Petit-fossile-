@@ -33,10 +33,10 @@ char	get_delim_quote_type(char *delim)
 	int	i;
 
 	i = 0;
-	while(delim[i])
+	while (delim[i])
 	{
 		if (ft_strchr("\'\"", delim[i]))
-			return(delim[i]);
+			return (delim[i]);
 		i++;
 	}
 	return ('\0');

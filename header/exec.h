@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:07:05 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/08 21:07:17 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/08 21:49:32 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "minishell.h"
 # include <fcntl.h>
-# include <sys/wait.h>
 # include <stdbool.h>
+# include <sys/wait.h>
 
 typedef struct s_pipe_ctx
 {
@@ -71,5 +71,6 @@ char		**find_delimiters(t_tree *tree);
 void		free_int_tab(int **int_tab, int how_many);
 void		exit_bin(t_data *shell, t_tree *tree, char **env);
 bool		is_it_redir(t_tree *tree);
+void		close_pipe(int **pipe_table, int i);
 
 #endif
