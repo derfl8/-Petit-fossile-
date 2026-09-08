@@ -6,55 +6,44 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 22:44:33 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/04 21:56:20 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/08 21:49:01 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-static void	free_delimiters(char **delim)
+static int	quit_conditions(char *line, char *delim, int line_nb)
 {
-	int	i;
-
-	i = 0;
-	while (delim[i])
+	if (g_signal_status == 2)
+		return (1);
+	if (!line)
 	{
-		free(delim[i]);
-		i++;
+		print_readline_error(line_nb, delim);
+		free(line);
+		return (1);
 	}
-	free(delim);
-}
-
-static void	print_readline_error(int line_nb, char *delim)
-{
-	ft_putstr_fd("Petit Fossile: warning: ", 2);
-	ft_putstr_fd("here-document at line ", 2);
-	ft_putstr_fd(ft_itoa(line_nb), 2);
-	ft_putstr_fd(" of here-document delimited by end-of-file (wanted '", 2);
-	ft_putstr_fd(delim, 2);
-	ft_putstr_fd("')\n", 2);
+	if (ft_strncmp(line, delim, ft_strlen(line)) == 0)
+	{
+		free(line);
+		return (1);
+	}
+	return (0);
 }
 
 //TODO HANDLE VAR EXPANSIONS
-static void	heredoc_loop(char *delim, char quote_type, char *file_name)
+static void	read_heredoc(char *delim, char quote, char *file_name)
 {
 	char	*line;
 	int		fd;
 	int		line_nb;
 
-	(void)quote_type; //ONLY WHILE ITS NEEDED
+	(void) quote; //ONLY WHILE ITS NEEDED
 	line_nb = 1;
 	fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	while (1)
 	{
 		line = readline("> ");
-		if (!line)
-		{
-			print_readline_error(line_nb, delim);
-			free(line);
-			break ;
-		}
-		if (ft_strncmp(line, delim, ft_strlen(line)) == 0)
+		if (quit_conditions(line, delim, line_nb))
 			break ;
 		//if (quote_type == quote a expand lol mdr)
 		//	var expander
@@ -66,34 +55,13 @@ static void	heredoc_loop(char *delim, char quote_type, char *file_name)
 	close(fd);
 }
 
-void	store_filename(t_tree *tree, char *file_name)
+int	child_heredoc(char **delim, char *file_name, t_tree *tree, t_data *shell)
 {
-	while (tree)
-	{
-		if (tree->type == ASL_HEREDOC)
-		{
-			free(tree->args[0]);
-			tree->args[0] = ft_strdup(file_name);
-		}
-		tree = tree->next;
-	}
-}
-
-void	heredoc_handler(t_tree *tree)
-{
-	char	**delim;
 	int		i;
 	char	quote_type;
-	char	*file_name;
 
 	i = 0;
-	delim = find_delimiters(tree);
-	if (!delim || !*delim)
-		return ;
-	file_name = get_random_filename(20);
-	if (!file_name)
-		return ;
-	store_filename(tree, file_name);
+	signal_init(S_CHILD_HEREDOC);
 	while (delim[i])
 	{
 		if (!is_delim_valid(delim[i]))
@@ -103,9 +71,53 @@ void	heredoc_handler(t_tree *tree)
 		}
 		quote_type = get_delim_quote_type(delim[i]);
 		quote_remover(delim[i]);
-		heredoc_loop(delim[i], quote_type, file_name);
+		g_signal_status = 0;
+		read_heredoc(delim[i], quote_type, file_name);
+		if (g_signal_status == 2)
+			break ;
 		i++;
 	}
+	ft_free_stack_env(shell->env);
+	free_cmd_tree(tree);
 	free_delimiters(delim);
 	free(file_name);
+	exit(g_signal_status);
+}
+
+void	parent_heredoc(int pid, t_data *shell)
+{
+	int	status;
+	int	wait_ret;
+
+	wait_ret = -1;
+	signal_init(S_PARENT_HEREDOC);
+	while (wait_ret == -1)
+		wait_ret = waitpid(pid, &status, 0);
+	signal_init(S_MAIN);
+	shell->success_or_failed = WEXITSTATUS(status);
+}
+
+int	heredoc_handler(t_tree *tree, t_data *shell)
+{
+	char	**delim;
+	char	*file_name;
+	int		pid;
+
+	delim = find_delimiters(tree);
+	if (!delim || !*delim)
+		return (1);
+	file_name = get_random_filename(20);
+	if (!file_name)
+		return (0);
+	store_filename(tree, file_name);
+	pid = fork();
+	if (pid == 0)
+		child_heredoc(delim, file_name, tree, shell);
+	else
+		parent_heredoc(pid, shell);
+	free_delimiters(delim);
+	free(file_name);
+	if (shell->success_or_failed != 0)
+		return (0);
+	return (1);
 }

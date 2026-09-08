@@ -32,6 +32,7 @@ exec/exec.c					\
 exec/exec_family.c			\
 exec/redir.c				\
 exec/heredoc.c				\
+exec/heredoc_utils.c		\
 exec/heredoc_delim_utils.c	\
 exec/exec_utils.c			\
 signal/signal_handler.c		\
