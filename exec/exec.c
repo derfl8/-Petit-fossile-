@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:27:46 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/01 22:27:28 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/08 21:13:41 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,11 @@ void	ft_exec(t_data *shell, t_tree *tree)
 	int	nb_cmd;
 
 	nb_cmd = cmd_count(tree);
+	signal_init(S_CMD);
 	if (nb_cmd > 1)
 		ft_exec_pipe(shell, tree, nb_cmd);
 	else
 		ft_exec_alone(shell, tree);
 	return ;
+	signal_init(S_MAIN);
 }

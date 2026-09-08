@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:07:05 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/03 15:39:47 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/08 21:07:17 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,18 @@ int			redirections(t_tree *curr);
 void		redir_builtin(t_data *shell, t_tree *tree);
 
 // HEREDOC.C
-void	heredoc_handler(t_tree *tree);
+int			heredoc_handler(t_tree *tree, t_data *shell);
+
+//HEREDOC_UTILS.C
+void		free_delimiters(char **delim);
+void		print_readline_error(int line_nb, char *delim);
+void		store_filename(t_tree *tree, char *file_name);
 
 //HEREDOC_DELIM_UTILS.C
-bool	is_delim_valid(char *delim);
-char	get_delim_quote_type(char *delim);
-int		find_delim_nbr(t_tree *tree);
-char	**find_delimiters(t_tree *tree);
+bool		is_delim_valid(char *delim);
+char		get_delim_quote_type(char *delim);
+int			find_delim_nbr(t_tree *tree);
+char		**find_delimiters(t_tree *tree);
 
 // exec_utils.c
 void		free_int_tab(int **int_tab, int how_many);

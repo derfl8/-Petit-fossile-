@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/02 21:48:33 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/08 01:18:13 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ int	main_process(t_data *shell)
 		if (tree)
 		{
 			//exp_args(&shell, tree);
-			heredoc_handler(tree);
-			tree_quote_remover(tree);
-			//print_tree(tree); //DEBUG LINE
-			ft_exec(shell, tree);
+			if (heredoc_handler(tree, shell))
+			{
+				tree_quote_remover(tree);
+				//print_tree(tree); //DEBUG LINE
+				ft_exec(shell, tree);
+			}
 			free_cmd_tree(tree);
 		}
 		free(line);
@@ -48,7 +50,7 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	shell.env = init_env(envp);
 	shell.success_or_failed = 0;
-	signal_init(false);
+	signal_init(S_MAIN);
 	main_process(&shell);
 	ft_free_stack_env(shell.env);
 	return (shell.success_or_failed);
