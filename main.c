@@ -6,11 +6,16 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/08 01:18:13 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/10 22:35:36 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "header/builtin.h"
+#include "header/expander.h"
 #include "header/minishell.h"
+#include "libft/libft.h"
+#include <stdio.h>
+
 
 int	main_process(t_data *shell)
 {
@@ -19,6 +24,7 @@ int	main_process(t_data *shell)
 
 	while (1)
 	{
+		// printf("%s\n", ft_itoa(shell->success_or_failed));
 		line = readline("Petit Fossile> ");
 		if (!line)
 		{
@@ -34,6 +40,7 @@ int	main_process(t_data *shell)
 			{
 				tree_quote_remover(tree);
 				//print_tree(tree); //DEBUG LINE
+				archaic_expand(shell, tree);
 				ft_exec(shell, tree);
 			}
 			free_cmd_tree(tree);

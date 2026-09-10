@@ -36,6 +36,7 @@ exec/heredoc_utils.c		\
 exec/heredoc_delim_utils.c	\
 exec/exec_utils.c			\
 signal/signal_handler.c		\
+expander/expander.c			\
 main.c
 
 OBJS    = $(SRCS:%.c=$(OBJPATH)%.o)
@@ -46,7 +47,7 @@ $(NAME): $(OBJPATH) $(OBJS) $(LIBFT)
 	$(CC) $(OBJS) -o $(NAME) $(CFLAGS) $(LIBFT) $(READLINE)
 
 $(OBJPATH):
-	mkdir -p $(OBJPATH) $(OBJPATH)/builtin $(OBJPATH)/parser $(OBJPATH)/exec $(OBJPATH)/signal
+	mkdir -p $(OBJPATH) $(OBJPATH)/builtin $(OBJPATH)/parser $(OBJPATH)/exec $(OBJPATH)/signal $(OBJPATH)/expander
 
 $(OBJPATH)%.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -28,8 +28,6 @@ static void	get_quoted_str(t_lexer *lexer)
 		lexer->i++;
 }
 
-#include <string.h>
-
 static char	*get_token_value(t_lexer *lexer, t_token_type token_type)
 {
 	size_t	i;
@@ -84,6 +82,7 @@ static t_token_type	get_token_type(t_lexer *lexer)
 /*#include <stdio.h>
 static void	print_token(t_token *token)
 {
+	t_token	*res;
 	t_token	*res;
 	t_token	*res;
 

@@ -37,7 +37,7 @@ static void	read_heredoc(char *delim, char quote, char *file_name)
 	int		fd;
 	int		line_nb;
 
-	(void) quote; //ONLY WHILE ITS NEEDED
+	(void)quote; //ONLY WHILE ITS NEEDED
 	line_nb = 1;
 	fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	while (1)

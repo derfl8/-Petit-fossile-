@@ -32,7 +32,7 @@ static char	alnum_formatting(char *str, size_t i)
 	return (str[i]);
 }
 
-static void	format_random_str(char	*str, size_t size)
+static void	format_random_str(char *str, size_t size)
 {
 	size_t	i;
 
@@ -50,7 +50,7 @@ static void	format_random_str(char	*str, size_t size)
 	str[i - 1] = '\0';
 }
 
-static char	*get_random_str(size_t	size)
+static char	*get_random_str(size_t size)
 {
 	char	*str;
 	int		fd;
@@ -62,7 +62,7 @@ static char	*get_random_str(size_t	size)
 	{
 		return (NULL);
 	}
-	str = malloc(sizeof (char) * size);
+	str = malloc(sizeof(char) * size);
 	if (!str)
 	{
 		close(fd);
@@ -94,7 +94,7 @@ char	*get_random_filename(size_t random_size)
 		return (NULL);
 	}
 	format_random_str(random_str, random_size);
-	file_name = malloc(sizeof (char) * (size + 1));
+	file_name = malloc(sizeof(char) * (size + 1));
 	ft_strlcpy(file_name, "/tmp/minishell_tmp_heredoc", size);
 	ft_strlcat(file_name, random_str, size);
 	free(random_str);
