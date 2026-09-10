@@ -6,33 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/12 19:25:36 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/09 21:55:35 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/parser.h"
-
-void	parse_error(t_parse_error err_type)
-{
-	if (err_type == ERR_QUOTE)
-	{
-		ft_putstr_fd("quote error : missing closing quote\n", 2);
-	}
-	else if (err_type == ERR_MISSING_CMD)
-	{
-		ft_putstr_fd("command error : missing command\n", 2);
-	}
-	else if (err_type == ERR_INVALID_TOKEN)
-	{
-		ft_putstr_fd("synthax error : unexpected token\n", 2);
-	}
-}
-
-void	lexer_init(t_lexer *lexer, const char *line)
-{
-	lexer->line = line;
-	lexer->i = 0;
-}
 
 void	free_token(t_token *token)
 {
@@ -40,7 +18,50 @@ void	free_token(t_token *token)
 	free(token);
 }
 
-int	parser_logic(t_tree *cmd_head, t_token *next_token, t_lexer *lexer)
+static void	parse_error(t_parse_error err_type)
+{
+	if (err_type == ERR_QUOTE)
+		ft_putstr_fd("quote error : missing closing quote\n", 2);
+	else if (err_type == ERR_MISSING_CMD)
+		ft_putstr_fd("command error : missing command\n", 2);
+	else if (err_type == ERR_INVALID_TOKEN)
+		ft_putstr_fd("synthax error : unexpected token\n", 2);
+	else if (err_type == ERR_PIPE)
+		ft_putstr_fd("Petit Fossile: synthax error near unexpected token '|'\n", 2);
+}
+
+static bool	is_pipe_error(t_tree *tree)
+{
+	while (tree && tree->type != ASL_PIPE)
+	{
+		if (tree->type == ASL_CMD && tree->args && tree->args[0])
+			return (false);
+		tree = tree->next;
+	}
+	return (true);
+}
+
+static bool	is_tree_valid(t_tree *tree)
+{
+	int		node_pos;
+	t_tree	*previous;
+
+	node_pos = 0;
+	previous = NULL;
+	if (is_pipe_present(tree) && is_pipe_error(tree))
+	{
+		parse_error(ERR_PIPE);
+		return (false);
+	}
+	return (true);	//tmp
+	while (tree)
+	{
+		previous = tree;
+		tree = tree->next;
+	}
+}
+
+static int	parser_logic(t_tree *cmd_head, t_token *next_token, t_lexer *lexer)
 {
 	t_tree	*current_cmd;
 
@@ -84,5 +105,8 @@ t_tree	*pf_parser(char *line)
 		next_token = get_next_token(&lexer);
 	}
 	free_token(next_token);
-	return (cmd_head);
+	if (is_tree_valid(cmd_head))
+		return (cmd_head);
+	free_cmd_tree(cmd_head);
+	return (NULL);
 }
