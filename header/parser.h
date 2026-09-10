@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/02 21:45:57 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/09 21:53:25 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,14 @@ typedef enum e_parse_error
 	ERR_QUOTE,
 	ERR_MISSING_CMD,
 	ERR_INVALID_TOKEN,
+	ERR_PIPE,
 }					t_parse_error;
 
 // FUNCTIONS
 t_token	*get_next_token(t_lexer *lexer);
 t_tree	*pf_parser(char *line);
 void	free_token(t_token *token);
+void	lexer_init(t_lexer *lexer, const char *line);
 
 // CMD_TREE_UTILS.C
 t_tree	*pf_node_new(void);

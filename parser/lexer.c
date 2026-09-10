@@ -6,11 +6,17 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:34:16 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/10 22:11:35 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/10 22:50:59 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/parser.h"
+
+void	lexer_init(t_lexer *lexer, const char *line)
+{
+	lexer->line = line;
+	lexer->i = 0;
+}
 
 static void	get_quoted_str(t_lexer *lexer)
 {
@@ -86,8 +92,8 @@ static void	print_token(t_token *token)
 }*/
 t_token	*get_next_token(t_lexer *lexer)
 {
-	t_token			*res;
-	
+	t_token	*res;
+
 	if (!lexer->line)
 		return (NULL);
 	res = malloc(sizeof(t_token));
@@ -97,13 +103,11 @@ t_token	*get_next_token(t_lexer *lexer)
 	{
 		res->type = T_EOF;
 		res->value = NULL;
-		//		print_token(res);		// DEBUG
 		return (res);
 	}
 	if (!res)
 		return (NULL);
 	res->type = get_token_type(lexer);
 	res->value = get_token_value(lexer, res->type);
-	//	print_token(res);		// DEBUG
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:27:46 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/08 21:49:03 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/09 05:19:15 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,6 @@ void	ft_exec(t_data *shell, t_tree *tree)
 		ft_exec_pipe(shell, tree, nb_cmd);
 	else
 		ft_exec_alone(shell, tree);
-	return ;
 	signal_init(S_MAIN);
+	return ;
 }
