@@ -6,49 +6,44 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 16:09:15 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/07 20:53:43 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/10 22:36:12 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/expander.h"
 
-char	*exp_value(t_data *shell, t_tree *tree)
+/*static char	*exp_key_env(t_env *env, char *key_name)
 {
 	int		keysize;
-	char	*tmp;
+	char	*value;
+	
+	keysize = ft_strlen(key_name);
+	while (env && ft_strncmp(key_name, env->envinfo, keysize) != 0)
+		env = env->next;
+	if (!env || env->envinfo[keysize] != '=')
+		return (NULL);
+	value = ft_cut_env(env->envinfo);
+	return (value);
+}*/
 
-	keysize = ft_strlen(tree->args[0]);
-	while (shell->env && ft_strncmp(tree->args[0], shell->env->envinfo, keysize) != 0)
-		shell->env = shell->env->next;
-	if (shell->env && ft_strncmp(tree->args[0], shell->env->envinfo, keysize) == 0)
-	{
-		free(shell->env->envinfo);
-		tmp = ft_strjoin(tree->args[0], "=");
-		if (!tmp)
-			return (false);
-		shell->env->envinfo = ft_strjoin(tmp, value);
-		if (!shell->env->envinfo)
-			return (false);
-		free(tmp);
-	}
-	else
-		return (false);
-	return (true);
-}
-
-char	**expand(t_data *shell, t_tree *tree)
+void	archaic_expand(t_data *shell, t_tree *tree)
 {
+	int		i;
 	char	*exp_str;
 
-	exp_str = exp_value(shell, tree);
-	if (exp_str)
+	i = 0;
+	while (tree)
 	{
-		printf("%s\n", exp_str);
-		free(exp_str);
-	}
-	else 
-	{
-		printf("\n");
-		free(exp_str);
+		while (tree->args && tree->args[i])
+		{
+			if (ft_strncmp(tree->args[i], "$?", 3) == 0)
+			{
+				exp_str = ft_itoa(shell->success_or_failed);
+				free(tree->args[i]);
+				tree->args[i] = exp_str;
+			}
+			i++;
+		}
+		tree = tree->next;
 	}
 }

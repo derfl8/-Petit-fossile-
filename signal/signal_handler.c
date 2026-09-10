@@ -12,7 +12,7 @@
 
 #include "../header/signal_handler.h"
 
-volatile sig_atomic_t g_signal_status = 0;
+volatile sig_atomic_t	g_signal_status = 0;
 
 void	signal_handler(int sig)
 {
@@ -48,7 +48,7 @@ void	cmd_signal_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_signal_status = sig;	
+		g_signal_status = sig;
 		write(1, "\n", 1);
 	}
 	else if (sig == SIGQUIT)
@@ -58,9 +58,9 @@ void	cmd_signal_handler(int sig)
 	}
 }
 
-void	signal_init(int	where_from)
+void	signal_init(int where_from)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
