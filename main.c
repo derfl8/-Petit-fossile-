@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/10 22:35:36 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/10 22:47:00 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main_process(t_data *shell)
 
 	while (1)
 	{
-		// printf("%s\n", ft_itoa(shell->success_or_failed));
+		printf("code d'erreur : %s\n", ft_itoa(shell->success_or_failed));
 		line = readline("Petit Fossile> ");
 		if (!line)
 		{
@@ -35,12 +35,11 @@ int	main_process(t_data *shell)
 		tree = pf_parser(line);
 		if (tree)
 		{
-			//exp_args(&shell, tree);
+			archaic_expand(shell, tree);
 			if (heredoc_handler(tree, shell))
 			{
 				tree_quote_remover(tree);
 				//print_tree(tree); //DEBUG LINE
-				archaic_expand(shell, tree);
 				ft_exec(shell, tree);
 			}
 			free_cmd_tree(tree);
