@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alfred <alfred@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 16:09:15 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/10 22:36:12 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/11 11:48:43 by alfred           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/expander.h"
 
-/*static char	*exp_key_env(t_env *env, char *key_name)
+static char	*exp_key_env(t_env *env, char *key_name)
 {
 	int		keysize;
 	char	*value;
@@ -24,7 +24,7 @@
 		return (NULL);
 	value = ft_cut_env(env->envinfo);
 	return (value);
-}*/
+}
 
 void	archaic_expand(t_data *shell, t_tree *tree)
 {
@@ -41,6 +41,16 @@ void	archaic_expand(t_data *shell, t_tree *tree)
 				exp_str = ft_itoa(shell->success_or_failed);
 				free(tree->args[i]);
 				tree->args[i] = exp_str;
+			}
+			else if (ft_strncmp(tree->args[i], "$", 1) == 0)
+			{
+				tree->args[i] = ft_strtrim(tree->args[i], "$");
+				if (exp_key_env(shell->env, tree->args[i]) != NULL)
+				{
+					exp_str = exp_key_env(shell->env, tree->args[i]);
+					free(tree->args[i]);
+					tree->args[i] = exp_str;
+				}
 			}
 			i++;
 		}

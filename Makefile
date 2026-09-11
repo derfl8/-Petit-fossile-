@@ -1,5 +1,5 @@
 CC			= clang
-CFLAGS		= -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -Werror -Wno-unused-but-set-variable -g
 NAME		= minishell
 LIBFT_PATH	= libft/
 LIBFT		= libft/libft.a
