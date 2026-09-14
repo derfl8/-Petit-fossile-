@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alfred <alfred@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 16:09:15 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/11 12:24:44 by alfred           ###   ########.fr       */
+/*   Updated: 2026/09/14 23:19:51 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*exp_key_env(t_env *env, char *key_name)
 {
 	int		keysize;
 	char	*value;
-	
+
 	keysize = ft_strlen(key_name);
 	while (env && ft_strncmp(key_name, env->envinfo, keysize) != 0)
 		env = env->next;
@@ -35,12 +35,14 @@ void	archaic_expand(t_data *shell, t_tree *tree)
 	i = 0;
 	while (tree)
 	{
+		i = 0;
 		while (tree->args && tree->args[i])
 		{
 			if (ft_strchr(tree->args[i], '$') != NULL)
 			{
-				tmp = ft_substr(tree->args[i], 0, ft_strchr(tree->args[i], '$') - tree->args[i]);
-				printf("tmp = %s\n", tmp);
+				tmp = ft_substr(tree->args[i], 0, ft_strchr(tree->args[i], '$')
+						- tree->args[i]);
+				printf("tmp = %s\n", tmp); // DEBUG
 				if (ft_strncmp(tree->args[i], "$?", 3) == 0)
 				{
 					exp_str = ft_itoa(shell->success_or_failed);
