@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 16:09:15 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/10 22:36:12 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/14 20:50:17 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	archaic_expand(t_data *shell, t_tree *tree)
 	i = 0;
 	while (tree)
 	{
+		i = 0;
 		while (tree->args && tree->args[i])
 		{
 			if (ft_strncmp(tree->args[i], "$?", 3) == 0)
