@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 16:06:52 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/03 16:07:25 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/14 23:06:19 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ void	redir_builtin(t_data *shell, t_tree *tree)
 	}
 	if (redirections(tree) == -1)
 		shell->success_or_failed = 1;
-	else
+	else if (tree->args && tree->args[0])
 		shell->success_or_failed = exec_builtin(shell, tree->args, tree);
+	else
+		shell->success_or_failed = 0;
 	if (redir == true)
 	{
 		dup2(dup_stdin, STDIN_FILENO);
