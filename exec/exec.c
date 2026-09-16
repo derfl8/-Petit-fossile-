@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:27:46 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/09 05:19:15 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/14 23:16:10 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,10 @@ static void	ft_exec_alone(t_data *shell, t_tree *tree)
 
 	status = 0;
 	if (!tree->args)
+	{
+		redir_builtin(shell, tree);
 		return ;
+	}
 	if (builtin_check(tree->args[0]) == 0)
 	{
 		redir_builtin(shell, tree);

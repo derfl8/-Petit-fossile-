@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/14 22:00:49 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/16 21:00:08 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "header/minishell.h"
 #include "libft/libft.h"
 
-
 int	main_process(t_data *shell)
 {
 	t_tree	*tree;
@@ -23,7 +22,6 @@ int	main_process(t_data *shell)
 
 	while (1)
 	{
-		// printf("%s\n", ft_itoa(shell->success_or_failed));
 		line = readline("Petit Fossile> ");
 		if (!line)
 		{
