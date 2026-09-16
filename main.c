@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/10 22:35:36 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/14 22:00:49 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "header/expander.h"
 #include "header/minishell.h"
 #include "libft/libft.h"
-#include <stdio.h>
 
 
 int	main_process(t_data *shell)
@@ -33,14 +32,13 @@ int	main_process(t_data *shell)
 		}
 		add_history(line);
 		tree = pf_parser(line);
+		//print_tree(tree); //DEBUG LINE
 		if (tree)
 		{
-			//exp_args(&shell, tree);
+			archaic_expand(shell, tree);
 			if (heredoc_handler(tree, shell))
 			{
 				tree_quote_remover(tree);
-				//print_tree(tree); //DEBUG LINE
-				archaic_expand(shell, tree);
 				ft_exec(shell, tree);
 			}
 			free_cmd_tree(tree);

@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/09 21:55:35 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/14 21:59:57 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,37 @@ static void	parse_error(t_parse_error err_type)
 	else if (err_type == ERR_MISSING_CMD)
 		ft_putstr_fd("command error : missing command\n", 2);
 	else if (err_type == ERR_INVALID_TOKEN)
-		ft_putstr_fd("synthax error : unexpected token\n", 2);
+		ft_putstr_fd("Petit Fossile: synthax error : unexpected token\n", 2);
 	else if (err_type == ERR_PIPE)
-		ft_putstr_fd("Petit Fossile: synthax error near unexpected token '|'\n", 2);
+	{
+		ft_putstr_fd("Petit Fossile: synthax error near ", 2);
+		ft_putstr_fd("unexpected token `|'\n", 2);
+	}
 }
 
 static bool	is_pipe_error(t_tree *tree)
 {
-	while (tree && tree->type != ASL_PIPE)
+	bool	is_pipe;
+	bool	is_cmd_after_pipe;
+	bool	is_cmd_before_pipe;
+
+	is_pipe = false;
+	is_cmd_after_pipe = false;
+	is_cmd_before_pipe = false;
+	while (tree)
 	{
-		if (tree->type == ASL_CMD && tree->args && tree->args[0])
-			return (false);
+		if (tree->type == ASL_PIPE)
+			is_pipe = true;
+		else if (is_pipe == true && tree->type == ASL_CMD && tree->args)
+			is_cmd_after_pipe = true;
+		else if (!is_pipe && tree->type == ASL_CMD && tree->args)
+			is_cmd_before_pipe = true;
+		if (tree->type == ASL_PIPE && tree->next->args == NULL)
+			return (true);
 		tree = tree->next;
 	}
+	if (is_cmd_after_pipe && is_cmd_before_pipe)
+		return (false);		
 	return (true);
 }
 
