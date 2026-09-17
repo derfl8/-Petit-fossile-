@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 19:41:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/16 14:48:10 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/17 23:45:56 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static bool	ft_parsecho(char *pars)
 	int	i;
 
 	i = 0;
+	if (!pars || !*pars)
+		return (false);
 	if (pars[i + 1] && pars[i] == '-' && pars[i + 1] == 'n')
 	{
 		i++;
