@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:00:47 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/15 18:05:48 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/17 02:04:15 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,10 @@ void	free_cmd_tree(t_tree *cmd_tree)
 		cmd_tree = cmd_tree->next;
 		free(old);
 	}
+}
+
+void	free_token(t_token *token)
+{
+	free(token->value);
+	free(token);
 }

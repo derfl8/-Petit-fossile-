@@ -6,11 +6,12 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 18:50:58 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/08 21:14:03 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/17 02:11:49 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/signal_handler.h"
+#include "../header/minishell.h"
 
 volatile sig_atomic_t	g_signal_status = 0;
 

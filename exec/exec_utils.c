@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 22:04:49 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/03 18:49:51 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/17 02:41:27 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ bool	is_it_redir(t_tree *tree)
 	{
 		if (tree->next->type == ASL_REDIR_IN
 			|| tree->next->type == ASL_REDIR_OUT
-			|| tree->next->type == ASL_APPEND)
+			|| tree->next->type == ASL_APPEND
+			|| tree->next->type == ASL_HEREDOC)
 			return (true);
 	}
 	return (false);

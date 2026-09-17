@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 16:09:15 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/14 23:19:51 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/16 21:17:27 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	archaic_expand(t_data *shell, t_tree *tree)
 			{
 				tmp = ft_substr(tree->args[i], 0, ft_strchr(tree->args[i], '$')
 						- tree->args[i]);
-				printf("tmp = %s\n", tmp); // DEBUG
+				//printf("tmp = %s\n", tmp); // DEBUG
 				if (ft_strncmp(tree->args[i], "$?", 3) == 0)
 				{
 					exp_str = ft_itoa(shell->success_or_failed);

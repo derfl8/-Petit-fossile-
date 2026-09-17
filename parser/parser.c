@@ -6,17 +6,11 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/14 21:59:57 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/17 02:04:03 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/parser.h"
-
-void	free_token(t_token *token)
-{
-	free(token->value);
-	free(token);
-}
 
 static void	parse_error(t_parse_error err_type)
 {
@@ -55,7 +49,7 @@ static bool	is_pipe_error(t_tree *tree)
 		tree = tree->next;
 	}
 	if (is_cmd_after_pipe && is_cmd_before_pipe)
-		return (false);		
+		return (false);
 	return (true);
 }
 
