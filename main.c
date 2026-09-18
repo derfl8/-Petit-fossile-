@@ -30,8 +30,10 @@ int	main_process(t_data *shell)
 		}
 		add_history(line);
 		tree = pf_parser(line);
+		//print_tree(tree); //DEBUG LINE
 		if (tree)
 		{
+			archaic_expand(shell, tree);
 			if (heredoc_handler(tree, shell))
 			{
 				archaic_expand(shell, tree);

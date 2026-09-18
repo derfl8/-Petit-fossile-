@@ -6,7 +6,7 @@
 /*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 22:46:27 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/07 22:49:20 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/17 02:18:53 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_readline_error(int line_nb, char *delim)
 	ft_putstr_fd(nb_tmp, 2);
 	ft_putstr_fd(" of here-document delimited by end-of-file (wanted '", 2);
 	ft_putstr_fd(delim, 2);
-	ft_putstr_fd("')\n", 2);
+	ft_putstr_fd("`)\n", 2);
 	free(nb_tmp);
 }
 
