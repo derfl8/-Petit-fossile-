@@ -6,11 +6,12 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 18:52:50 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/16 14:48:07 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/18 18:02:08 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+#include <stdbool.h>
 
 static size_t	ft_size_cut(char *to_cut)
 {
@@ -31,6 +32,37 @@ static size_t	ft_size_cut(char *to_cut)
 		}
 	}
 	return (j);
+}
+
+char	*ft_cut_env_quote(char *to_cut)
+{
+	char	*cuted;
+	int		i;
+	int		j;
+	bool	is_first_space;
+
+	i = 0;
+	j = 0;
+	is_first_space = true;
+	cuted = malloc((sizeof(char) * ft_size_cut(to_cut)) + 1);
+	while (to_cut[i])
+	{
+		if (to_cut[i++] == '=')
+		{
+			while (to_cut[i])
+			{
+				while (ft_isspace(to_cut[i]) == 1)
+					i++;
+				if (is_first_space)
+					is_first_space = false;
+				else if (ft_isspace(to_cut[i - 1]) == 1)
+					cuted[j++] = ' ';
+				cuted[j++] = to_cut[i++];
+			}
+		}
+	}
+	cuted[j] = '\0';
+	return (cuted);
 }
 
 char	*ft_cut_env(char *to_cut)

@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 16:09:15 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/18 16:04:24 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/18 18:38:06 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ static char	*exp_key_env(t_env *env, char *key_name)
 		env = env->next;
 	if (!env || env->envinfo[keysize] != '=')
 		return (NULL);
+	// if (is_quoted == true)
+	// 	value = ft_cut_env_quote(env->envinfo);
+	// else
 	value = ft_cut_env(env->envinfo);
 	return (value);
 }
@@ -65,17 +68,22 @@ char	*expand_str(t_data *shell, char *str)
 {
 	char	*result;
 	int		i;
-	bool	is_quoted;
-	char	quote;
 
 	result = ft_strdup("");
 	i = 0;
-	is_quoted = false;
-	quote = '\0';
 	while (str[i])
 	{
-		if (str[i] == '\'' && quote != '"')
-			return (NULL);
+		if (str[i] == '\'')
+		{	
+			free(result);
+			return (ft_strdup(str));
+		}
+		if (str[i] == '"')
+		{
+			shell->is_quoted = true;
+			i++;
+			continue ;
+		}
 		if (str[i] == '$' && str[i + 1] == '?')
 		{
 			result = join_and_free(result, ft_itoa(shell->success_or_failed));

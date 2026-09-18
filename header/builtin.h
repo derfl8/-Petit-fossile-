@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 14:22:21 by abegou            #+#    #+#             */
-/*   Updated: 2026/06/17 18:25:02 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/18 17:53:36 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ typedef struct s_env
 {
 	char				*envinfo;
 	struct s_env		*next;
-
 }						t_env;
 
 typedef struct s_data
 {
 	t_env				*env;
 	int					success_or_failed;
+	bool				is_quoted;
 }						t_data;
 
 // exp_no_arg.c
@@ -89,6 +89,7 @@ t_env					*ft_new_env(char *envinfo);
 
 // custom_libft.c
 char					*ft_cut_env(char *to_cut);
+char					*ft_cut_env_quote(char *to_cut);
 size_t					arg_len(char **av);
 void					free_tab(char **tab);
 
