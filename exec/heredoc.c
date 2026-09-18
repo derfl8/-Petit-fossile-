@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 22:44:33 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/08 21:49:01 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/18 21:49:29 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ int	heredoc_handler(t_tree *tree, t_data *shell)
 		parent_heredoc(pid, shell);
 	free_delimiters(delim);
 	free(file_name);
+	if (g_signal_status == 2)
+		shell->success_or_failed = 130;
 	if (shell->success_or_failed != 0)
 		return (0);
 	return (1);
