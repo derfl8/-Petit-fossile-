@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 12:35:42 by aldecour          #+#    #+#             */
-/*   Updated: 2026/06/11 18:39:55 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/14 00:09:30 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	parse_redir(t_token *current, t_tree *cmd_node, t_lexer *lexer)
 	if (current->type != T_WORD)
 		return ;
 	cmd_node->args = calloc(2, sizeof(char *));
+	if (!cmd_node->args)
+		return ;
 	cmd_node->args[0] = ft_strdup(current->value);
 	cmd_node->args[1] = NULL;
 	free_token(current);

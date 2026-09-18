@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/09 21:53:25 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/17 02:07:10 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ typedef struct s_lexer
 
 typedef enum e_token_type
 {
-	T_PIPE,      // |
-	T_REDIR_IN,  // <
-	T_REDIR_OUT, // >
-	T_HEREDOC,   // <<
-	T_APPEND,    // >>
+	T_PIPE,
+	T_REDIR_IN,
+	T_REDIR_OUT,
+	T_HEREDOC,
+	T_APPEND,
 	T_WORD,
 	T_INVALID,
 	T_EOF,
@@ -70,7 +70,6 @@ typedef enum e_parse_error
 // FUNCTIONS
 t_token	*get_next_token(t_lexer *lexer);
 t_tree	*pf_parser(char *line);
-void	free_token(t_token *token);
 void	lexer_init(t_lexer *lexer, const char *line);
 
 // CMD_TREE_UTILS.C
@@ -98,6 +97,7 @@ void	tree_quote_remover(t_tree *tree);
 
 // FREE_CMD_TREE.C
 void	free_cmd_tree(t_tree *cmd_tree);
+void	free_token(t_token *token);
 
 // DEBUG.C TODO : REMOVE THAT SHIT BEFORE PUSH
 void	print_tree(t_tree *cmd_tree);
