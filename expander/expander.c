@@ -45,12 +45,12 @@ static int	get_varend(char *key, int end)
 	return (end);
 }
 
-static char	*get_value(t_data *shell, char *result, char *str,  int start)
+static char	*get_value(t_data *shell, char *result, char *str, int start)
 {
 	char	*key;
 	char	*tmp;
 	int		len;
-	
+
 	len = get_varend(str, start) - start;
 	key = ft_substr(str, start, len);
 	tmp = exp_key_env(shell->env, key);

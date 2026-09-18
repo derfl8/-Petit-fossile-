@@ -19,5 +19,4 @@
 // expanderx.c
 void	archaic_expand(t_data *shell, t_tree *tree);
 
-
 #endif
