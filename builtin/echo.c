@@ -17,6 +17,8 @@ static bool	ft_parsecho(char *pars)
 	int	i;
 
 	i = 0;
+	if (!pars || !*pars)
+		return (false);
 	if (pars[i + 1] && pars[i] == '-' && pars[i + 1] == 'n')
 	{
 		i++;

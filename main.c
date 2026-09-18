@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/16 22:15:35 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/17 23:54:05 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int	main_process(t_data *shell)
 			archaic_expand(shell, tree);
 			if (heredoc_handler(tree, shell))
 			{
+				archaic_expand(shell, tree);
 				tree_quote_remover(tree);
+				//print_tree(tree); //DEBUG LINE
 				ft_exec(shell, tree);
 			}
 			free_cmd_tree(tree);
