@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:34:16 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/10 22:58:39 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/18 15:57:48 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	get_quoted_str(t_lexer *lexer)
 	lexer->i++;
 	while (lexer->line[lexer->i] && lexer->line[lexer->i] != quote)
 		lexer->i++;
+	lexer->i++;
 }
 
 static char	*get_token_value(t_lexer *lexer, t_token_type token_type)
@@ -79,17 +80,14 @@ static t_token_type	get_token_type(t_lexer *lexer)
 	return (T_WORD);
 }
 
-/*#include <stdio.h>
+#include <stdio.h>
 static void	print_token(t_token *token)
 {
-	t_token	*res;
-	t_token	*res;
-	t_token	*res;
-
 	printf("token type : %d\n", token->type);
 	printf("token value : %s\n", token->value);
 	printf("--------------------\n");
-}*/
+}
+
 t_token	*get_next_token(t_lexer *lexer)
 {
 	t_token	*res;
@@ -109,5 +107,6 @@ t_token	*get_next_token(t_lexer *lexer)
 		return (NULL);
 	res->type = get_token_type(lexer);
 	res->value = get_token_value(lexer, res->type);
+	print_token(res);	//DEBUG
 	return (res);
 }
