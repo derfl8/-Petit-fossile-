@@ -1,0 +1,10 @@
+compile_commands.json
+*.o
+*.a
+*.out
+\minishell
+minishell
+*.swp
+.cache/
+.vscode/
+test*

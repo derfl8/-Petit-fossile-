@@ -1,0 +1,121 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/12 21:27:46 by abegou            #+#    #+#             */
+/*   Updated: 2026/09/18 21:58:45 by aldecour         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../header/exec.h"
+
+void	run_child(t_data *shell, t_tree *tree, t_tree *curr, char **env)
+{
+	char	*bin;
+
+	bin = path_verif(shell->env, curr->args[0]);
+	if (bin == NULL)
+		exit_bin(shell, tree, curr, env);
+	if (redirections(curr) == -1)
+	{
+		free(bin);
+		ft_free_stack_env(shell->env);
+		free_tab(env);
+		free_cmd_tree(tree);
+		exit(1);
+	}
+	execve(bin, curr->args, env);
+	free(bin);
+	free_tab(env);
+	perror(curr->args[0]);
+	ft_free_stack_env(shell->env);
+	free_cmd_tree(tree);
+	exit(1);
+}
+
+int	cmd_count(t_tree *tree)
+{
+	int	cmd;
+
+	cmd = 0;
+	while (tree)
+	{
+		if (tree->type == ASL_CMD)
+			cmd++;
+		tree = tree->next;
+	}
+	return (cmd);
+}
+
+int	**pipes_gen(int nb_cmd)
+{
+	int	**pipe_table;
+	int	i;
+
+	pipe_table = ft_calloc(sizeof(int *), nb_cmd - 1);
+	i = 0;
+	if (!pipe_table)
+		return (NULL);
+	while (i < nb_cmd - 1)
+	{
+		pipe_table[i] = ft_calloc(sizeof(int), 2);
+		if (!pipe_table[i])
+		{
+			close_pipe(pipe_table, i);
+			return (NULL);
+		}
+		if (pipe(pipe_table[i]) == -1)
+		{
+			free(pipe_table[i]);
+			close_pipe(pipe_table, i);
+			return (NULL);
+		}
+		i++;
+	}
+	return (pipe_table);
+}
+
+static void	ft_exec_alone(t_data *shell, t_tree *tree)
+{
+	pid_t	pid;
+	int		status;
+	char	**env;
+
+	status = 0;
+	if (!tree->args)
+	{
+		redir_builtin(shell, tree);
+		return ;
+	}
+	if (builtin_check(tree->args[0]) == 0)
+	{
+		redir_builtin(shell, tree);
+		return ;
+	}
+	env = env_to_char(shell);
+	pid = fork();
+	if (pid == 0)
+		run_child(shell, tree, tree, env);
+	else if (pid > 0)
+		waitpid(pid, &status, 0);
+	free_tab(env);
+	shell->success_or_failed = WEXITSTATUS(status);
+	return ;
+}
+
+void	ft_exec(t_data *shell, t_tree *tree)
+{
+	int	nb_cmd;
+
+	nb_cmd = cmd_count(tree);
+	signal_init(S_CMD);
+	if (nb_cmd > 1)
+		ft_exec_pipe(shell, tree, nb_cmd);
+	else
+		ft_exec_alone(shell, tree);
+	signal_init(S_MAIN);
+	return ;
+}
