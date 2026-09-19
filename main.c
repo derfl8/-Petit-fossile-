@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/19 18:33:47 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/18 22:01:35 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 #include "header/expander.h"
 #include "header/minishell.h"
 #include "libft/libft.h"
+
+void	ft_check_reset_sig_status(t_data *shell)
+{
+	shell->success_or_failed = 0;
+	if (g_signal_status == 2)
+		shell->success_or_failed = 130;
+	else if (g_signal_status == 3)
+		shell->success_or_failed = 131;	
+	g_signal_status = 0;
+}
 
 int	main_process(t_data *shell)
 {
@@ -23,6 +33,7 @@ int	main_process(t_data *shell)
 	while (1)
 	{
 		line = readline("Petit Fossile> ");
+		ft_check_reset_sig_status(shell);
 		if (!line)
 		{
 			ft_putstr_fd("exit\n", 1);
@@ -30,14 +41,14 @@ int	main_process(t_data *shell)
 		}
 		add_history(line);
 		tree = pf_parser(line);
-		// print_tree(tree); //DEBUG LINE
+		//print_tree(tree); //DEBUG LINE
 		if (tree)
 		{
 			if (heredoc_handler(tree, shell))
 			{
 				archaic_expand(shell, tree);
 				tree_quote_remover(tree);
-				// print_tree(tree); //DEBUG LINE
+				//print_tree(tree); //DEBUG LINE
 				ft_exec(shell, tree);
 			}
 			free_cmd_tree(tree);

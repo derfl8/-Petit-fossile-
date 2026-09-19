@@ -107,6 +107,5 @@ t_token	*get_next_token(t_lexer *lexer)
 		return (NULL);
 	res->type = get_token_type(lexer);
 	res->value = get_token_value(lexer, res->type);
-	// print_token(res);	//DEBUG
 	return (res);
 }
