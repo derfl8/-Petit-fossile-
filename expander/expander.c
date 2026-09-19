@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 16:09:15 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/19 22:17:13 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/20 01:00:49 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	expand_norm(t_data *shell, char **result, char *str, int i)
 	return (i);
 }
 
-static char	*expand_str(t_data *shell, char *str)
+char	*expand_str(t_data *shell, char *str)
 {
 	char	*result;
 	int		i;

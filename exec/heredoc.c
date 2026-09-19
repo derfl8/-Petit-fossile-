@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 22:44:33 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/18 21:49:29 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/20 01:11:52 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,25 @@ static int	quit_conditions(char *line, char *delim, int line_nb)
 	return (0);
 }
 
-//TODO HANDLE VAR EXPANSIONS
-static void	read_heredoc(char *delim, char quote, char *file_name)
+static void	read_heredoc(char *delim, char *file_name, t_data *shell)
 {
 	char	*line;
 	int		fd;
 	int		line_nb;
+	char	quote;
 
-	(void)quote; //ONLY WHILE ITS NEEDED
+	quote = '\0';
 	line_nb = 1;
 	fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	quote = get_delim_quote_type(delim);
+	quote_remover(delim);
 	while (1)
 	{
 		line = readline("> ");
 		if (quit_conditions(line, delim, line_nb))
 			break ;
-		//if (quote_type == quote a expand lol mdr)
-		//	var expander
+		if (quote == '\0')
+			line = expand_str(shell, line);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
@@ -58,7 +60,6 @@ static void	read_heredoc(char *delim, char quote, char *file_name)
 int	child_heredoc(char **delim, char *file_name, t_tree *tree, t_data *shell)
 {
 	int		i;
-	char	quote_type;
 
 	i = 0;
 	signal_init(S_CHILD_HEREDOC);
@@ -67,12 +68,11 @@ int	child_heredoc(char **delim, char *file_name, t_tree *tree, t_data *shell)
 		if (!is_delim_valid(delim[i]))
 		{
 			ft_putstr_fd("Petit Fossile : error: Invalid delimiter\n", 2);
+			shell->success_or_failed = 1;
 			break ;
 		}
-		quote_type = get_delim_quote_type(delim[i]);
-		quote_remover(delim[i]);
 		g_signal_status = 0;
-		read_heredoc(delim[i], quote_type, file_name);
+		read_heredoc(delim[i], file_name, shell);
 		if (g_signal_status == 2)
 			break ;
 		i++;
@@ -81,6 +81,8 @@ int	child_heredoc(char **delim, char *file_name, t_tree *tree, t_data *shell)
 	free_cmd_tree(tree);
 	free_delimiters(delim);
 	free(file_name);
+	if (shell->success_or_failed == 1)
+		exit(shell->success_or_failed);
 	exit(g_signal_status);
 }
 

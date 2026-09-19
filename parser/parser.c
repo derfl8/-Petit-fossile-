@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/17 02:04:03 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/20 00:33:34 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,7 @@ static bool	is_tree_valid(t_tree *tree)
 		parse_error(ERR_PIPE);
 		return (false);
 	}
-	return (true);	//tmp
-	while (tree)
-	{
-		previous = tree;
-		tree = tree->next;
-	}
+	return (true);
 }
 
 static int	parser_logic(t_tree *cmd_head, t_token *next_token, t_lexer *lexer)

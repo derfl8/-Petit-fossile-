@@ -23,7 +23,6 @@ parser/cmd_tree_utils.c		\
 parser/lexer.c				\
 parser/dynamic_arg_table.c	\
 parser/quote_handling.c		\
-parser/debug_parser.c		\
 parser/free_cmd_tree.c		\
 parser/rsg_tmp_name.c		\
 exec/exec_builtin.c			\

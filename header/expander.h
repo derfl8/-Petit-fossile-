@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 16:09:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/19 22:17:58 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/20 01:01:01 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 // expander.c
 void	archaic_expand(t_data *shell, t_tree *tree);
+char	*expand_str(t_data *shell, char *str);
 
 // expander_utils.c
 char	*exp_key_env(t_env *env, char *key_name);
