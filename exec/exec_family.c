@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 19:42:54 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/06 17:18:42 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/19 17:34:11 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	exec_cmd_fork(t_data *shell, t_tree *tree, t_tree *curr,
 	if (builtin_check(curr->args[0]) == 0)
 		builtin_fork(shell, tree, curr, ctx);
 	else
-		run_child(shell, curr, ctx->env);
+		run_child(shell, tree, curr, ctx->env);
 }
 
 static void	close_wait(t_data *shell, t_pipe_ctx *ctx)

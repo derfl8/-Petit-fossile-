@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 22:04:49 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/17 02:41:27 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/19 17:33:11 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ bool	is_it_redir(t_tree *tree)
 	return (false);
 }
 
-void	exit_bin(t_data *shell, t_tree *tree, char **env)
+void	exit_bin(t_data *shell, t_tree *tree, t_tree *curr, char **env)
 {
 	ft_putstr_fd("Petit Fossile: ", 2);
-	ft_putstr_fd(tree->args[0], 2);
+	ft_putstr_fd(curr->args[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
 	ft_free_stack_env(shell->env);
 	free_tab(env);

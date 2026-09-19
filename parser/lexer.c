@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:34:16 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/18 16:09:43 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/19 15:29:16 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ static t_token_type	get_token_type(t_lexer *lexer)
 	return (T_WORD);
 }
 
-#include <stdio.h>
-static void	print_token(t_token *token)
-{
-	printf("token type : %d\n", token->type);
-	printf("token value : %s\n", token->value);
-	printf("--------------------\n");
-}
+// #include <stdio.h>
+// static void	print_token(t_token *token)
+// {
+// 	printf("token type : %d\n", token->type);
+// 	printf("token value : %s\n", token->value);
+// 	printf("--------------------\n");
+// }
 
 t_token	*get_next_token(t_lexer *lexer)
 {
@@ -107,6 +107,6 @@ t_token	*get_next_token(t_lexer *lexer)
 		return (NULL);
 	res->type = get_token_type(lexer);
 	res->value = get_token_value(lexer, res->type);
-	print_token(res);	//DEBUG
+	// print_token(res);	//DEBUG
 	return (res);
 }
