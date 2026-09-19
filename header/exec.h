@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 18:07:05 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/08 21:49:32 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/19 17:25:59 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char		**env_to_char(t_data *shell);
 // exec.c
 void		ft_exec(t_data *shell, t_tree *tree);
 int			cmd_count(t_tree *tree);
-void		run_child(t_data *shell, t_tree *tree, char **env);
+void		run_child(t_data *shell, t_tree *tree, t_tree *curr, char **env);
 int			**pipes_gen(int nb_cmd);
 
 // exec_family.c
@@ -69,7 +69,7 @@ char		**find_delimiters(t_tree *tree);
 
 // exec_utils.c
 void		free_int_tab(int **int_tab, int how_many);
-void		exit_bin(t_data *shell, t_tree *tree, char **env);
+void		exit_bin(t_data *shell, t_tree *tree, t_tree *curr, char **env);
 bool		is_it_redir(t_tree *tree);
 void		close_pipe(int **pipe_table, int i);
 

@@ -12,14 +12,14 @@
 
 #include "../header/exec.h"
 
-void	run_child(t_data *shell, t_tree *tree, char **env)
+void	run_child(t_data *shell, t_tree *tree, t_tree *curr, char **env)
 {
 	char	*bin;
 
-	bin = path_verif(shell->env, tree->args[0]);
+	bin = path_verif(shell->env, curr->args[0]);
 	if (bin == NULL)
-		exit_bin(shell, tree, env);
-	if (redirections(tree) == -1)
+		exit_bin(shell, tree, curr, env);
+	if (redirections(curr) == -1)
 	{
 		free(bin);
 		ft_free_stack_env(shell->env);
@@ -27,10 +27,10 @@ void	run_child(t_data *shell, t_tree *tree, char **env)
 		free_cmd_tree(tree);
 		exit(1);
 	}
-	execve(bin, tree->args, env);
+	execve(bin, curr->args, env);
 	free(bin);
 	free_tab(env);
-	perror(tree->args[0]);
+	perror(curr->args[0]);
 	ft_free_stack_env(shell->env);
 	free_cmd_tree(tree);
 	exit(1);
@@ -98,7 +98,7 @@ static void	ft_exec_alone(t_data *shell, t_tree *tree)
 	env = env_to_char(shell);
 	pid = fork();
 	if (pid == 0)
-		run_child(shell, tree, env);
+		run_child(shell, tree, tree, env);
 	else if (pid > 0)
 		waitpid(pid, &status, 0);
 	free_tab(env);

@@ -37,6 +37,7 @@ exec/heredoc_delim_utils.c	\
 exec/exec_utils.c			\
 signal/signal_handler.c		\
 expander/expander.c			\
+expander/expander_utils.c	\
 main.c
 
 OBJS    = $(SRCS:%.c=$(OBJPATH)%.o)

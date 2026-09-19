@@ -6,99 +6,61 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 16:09:15 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/18 18:38:06 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/19 22:17:13 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/expander.h"
 
-static char	*exp_key_env(t_env *env, char *key_name)
+static void	quote_update(char c, bool *in_s_quote, bool *in_d_quote)
 {
-	int		keysize;
-	char	*value;
-
-	keysize = ft_strlen(key_name);
-	while (env && ft_strncmp(key_name, env->envinfo, keysize) != 0)
-		env = env->next;
-	if (!env || env->envinfo[keysize] != '=')
-		return (NULL);
-	// if (is_quoted == true)
-	// 	value = ft_cut_env_quote(env->envinfo);
-	// else
-	value = ft_cut_env(env->envinfo);
-	return (value);
+	if (c == '\'' && !*in_d_quote)
+		*in_s_quote = !*in_s_quote;
+	else if (c == '"' && !*in_s_quote)
+		*in_d_quote = !*in_d_quote;
 }
 
-static char	*join_and_free(char *base, char *add)
+static int	expand_norm(t_data *shell, char **result, char *str, int i)
 {
-	char	*joined;
-
-	joined = ft_strjoin(base, add);
-	if (!joined)
-		return (NULL);
-	free(base);
-	free(add);
-	return (joined);
+	if (str[i + 1] == '?')
+	{
+		*result = join_and_free(*result, ft_itoa(shell->success_or_failed));
+		i += 2;
+	}
+	else if (ft_isalnum(str[i + 1]) || str[i + 1] == '_')
+	{
+		*result = get_value(shell, *result, str, i + 1);
+		i = get_varend(str, i + 1);
+	}
+	else
+	{
+		*result = join_and_free(*result, ft_substr(str, i, 1));
+		i++;
+	}
+	return (i);
 }
 
-static int	get_varend(char *key, int end)
-{
-	while (key[end] && (ft_isalnum(key[end]) || key[end] == '_'))
-		end++;
-	return (end);
-}
-
-static char	*get_value(t_data *shell, char *result, char *str, int start)
-{
-	char	*key;
-	char	*tmp;
-	int		len;
-
-	len = get_varend(str, start) - start;
-	key = ft_substr(str, start, len);
-	tmp = exp_key_env(shell->env, key);
-	free(key);
-	if (!tmp)
-		tmp = ft_strdup("");
-	result = join_and_free(result, tmp);
-	return (result);
-}
-
-char	*expand_str(t_data *shell, char *str)
+static char	*expand_str(t_data *shell, char *str)
 {
 	char	*result;
 	int		i;
+	bool	in_s_quote;
+	bool	in_d_quote;
 
 	result = ft_strdup("");
 	i = 0;
+	in_s_quote = false;
+	in_d_quote = false;
 	while (str[i])
 	{
-		if (str[i] == '\'')
-		{	
-			free(result);
-			return (ft_strdup(str));
-		}
-		if (str[i] == '"')
-		{
-			shell->is_quoted = true;
-			i++;
-			continue ;
-		}
-		if (str[i] == '$' && str[i + 1] == '?')
-		{
-			result = join_and_free(result, ft_itoa(shell->success_or_failed));
-			i += 2;
-		}
-		else if (str[i] == '$' && (ft_isalnum(str[i + 1]) || str[i + 1] == '_'))
-		{
-			result = get_value(shell, result, str, i + 1);
-			i = get_varend(str, i + 1);
-		}
-		else
+		quote_update(str[i], &in_s_quote, &in_d_quote);
+		if (in_s_quote || str[i] != '$')
 		{
 			result = join_and_free(result, ft_substr(str, i, 1));
 			i++;
 		}
+		else
+			i = expand_norm(shell, &result, str, i);
 	}
 	return (result);
 }
