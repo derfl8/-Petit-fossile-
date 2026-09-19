@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/19 22:02:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/19 22:16:35 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/19 22:26:13 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	get_varend(char *key, int end)
 
 char	*get_value(t_data *shell, char *result, char *str, int start)
 {
-	char *key;
-	char *tmp;
-	int len;
+	char	*key;
+	char	*tmp;
+	int		len;
 
 	len = get_varend(str, start) - start;
 	key = ft_substr(str, start, len);

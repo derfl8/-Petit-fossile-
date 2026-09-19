@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/18 22:01:35 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/19 22:25:24 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_check_reset_sig_status(t_data *shell)
 	if (g_signal_status == 2)
 		shell->success_or_failed = 130;
 	else if (g_signal_status == 3)
-		shell->success_or_failed = 131;	
+		shell->success_or_failed = 131;
 	g_signal_status = 0;
 }
 
@@ -41,14 +41,12 @@ int	main_process(t_data *shell)
 		}
 		add_history(line);
 		tree = pf_parser(line);
-		//print_tree(tree); //DEBUG LINE
 		if (tree)
 		{
 			if (heredoc_handler(tree, shell))
 			{
 				archaic_expand(shell, tree);
 				tree_quote_remover(tree);
-				//print_tree(tree); //DEBUG LINE
 				ft_exec(shell, tree);
 			}
 			free_cmd_tree(tree);
