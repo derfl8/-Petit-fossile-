@@ -5,7 +5,7 @@
 ## What is a shell ?
 >An operating system shell is a computer program that provides relatively broad and direct access to the system on which it runs. The term shell refers to how it is a relatively thin layer around an operating system.
 
-(quote from [https://en.wikipedia.org/wiki/Shell_(computing)])\
+(quote from [wikipedia shell's page](https://en.wikipedia.org/wiki/Shell_(computing)))\
 Minishell is a project about, you guessed it, making a small(er) shell.
 
 ## What can *Petit Fossile* do ?
@@ -23,7 +23,7 @@ Our minishell includes a lot of basic shell features, such as :\
 
 # Instructions
 
-Afer pulling the repository, simply run `make` to compile the project and enter `./minishell` to launch our prehistoric shell !:shell:\
+Afer pulling the repository, simply run `make` to compile the project and enter `./minishell` to launch our prehistoric shell ! :shell:\
 You can then enjoy the wonders of using our perfect shell daily for all of your shelling (?) needs !
 
 # Resources
