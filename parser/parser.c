@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/20 21:26:42 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/20 22:15:21 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,27 +68,27 @@ static bool	is_tree_valid(t_tree *tree)
 	return (true);
 }
 
-static int	parser_logic(t_tree *cmd_head, t_token *next_token, t_lexer *lexer)
+static int	parser_logic(t_tree *head, t_token *token, t_lexer *lexer)
 {
 	t_tree	*current_cmd;
 	int		special_parse_res;
 
 	special_parse_res = 1;
-	current_cmd = get_current_cmd_node(cmd_head);
-	if (next_token->type == T_INVALID)
+	current_cmd = get_current_cmd_node(head);
+	if (token->type == T_INVALID)
 	{
 		parse_error(ERR_INVALID_TOKEN);
 		return (0);
 	}
-	if (is_quote_error(next_token))
+	if (is_quote_error(token))
 	{
 		parse_error(ERR_QUOTE);
 		return (0);
 	}
-	if (next_token->type == T_WORD)
-		parse_cmd(next_token, current_cmd);
+	if (token->type == T_WORD)
+		parse_cmd(token, current_cmd);
 	else
-		special_parse_res = parse_special(cmd_head, next_token, lexer);
+		special_parse_res = parse_special(head, token, lexer);
 	if (special_parse_res == 0)
 	{
 		parse_error(ERR_PIPE);
