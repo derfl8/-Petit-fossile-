@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:04:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/02 18:28:06 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/20 23:23:26 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,5 @@ int	ft_export(t_data *shell, char **av)
 			add_env(shell, av[i]);
 		i++;
 	}
-	shell->success_or_failed = 0;
-	return (0);
+	return (shell->success_or_failed);
 }
