@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:34:16 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/20 17:51:48 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/20 19:47:38 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static void	get_quoted_str(t_lexer *lexer)
 	lexer->i++;
 	while (lexer->line[lexer->i] && lexer->line[lexer->i] != quote)
 		lexer->i++;
-	lexer->i++;
+	if (lexer->line[lexer->i])
+		lexer->i++;
 }
 
 static char	*get_token_value(t_lexer *lexer, t_token_type token_type)

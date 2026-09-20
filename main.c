@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/20 19:36:18 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/20 20:00:24 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void   ft_check_reset_sig_status(t_data *shell)
 	       shell->success_or_failed = 130;
 	else if (g_signal_status == 3)
 	       shell->success_or_failed = 131;
-	g_signal_status = 0;
+	//g_signal_status = 0;
 }
 
 static char	*get_prompt(void)
@@ -45,7 +45,7 @@ int	main_process(t_data *shell)
 				ft_putstr_fd("exit\n", 1);
 			return (1);
 		}
-		if (*line)
+		if (*line && line[0])
 		{
 			ft_check_reset_sig_status(shell);
 			add_history(line);
