@@ -28,4 +28,10 @@ You can then enjoy the wonders of using our perfect shell daily for all of your 
 
 # Resources
 
-[Git cheat sheet](https://education.github.com/git-cheat-sheet-education.pdf)
+Here are all the ressources used during the development :
+[Git cheat sheet](https://education.github.com/git-cheat-sheet-education.pdf)\
+[Guide about processes](https://www.cs.tufts.edu/cs/21/notes/processes/processes_c.html)\
+[Explanation and usage of signals](https://www.codequoi.com/en/sending-and-intercepting-a-signal-in-c/)\
+[A wonderful piece of documentation](https://github.com/MarKowPowLow/documentation_minishell_FSI) from a student at our school. Thanks a lot !\
+[Wikipedia's page about /dev/random](https://en.wikipedia.org/wiki//dev/random), which helped a lot for generating a random file name for our heredoc handling.\
+And of course, [God's gift to mankind](https://man7.org/linux/man-pages/man1/man.1.html)\
