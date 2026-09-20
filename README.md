@@ -34,8 +34,8 @@ Here are all the ressources used during the development :\
 [Guide about processes](https://www.cs.tufts.edu/cs/21/notes/processes/processes_c.html)\
 [Explanation and usage of signals](https://www.codequoi.com/en/sending-and-intercepting-a-signal-in-c/)\
 [Wink's video about linux sys calls](https://www.youtube.com/watch?v=Odezvr0skO8)\
-[CodeVault entire channel](https://www.youtube.com/watch?v=Odezvr0skO8), such a mine of information.\
+[CodeVault's entire channel](https://www.youtube.com/watch?v=Odezvr0skO8), such a mine of information.\
 [A wonderful piece of documentation](https://github.com/MarKowPowLow/documentation_minishell_FSI) from a student at our school. Thanks a lot !\
 [Wikipedia's page about /dev/random](https://en.wikipedia.org/wiki//dev/random), which helped a lot for generating a random file name for our heredoc handling.\
 [GNU bash reference manual](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html)\
-And of course, [God's gift to mankind](https://man7.org/linux/man-pages/man1/man.1.html)
+And of course, [God's gift to mankind](https://man7.org/linux/man-pages/man1/man.1.html).
