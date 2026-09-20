@@ -17,6 +17,7 @@ builtin/cd_norm.c			\
 builtin/unset.c				\
 builtin/export.c			\
 builtin/exp_no_arg.c		\
+parser/parser_norm_CASSELESCOUILLES.c	\
 parser/parser_utils.c		\
 parser/parser.c				\
 parser/cmd_tree_utils.c		\

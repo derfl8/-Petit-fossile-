@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/20 22:23:39 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/20 22:53:47 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,7 @@ void	print_tree(t_tree *cmd_tree);
 
 //RSG_TMP_NAME.C
 char	*get_random_filename(size_t random_size);
+
+//we dont talk about that one......
+void	pipe_moment(t_tree *cmd_current, t_tree *cmd_head);
 #endif

@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:10 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/20 22:23:09 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/20 22:45:13 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	parser_logic(t_tree *head, t_token *token, t_lexer *lexer)
 	t_tree	*current_cmd;
 	int		special_parse_res;
 
-	special_parse_res = 1;
+	special_parse_res = 0;
 	current_cmd = get_current_cmd_node(head);
 	if (token->type == T_INVALID)
 	{
@@ -89,7 +89,7 @@ static int	parser_logic(t_tree *head, t_token *token, t_lexer *lexer)
 		parse_cmd(token, current_cmd);
 	else
 		special_parse_res = parse_special(head, token, lexer);
-	if (special_parse_res == 0)
+	if (special_parse_res == 1)
 	{
 		parse_error(ERR_PIPE);
 		return (0);

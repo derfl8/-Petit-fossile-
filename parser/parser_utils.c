@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 12:35:42 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/20 21:28:49 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/20 22:55:43 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	parse_special(t_tree *cmd_head, t_token *next_token, t_lexer *lexer)
 	redir_res = NULL;
 	cmd_current = pf_node_new();
 	if (next_token->type == T_REDIR_IN)
-		parse_redir(next_token, cmd_current, lexer);
+		redir_res = parse_redir(next_token, cmd_current, lexer);
 	else if (next_token->type == T_REDIR_OUT)
 		redir_res = parse_redir(next_token, cmd_current, lexer);
 	else if (next_token->type == T_APPEND)
@@ -88,12 +88,9 @@ int	parse_special(t_tree *cmd_head, t_token *next_token, t_lexer *lexer)
 	pf_node_add_back(cmd_head, cmd_current);
 	if (next_token->type == T_PIPE)
 	{
-		cmd_current = pf_node_new();
-		cmd_current->type = ASL_CMD;
-		cmd_current->args = NULL;
-		pf_node_add_back(cmd_head, cmd_current);
+		pipe_moment(cmd_current, cmd_head);
 	}
-	else if (!redir_res)
+	else if (redir_res)
 		return (1);
 	free(redir_res);
 	return (0);
