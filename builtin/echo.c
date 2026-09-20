@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 19:41:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/16 21:07:21 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/20 16:48:03 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	ft_echo(t_data *shell, char **av)
 	if (av[i] == NULL)
 	{
 		write(1, "\n", 1);
-		shell->success_or_failed = 1;
-		return (1);
+		shell->success_or_failed = 0;
+		return (0);
 	}
 	if (ft_parsecho(av[i]) == true)
 		echo_n(av, i);

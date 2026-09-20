@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/20 00:30:35 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/20 16:31:35 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void	ft_check_reset_sig_status(t_data *shell)
 {
-	shell->success_or_failed = 0;
+	// shell->success_or_failed = 0;
 	if (g_signal_status == 2)
 		shell->success_or_failed = 130;
 	else if (g_signal_status == 3)

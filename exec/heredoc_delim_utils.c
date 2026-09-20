@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_delim_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aldecour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/29 22:36:11 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/08 21:37:14 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/20 18:10:24 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ char	**find_delimiters(t_tree *tree)
 	{
 		if (tree->type == ASL_HEREDOC)
 		{
+			if (!tree->args)
+			{
+				free(delim);
+				return (NULL);
+			}
 			delim[i] = ft_strdup(tree->args[0]);
 			i++;
 		}

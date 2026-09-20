@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:34:16 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/19 15:29:16 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/20 17:51:48 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static t_token_type	get_token_type(t_lexer *lexer)
 // 	printf("token value : %s\n", token->value);
 // 	printf("--------------------\n");
 // }
-
 t_token	*get_next_token(t_lexer *lexer)
 {
 	t_token	*res;
