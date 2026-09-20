@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/20 20:00:24 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/20 20:57:20 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 #include "header/minishell.h"
 #include "libft/libft.h"
 
-void   ft_check_reset_sig_status(t_data *shell)
+void	ft_check_reset_sig_status(t_data *shell)
 {
 	if (g_signal_status == 2)
-	       shell->success_or_failed = 130;
+		shell->success_or_failed = 130;
 	else if (g_signal_status == 3)
-	       shell->success_or_failed = 131;
-	//g_signal_status = 0;
+		shell->success_or_failed = 131;
 }
 
 static char	*get_prompt(void)
