@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/20 22:14:59 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/20 22:24:28 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	post_parse_instructions(t_data *shell, char *line)
 	ft_check_reset_sig_status(shell);
 	add_history(line);
 	tree = pf_parser(line);
+	if (!tree)
+		shell->success_or_failed = 2;
 	if (tree && heredoc_handler(tree, shell))
 	{
 		archaic_expand(shell, tree);
