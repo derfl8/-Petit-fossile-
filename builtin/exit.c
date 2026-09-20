@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:13:07 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/02 17:22:46 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/20 20:35:09 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,21 @@ static void	print_error_arg(char *exit_code)
 	ft_putendl_fd(": numeric argument required", 2);
 }
 
+static void	exit_no_arg(t_data *shell, char **exit_code, t_tree *cmd_tree)
+{
+	print_error_arg(exit_code[1]);
+	ft_free_stack_env(shell->env);
+	free_cmd_tree(cmd_tree);
+	exit(2);
+}
+
 void	ft_exit(t_data *shell, char **exit_code, t_tree *cmd_tree)
 {
 	int	how_many;
 
 	how_many = arg_len(exit_code);
 	if (how_many > 1 && wich_case(exit_code[1]) == false)
-	{
-		print_error_arg(exit_code[1]);
-		ft_free_stack_env(shell->env);
-		free_cmd_tree(cmd_tree);
-		exit(2);
-	}
+		exit_no_arg(shell, exit_code, cmd_tree);
 	else if (how_many > 2)
 	{
 		ft_putendl_fd("Petit Fossile: exit: too many arguments", 2);
@@ -58,8 +61,10 @@ void	ft_exit(t_data *shell, char **exit_code, t_tree *cmd_tree)
 	}
 	else if (how_many == 2)
 	{
+		how_many = ((unsigned char)ft_atol(exit_code[1]));
 		ft_free_stack_env(shell->env);
-		exit(((unsigned char)ft_atol(exit_code[1])));
+		free_cmd_tree(cmd_tree);
+		exit(how_many);
 	}
 	ft_free_stack_env(shell->env);
 	free_cmd_tree(cmd_tree);

@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 14:52:32 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/02 20:05:31 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/20 20:54:52 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ char	*path_verif(t_env *env, char *cmd)
 	t_env	*tmp;
 	char	*path;
 
+	if (cmd[0] == '\0')
+		return (NULL);
 	if (ft_strchr(cmd, '/'))
 	{
 		if (access(cmd, X_OK | F_OK) == 0)
