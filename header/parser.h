@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 22:47:26 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/17 02:07:10 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/20 21:19:20 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ t_tree	*get_current_cmd_node(t_tree *cmd_head);
 
 // PARSER_UTILS.C
 void	parse_cmd(t_token *current, t_tree *cmd_node);
-void	parse_special(t_tree *cmd_head, t_token *next_token, t_lexer *lexer);
-void	parse_redir(t_token *current, t_tree *cmd_node, t_lexer *lexer);
-void	parse_heredoc(t_token *current, t_tree *cmd_node, t_lexer *lexer);
-void	parse_pipe(t_tree *cmd_node);
+int		parse_special(t_tree *cmd_head, t_token *next_token, t_lexer *lexer);
+//void	parse_redir(t_token *current, t_tree *cmd_node, t_lexer *lexer);
+//void	parse_heredoc(t_token *current, t_tree *cmd_node, t_lexer *lexer);
+//void	parse_pipe(t_tree *cmd_node);
 
 // DYNAMIC_ARG_TABLE.C
 void	realloc_args(char ***args, t_token *current);
