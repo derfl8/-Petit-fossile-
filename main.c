@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/20 22:24:28 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/20 23:23:21 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	post_parse_instructions(t_data *shell, char *line)
 	}
 	if (tree)
 		free_cmd_tree(tree);
+	g_signal_status = 0;
 }
 
 int	main_process(t_data *shell)
