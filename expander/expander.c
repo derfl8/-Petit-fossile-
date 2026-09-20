@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/04 16:09:15 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/20 21:23:10 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/20 21:26:24 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*expand_str(t_data *shell, char *str)
 	{
 		quote_update(str[i], &in_s_quote, &in_d_quote);
 		if (i > 0 && (in_d_quote && result[i -1]))
-			result[ft_strlen(result) -1] = '\0';
+			result[ft_strlen(result) - 1] = '\0';
 		if (in_s_quote || str[i] != '$')
 		{
 			result = join_and_free(result, ft_substr(str, i, 1));
