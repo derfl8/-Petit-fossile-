@@ -15,14 +15,20 @@
 #include "header/minishell.h"
 #include "libft/libft.h"
 
-void	ft_check_reset_sig_status(t_data *shell)
+void   ft_check_reset_sig_status(t_data *shell)
 {
-	shell->success_or_failed = 0;
 	if (g_signal_status == 2)
-		shell->success_or_failed = 130;
+	       shell->success_or_failed = 130;
 	else if (g_signal_status == 3)
-		shell->success_or_failed = 131;
+	       shell->success_or_failed = 131;
 	g_signal_status = 0;
+}
+
+static char	*get_prompt(void)
+{
+	if (isatty(0))
+		return ("Petit Fossile> ");
+	return (NULL);
 }
 
 int	main_process(t_data *shell)
@@ -32,23 +38,27 @@ int	main_process(t_data *shell)
 
 	while (1)
 	{
-		line = readline("Petit Fossile> ");
-		ft_check_reset_sig_status(shell);
+		line = readline(get_prompt());
 		if (!line)
 		{
-			ft_putstr_fd("exit\n", 1);
+			if (isatty(0))
+				ft_putstr_fd("exit\n", 1);
 			return (1);
 		}
-		add_history(line);
-		tree = pf_parser(line);
-		if (tree && heredoc_handler(tree, shell))
+		if (*line)
 		{
-			archaic_expand(shell, tree);
-			tree_quote_remover(tree);
-			ft_exec(shell, tree);
+			ft_check_reset_sig_status(shell);
+			add_history(line);
+			tree = pf_parser(line);
+			if (tree && heredoc_handler(tree, shell))
+			{
+				archaic_expand(shell, tree);
+				tree_quote_remover(tree);
+				ft_exec(shell, tree);
+			}
+			if (tree)
+				free_cmd_tree(tree);
 		}
-		if (tree)
-			free_cmd_tree(tree);
 		free(line);
 	}
 }
@@ -59,6 +69,9 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
+	rl_outstream = stderr;
+	if (!isatty(0))
+		rl_prep_term_function = NULL;
 	shell.env = init_env(envp);
 	shell.success_or_failed = 0;
 	signal_init(S_MAIN);

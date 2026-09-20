@@ -73,7 +73,10 @@ static void	close_wait(t_data *shell, t_pipe_ctx *ctx)
 	}
 	free(ctx->pids);
 	free_tab(ctx->env);
-	shell->success_or_failed = WEXITSTATUS(status);
+	if (WIFSIGNALED(status))
+		shell->success_or_failed = WTERMSIG(status) + 128;
+	else
+		shell->success_or_failed = WEXITSTATUS(status);
 }
 
 static void	cmd_fork(t_data *shell, t_tree *tree, t_pipe_ctx *ctx, t_tree *curr)
