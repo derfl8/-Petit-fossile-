@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/20 20:57:20 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/20 21:05:15 by aldecour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,25 @@ static char	*get_prompt(void)
 	return (NULL);
 }
 
-int	main_process(t_data *shell)
+void	post_parse_instructions(t_data *shell, char *line)
 {
 	t_tree	*tree;
+
+	ft_check_reset_sig_status(shell);
+	add_history(line);
+	tree = pf_parser(line);
+	if (tree && heredoc_handler(tree, shell))
+	{
+		archaic_expand(shell, tree);
+		tree_quote_remover(tree);
+		ft_exec(shell, tree);
+	}
+	if (tree)
+		free_cmd_tree(tree);
+}
+
+int	main_process(t_data *shell)
+{
 	char	*line;
 
 	while (1)
@@ -44,20 +60,8 @@ int	main_process(t_data *shell)
 				ft_putstr_fd("exit\n", 1);
 			return (1);
 		}
-		if (*line && line[0])
-		{
-			ft_check_reset_sig_status(shell);
-			add_history(line);
-			tree = pf_parser(line);
-			if (tree && heredoc_handler(tree, shell))
-			{
-				archaic_expand(shell, tree);
-				tree_quote_remover(tree);
-				ft_exec(shell, tree);
-			}
-			if (tree)
-				free_cmd_tree(tree);
-		}
+		if (*line)
+			post_parse_instructions(shell, line);
 		free(line);
 	}
 }
