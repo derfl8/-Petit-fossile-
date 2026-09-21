@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 19:42:54 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/21 18:18:50 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/21 20:04:50 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	builtin_fork(t_data *shell, t_tree *tree, t_tree *curr,
 	exit_code = exec_builtin(shell, curr->args, tree);
 	ft_free_stack_env(shell->env);
 	free_cmd_tree(tree);
+	rl_clear_history();
 	exit(exit_code);
 }
 
@@ -45,6 +46,7 @@ static void	exec_cmd_fork(t_data *shell, t_tree *tree, t_tree *curr,
 		ft_free_stack_env(shell->env);
 		free_tab(ctx->env);
 		free_cmd_tree(tree);
+		rl_clear_history();
 		exit(1);
 	}
 	if (builtin_check(curr->args[0]) == 0)

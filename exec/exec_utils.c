@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/01 22:04:49 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/20 16:36:28 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/21 20:04:32 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	exit_bin(t_data *shell, t_tree *tree, t_tree *curr, char **env)
 	ft_free_stack_env(shell->env);
 	free_tab(env);
 	free_cmd_tree(tree);
+	rl_clear_history();
 	exit(127);
 }
 

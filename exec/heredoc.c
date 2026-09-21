@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/29 22:44:33 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/20 01:11:52 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/21 19:58:43 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,15 @@ int	child_heredoc(char **delim, char *file_name, t_tree *tree, t_data *shell)
 			break ;
 		}
 		g_signal_status = 0;
-		read_heredoc(delim[i], file_name, shell);
+		read_heredoc(delim[i++], file_name, shell);
 		if (g_signal_status == 2)
 			break ;
-		i++;
 	}
 	ft_free_stack_env(shell->env);
 	free_cmd_tree(tree);
 	free_delimiters(delim);
 	free(file_name);
+	rl_clear_history();
 	if (shell->success_or_failed == 1)
 		exit(shell->success_or_failed);
 	exit(g_signal_status);

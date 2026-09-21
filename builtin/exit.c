@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:13:07 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/21 18:20:27 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/21 19:57:23 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	exit_no_arg(t_data *shell, char **exit_code, t_tree *cmd_tree)
 	print_error_arg(exit_code[1]);
 	ft_free_stack_env(shell->env);
 	free_cmd_tree(cmd_tree);
+	rl_clear_history();
 	exit(2);
 }
 
@@ -67,9 +68,11 @@ void	ft_exit(t_data *shell, char **exit_code, t_tree *cmd_tree)
 		how_many = ((unsigned char)ft_atol(exit_code[1]));
 		ft_free_stack_env(shell->env);
 		free_cmd_tree(cmd_tree);
+		rl_clear_history();
 		exit(how_many);
 	}
 	ft_free_stack_env(shell->env);
 	free_cmd_tree(cmd_tree);
+	rl_clear_history();
 	exit(shell->success_or_failed);
 }

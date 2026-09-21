@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 21:27:46 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/18 21:58:45 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/21 20:06:43 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	run_child(t_data *shell, t_tree *tree, t_tree *curr, char **env)
 		ft_free_stack_env(shell->env);
 		free_tab(env);
 		free_cmd_tree(tree);
+		rl_clear_history();
 		exit(1);
 	}
 	execve(bin, curr->args, env);
@@ -33,6 +34,7 @@ void	run_child(t_data *shell, t_tree *tree, t_tree *curr, char **env)
 	perror(curr->args[0]);
 	ft_free_stack_env(shell->env);
 	free_cmd_tree(tree);
+	rl_clear_history();
 	exit(1);
 }
 

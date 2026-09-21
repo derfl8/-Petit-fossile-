@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/21 18:48:22 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/21 21:04:14 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "header/expander.h"
 #include "header/minishell.h"
 #include "libft/libft.h"
+#include <readline/readline.h>
 
 void	ft_check_reset_sig_status(t_data *shell)
 {
@@ -34,7 +35,6 @@ void	post_parse_instructions(t_data *shell, char *line)
 {
 	t_tree	*tree;
 
-	ft_check_reset_sig_status(shell);
 	add_history(line);
 	tree = pf_parser(line);
 	if (!tree)
@@ -47,6 +47,7 @@ void	post_parse_instructions(t_data *shell, char *line)
 	}
 	if (tree)
 		free_cmd_tree(tree);
+	ft_check_reset_sig_status(shell);
 	g_signal_status = 0;
 }
 
@@ -57,9 +58,9 @@ int	main_process(t_data *shell)
 	while (1)
 	{
 		line = readline(get_prompt());
+		ft_check_reset_sig_status(shell);
 		if (!line)
 		{
-			ft_check_reset_sig_status(shell);
 			if (isatty(0))
 				ft_putstr_fd("exit\n", 1);
 			return (1);
@@ -84,5 +85,6 @@ int	main(int ac, char **av, char **envp)
 	signal_init(S_MAIN);
 	main_process(&shell);
 	ft_free_stack_env(shell.env);
+	rl_clear_history();
 	return (shell.success_or_failed);
 }
