@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 18:13:07 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/20 20:35:09 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/21 18:20:27 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,22 @@
 
 static bool	wich_case(char *exit_code)
 {
-	int	i;
+	int			i;
+	long long	overflow;
 
 	i = 0;
-	if (exit_code)
+	overflow = 0;
+	if (exit_code[0] == '-' || exit_code[0] == '+')
+		i++;
+	while (exit_code[i])
 	{
-		if (exit_code[0] == '-')
-			i++;
-		while (exit_code[i])
-		{
-			if (!ft_isdigit(exit_code[i]))
-				return (false);
-			i++;
-		}
+		if (!ft_isdigit(exit_code[i]))
+			return (false);
+		if (overflow > LLONG_MAX / 10 || (overflow == LLONG_MAX / 10
+				&& (exit_code[i] - '0') > LLONG_MAX % 10))
+			return (false);
+		overflow = overflow * 10 + (exit_code[i] - '0');
+		i++;
 	}
 	return (true);
 }
