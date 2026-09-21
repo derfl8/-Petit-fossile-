@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/20 23:23:21 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/21 18:37:02 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int	main_process(t_data *shell)
 		if (!line)
 		{
 			if (isatty(0))
+			{
+				shell->success_or_failed = 130;
 				ft_putstr_fd("exit\n", 1);
+			}
 			return (1);
 		}
 		if (*line)
