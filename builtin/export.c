@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 19:04:01 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/20 23:23:26 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/21 13:14:27 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,12 @@ int	ft_export(t_data *shell, char **av)
 	int	limit;
 
 	i = 1;
+	shell->success_or_failed = 0;
 	if (!av[1])
+	{
 		exp_no_arg(shell);
+		return (shell->success_or_failed);
+	}
 	while (av[i])
 	{
 		if (ft_strchr(av[i], '=') != NULL)

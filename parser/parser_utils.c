@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 12:35:42 by aldecour          #+#    #+#             */
-/*   Updated: 2026/09/20 22:55:43 by aldecour         ###   ########.fr       */
+/*   Updated: 2026/09/21 13:30:15 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,12 @@ int	parse_special(t_tree *cmd_head, t_token *next_token, t_lexer *lexer)
 		parse_pipe(cmd_current);
 	pf_node_add_back(cmd_head, cmd_current);
 	if (next_token->type == T_PIPE)
-	{
 		pipe_moment(cmd_current, cmd_head);
-	}
 	else if (redir_res)
+	{
+		free(redir_res);
 		return (1);
+	}
 	free(redir_res);
 	return (0);
 }

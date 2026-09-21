@@ -1,0 +1,14 @@
+builtin
+exec
+expander
+header
+libft
+main.c
+Makefile
+minishell
+obj
+parser
+readline.supp
+README.md
+signal
+t
