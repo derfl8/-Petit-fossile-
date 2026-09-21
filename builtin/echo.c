@@ -6,11 +6,12 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 19:41:55 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/20 16:48:03 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/21 14:06:39 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/builtin.h"
+#include <unistd.h>
 
 static bool	ft_parsecho(char *pars)
 {
@@ -68,7 +69,7 @@ int	ft_echo(t_data *shell, char **av)
 				write(1, " ", 1);
 			i++;
 		}
-		printf("\n");
+		write(1, "\n", 1);
 	}
 	shell->success_or_failed = 0;
 	return (0);
