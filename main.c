@@ -6,7 +6,7 @@
 /*   By: abegou <abegou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 23:15:18 by abegou            #+#    #+#             */
-/*   Updated: 2026/09/21 18:37:02 by abegou           ###   ########.fr       */
+/*   Updated: 2026/09/21 18:48:22 by abegou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ int	main_process(t_data *shell)
 		line = readline(get_prompt());
 		if (!line)
 		{
+			ft_check_reset_sig_status(shell);
 			if (isatty(0))
-			{
-				shell->success_or_failed = 130;
 				ft_putstr_fd("exit\n", 1);
-			}
 			return (1);
 		}
 		if (*line)
